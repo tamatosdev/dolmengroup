@@ -120,7 +120,7 @@ export default function BusinessMegaMenu() {
                 className="business-mega-card"
                 href={`#${item.title.toLowerCase().replaceAll(" ", "-")}`}
                 key={item.title}
-                onClick={beginClose}
+                onClick={() => beginClose()}
               >
                 <Image src={item.image} alt="" fill sizes="(max-width: 1024px) 70vw, 220px" />
                 <span className="business-mega-card-shade" />
@@ -132,7 +132,7 @@ export default function BusinessMegaMenu() {
             ))}
           </div>
           <div className="business-mega-footer">
-            <a href="#contact" onClick={beginClose}>CONTACT</a>
+            <a href="#contact" onClick={() => beginClose()}>CONTACT</a>
             <div>
               <a href="#instagram">INSTAGRAM</a>
               <a href="#facebook">FACEBOOK</a>

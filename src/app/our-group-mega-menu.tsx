@@ -90,7 +90,7 @@ export default function OurGroupMegaMenu() {
           </div>
           <div className="our-group-mega-cards">
             {cards.map((card) => (
-              <a className="our-group-mega-card" href={card.href} key={card.title} onClick={beginClose}>
+              <a className="our-group-mega-card" href={card.href} key={card.title} onClick={() => beginClose()}>
                 <Image src={card.image} alt="" fill sizes="(max-width: 1024px) 70vw, 220px" />
                 <span className="business-mega-card-shade" />
                 <span className="business-mega-card-copy">
@@ -101,7 +101,7 @@ export default function OurGroupMegaMenu() {
             ))}
           </div>
           <div className="business-mega-footer">
-            <a href="#contact" onClick={beginClose}>CONTACT</a>
+            <a href="#contact" onClick={() => beginClose()}>CONTACT</a>
             <div>
               <a href="#instagram">INSTAGRAM</a>
               <a href="#facebook">FACEBOOK</a>

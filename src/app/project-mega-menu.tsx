@@ -136,7 +136,7 @@ export default function ProjectMegaMenu() {
                 className="business-mega-card"
                 href={`#${project.title.toLowerCase().replaceAll(" ", "-")}`}
                 key={project.title}
-                onClick={beginClose}
+                onClick={() => beginClose()}
               >
                 <Image src={project.image} alt="" fill sizes="(max-width: 1024px) 70vw, 220px" />
                 <span className="business-mega-card-shade" />
@@ -148,7 +148,7 @@ export default function ProjectMegaMenu() {
             ))}
           </div>
           <div className="business-mega-footer">
-            <a href="#contact" onClick={beginClose}>CONTACT</a>
+            <a href="#contact" onClick={() => beginClose()}>CONTACT</a>
             <div>
               <a href="#instagram">INSTAGRAM</a>
               <a href="#facebook">FACEBOOK</a>

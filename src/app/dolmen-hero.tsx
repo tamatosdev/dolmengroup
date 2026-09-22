@@ -108,7 +108,7 @@ export default function DolmenHero() {
         <video
           ref={videoRef}
           className="dolmen-hero-video"
-          src="/dolmen-video-2.mp4?v=scrub1"
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/dolmen-video-2.mp4?v=scrub1`}
           muted
           playsInline
           preload="auto"
