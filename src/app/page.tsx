@@ -1,69 +1,183 @@
 import Image from "next/image";
+import Link from "next/link";
+import arrowDown from "../../assets/arrow-down.svg";
+import arrowRight from "../../assets/arrow-right.svg";
+import arrowUp from "../../assets/arrow-up.svg";
+import domenLogo from "../../assets/domen-logo.png";
+import footerLogo from "../../assets/footer-logo.png";
+import DolmenNumbers from "./dolmen-numbers";
+import DolmenHero from "./dolmen-hero";
+import BusinessMegaMenu from "./business-mega-menu";
+import FeaturedDevelopments from "./featured-developments";
+import FutureMarquee from "./future-marquee";
+import LatestUpdates from "./latest-updates";
+import ProjectSlides from "./project-slides";
+import ProjectOverviewSlider from "./project-overview-slider";
+import ProjectMegaMenu from "./project-mega-menu";
+import OurGroupMegaMenu from "./our-group-mega-menu";
+
+const navigationItems = ["OUR GROUP", "PROJECTS", "BUSINESSES", "REIT", "UPDATES"];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="site-shell">
+      <header className="site-header">
+        <Link className="brand" href="/" aria-label="Dolmen home">
+          <Image src={domenLogo} alt="Dolmen" priority />
+        </Link>
+
+        <nav aria-label="Primary navigation">
+          <ul className="navigation-list">
+            {navigationItems.map((item) => (
+              item === "OUR GROUP" ? (
+                <OurGroupMegaMenu key={item} />
+              ) : item === "PROJECTS" ? (
+                <ProjectMegaMenu key={item} />
+              ) : item === "BUSINESSES" ? (
+                <BusinessMegaMenu key={item} />
+              ) : (
+                <li key={item}>
+                <a href={`#${item.toLowerCase()}`}>
+                  {item}
+                  {item === "PROJECTS" && (
+                    <Image className="navigation-arrow" src={arrowDown} alt="" aria-hidden="true" />
+                  )}
+                </a>
+                </li>
+              )
+            ))}
+          </ul>
+        </nav>
+      </header>
+
+      <DolmenHero />
+
+      <section className="about-section" id="about" aria-labelledby="about-title">
+        <h2 className="about-title" id="about-title">
+          Where Life, Business
+          <br />
+          and Cities <span>Meet.</span>
+        </h2>
+
+        <div className="about-content">
+          <p className="about-statement">
+            A building occupies space.
+            <br />
+            Destination creates meaning.
           </p>
+
+          <div className="about-copy">
+            <p>
+              Dolmen approaches development through the way people experience a place — how they arrive, move, meet, work, shop, unwind and return.
+            </p>
+            <p>
+              For over 35 years, Dolmen Group has been shaping Pakistan&apos;s real estate landscape with landmark destinations.
+            </p>
+            <p className="about-claim">We create places with a life beyond their walls.</p>
+            <a className="about-button" href="#about-story">
+              Discover Our Story
+              <Image src={arrowRight} alt="" aria-hidden="true" />
+            </a>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
+      </section>
+
+      <ProjectSlides />
+
+      <FeaturedDevelopments />
+
+      <DolmenNumbers />
+
+      <ProjectOverviewSlider />
+
+      <LatestUpdates />
+
+      <FutureMarquee />
+
+      <footer className="site-footer">
+        <div className="footer-top">
+          <div className="footer-link-group">
+            <h2>Socials</h2>
+            <a href="#instagram">Instagram</a>
+            <a href="#facebook">Facebook</a>
+            <a href="#linkedin">LinkedIn</a>
+          </div>
+
+          <div className="footer-link-group">
+            <h2>Company</h2>
+            <a href="#about">About</a>
+            <a href="#updates">Updates</a>
+            <a href="#contact">Contact</a>
+          </div>
+
+          <div className="newsletter">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to get fresh property listings, market updates,<br />and expert tips delivered straight to your inbox.</p>
+            <form className="newsletter-form">
+              <label className="sr-only" htmlFor="email">Email address</label>
+              <input
+                id="email"
+                type="email"
+                placeholder="Type your email"
+                suppressHydrationWarning
+              />
+              <button type="submit" aria-label="Subscribe">
+                <Image src={arrowRight} alt="" aria-hidden="true" />
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div className="footer-main">
+          <Link className="footer-brand" href="/" aria-label="Dolmen home">
+            <Image src={footerLogo} alt="Dolmen - Building a better future" />
+          </Link>
+
+          <div className="footer-properties">
+            <div className="footer-property-group">
+              <h2>Malls</h2>
+              <a href="#dolmen-mall-clifton">Dolmen Mall Clifton</a>
+              <a href="#dolmen-mall-lahore">Dolmen Mall Lahore</a>
+              <a href="#dolmen-mall-tariq-road">Dolmen Mall Tariq Road</a>
+              <a href="#dolmen-mall-hyleri">Dolmen Mall Hyderi</a>
+            </div>
+
+            <div className="footer-property-group">
+              <h2>Offices</h2>
+              <a href="#the-harbour-front">The Harbour Front</a>
+              <a href="#sky-towers">Sky Towers</a>
+              <a href="#corporate-office-block">Corporate Office Block</a>
+              <a href="#executive-tower">Executive Tower</a>
+            </div>
+
+            <div className="footer-property-group">
+              <h2>Residences</h2>
+              <a href="#the-grove-residency">The Grove Residency</a>
+              <a href="#dolmen-city-islamabad">Dolmen City Islamabad</a>
+              <a href="#dolmen-mall-lahore-residences">Dolmen Mall Lahore</a>
+            </div>
+
+            <div className="footer-property-group">
+              <h2>Entertainment</h2>
+              <a href="#sindbads-wonderland">Sindbad&apos;s Wonderland</a>
+            </div>
+
+            <div className="footer-property-group">
+              <h2>Retail</h2>
+              <a href="#giordano">Giordano</a>
+              <a href="#bala-bala">Bala Bala</a>
+            </div>
+          </div>
+
+          <a className="back-to-top" href="#top" aria-label="Back to top">
+            <Image src={arrowUp} alt="" aria-hidden="true" />
           </a>
         </div>
-      </main>
+
+        <div className="footer-bottom">
+          <span>© 2026 Dolmen Group. All rights reserved.</span>
+        </div>
+      </footer>
     </div>
   );
 }
