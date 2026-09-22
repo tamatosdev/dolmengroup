@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import arrowDown from "../../assets/arrow-down.svg";
 import aboutCard from "../../assets/aboutus-card.png";
 import careersCard from "../../assets/careers-card.png";
 import contactCard from "../../assets/contact-card.png";
+import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
 
 const cards = [
   { image: aboutCard, title: "About", caption: "DISCOVER OUR STORY AND VALUES", href: "#about" },
@@ -16,13 +18,28 @@ const cards = [
 export default function OurGroupMegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const beginClose = (restoreMobileNav = false) => {
+    setIsClosing(true);
+    closeTimer.current = setTimeout(() => {
+      setIsOpen(false);
+      setIsClosing(false);
+      if (restoreMobileNav) {
+        window.dispatchEvent(new CustomEvent("mega-menu-close"));
+      }
+    }, 350);
+  };
 
   useEffect(() => {
     const handleOtherMenu = (event: Event) => {
       if ((event as CustomEvent<string>).detail !== "group" && isOpen) {
-        setIsClosing(true);
-        closeTimer.current = setTimeout(() => { setIsOpen(false); setIsClosing(false); }, 350);
+        beginClose();
       }
     };
     window.addEventListener("mega-menu-open", handleOtherMenu);
@@ -32,10 +49,17 @@ export default function OurGroupMegaMenu() {
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!(isOpen || isClosing)) {
+      return;
+    }
+    acquireMegaLock();
+    return () => releaseMegaLock();
+  }, [isOpen, isClosing]);
+
   const toggleMenu = () => {
     if (isOpen) {
-      setIsClosing(true);
-      closeTimer.current = setTimeout(() => { setIsOpen(false); setIsClosing(false); }, 350);
+      beginClose();
       return;
     }
     window.dispatchEvent(new CustomEvent("mega-menu-open", { detail: "group" }));
@@ -55,12 +79,19 @@ export default function OurGroupMegaMenu() {
         <Image className="navigation-arrow" src={arrowDown} alt="" aria-hidden="true" />
       </button>
 
-      {(isOpen || isClosing) && (
+      {(isOpen || isClosing) && isMounted && createPortal(
         <div className={`our-group-mega-panel${isClosing ? " is-closing" : ""}`} id="our-group-mega-panel">
+          <div className="mega-panel-toolbar">
+            <p className="mega-panel-title">Our Group</p>
+            <button className="mega-menu-close" type="button" aria-label="Close our group menu" onClick={() => beginClose(true)}>
+              <span />
+              <span />
+            </button>
+          </div>
           <div className="our-group-mega-cards">
             {cards.map((card) => (
-              <a className="our-group-mega-card" href={card.href} key={card.title}>
-                <Image src={card.image} alt="" fill sizes="(max-width: 540px) 160px, 220px" />
+              <a className="our-group-mega-card" href={card.href} key={card.title} onClick={beginClose}>
+                <Image src={card.image} alt="" fill sizes="(max-width: 1024px) 70vw, 220px" />
                 <span className="business-mega-card-shade" />
                 <span className="business-mega-card-copy">
                   <strong>{card.title}</strong>
@@ -70,7 +101,7 @@ export default function OurGroupMegaMenu() {
             ))}
           </div>
           <div className="business-mega-footer">
-            <a href="#contact">CONTACT</a>
+            <a href="#contact" onClick={beginClose}>CONTACT</a>
             <div>
               <a href="#instagram">INSTAGRAM</a>
               <a href="#facebook">FACEBOOK</a>
@@ -78,7 +109,8 @@ export default function OurGroupMegaMenu() {
             </div>
             <span>© 2026 DOLMEN GROUP</span>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </li>
   );

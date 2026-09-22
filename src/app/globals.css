@@ -318,9 +318,71 @@ body {
   z-index: 100;
 }
 
+.site-header-bar {
+  align-items: center;
+  display: flex;
+  flex: 0 0 auto;
+  justify-content: space-between;
+  min-height: 90px;
+}
+
+.site-nav {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.mobile-nav-toggle,
+.mobile-nav-backdrop,
+.mega-panel-toolbar {
+  display: none;
+}
+
+.mega-menu-close {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  display: none;
+  height: 44px;
+  justify-content: center;
+  padding: 0;
+  position: relative;
+  width: 44px;
+}
+
+.mega-menu-close span {
+  background: #ffffff;
+  height: 2px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  width: 20px;
+}
+
+.mega-menu-close span:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.mega-menu-close span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.mega-panel-title {
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+body.mobile-nav-open,
+body.mega-menu-visible {
+  overflow: hidden;
+}
+
 body.site-loaded .site-header {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
   transition-delay: 900ms;
 }
 
@@ -409,10 +471,10 @@ body.site-loaded .site-header {
   min-height: 520px;
   overflow: hidden;
   padding: 38px 30px 112px;
-  position: absolute;
+  position: fixed;
   right: 60px;
   top: 90px;
-  z-index: 20;
+  z-index: 120;
   animation: mega-menu-open 350ms ease both;
 }
 
@@ -604,12 +666,12 @@ body.site-loaded .site-header {
   margin: 0 auto;
   overflow: hidden;
   padding: 38px 30px 112px;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 90px;
   transform: translateX(-50%);
   width: 63%;
-  z-index: 20;
+  z-index: 120;
   animation: our-group-mega-open 350ms ease both;
 }
 
@@ -2108,18 +2170,6 @@ body.site-loaded .dolmen-hero-stage {
     font-size: 28px;
   }
 
-  .site-header {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 24px;
-    padding: 24px 60px;
-  }
-
-  .navigation-list {
-    flex-wrap: wrap;
-    gap: 18px 28px;
-  }
-
   .footer-top,
   .footer-main {
     grid-template-columns: 1fr 1fr;
@@ -2160,91 +2210,270 @@ body.site-loaded .dolmen-hero-stage {
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 1024px) {
   .site-header {
-    padding: 20px 24px;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: 72px;
+    padding: 0;
   }
 
+  .site-header-bar {
+    min-height: 72px;
+    padding: 0 24px;
+    position: relative;
+    width: 100%;
+    z-index: 4;
+  }
+
+  .brand img {
+    width: 140px;
+  }
+
+  .mobile-nav-toggle {
+    align-items: center;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: 44px;
+    justify-content: center;
+    padding: 0;
+    width: 44px;
+  }
+
+  .mobile-nav-toggle span {
+    background: #ffffff;
+    border-radius: 999px;
+    display: block;
+    height: 2px;
+    transition: transform 220ms ease, opacity 220ms ease;
+    width: 22px;
+  }
+
+  .mobile-nav-toggle.is-open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  .mobile-nav-toggle.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-nav-toggle.is-open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .site-nav {
+    background: rgb(18 18 18 / 96%);
+    backdrop-filter: blur(28px);
+    border-bottom: 1px solid rgb(255 255 255 / 12%);
+    display: block;
+    left: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 72px;
+    transition: max-height 320ms ease, opacity 220ms ease;
+    z-index: 3;
+  }
+
+  .site-nav.is-open {
+    max-height: min(80vh, 640px);
+    opacity: 1;
+    overflow-y: auto;
+    pointer-events: auto;
+  }
+
+  .mobile-nav-backdrop {
+    background: rgb(0 0 0 / 45%);
+    border: 0;
+    bottom: 0;
+    display: block;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 72px;
+    z-index: 2;
+  }
+
+  .navigation-list {
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 0 20px;
+  }
+
+  .navigation-list > li,
+  .business-menu {
+    border-bottom: 1px solid rgb(255 255 255 / 10%);
+    width: 100%;
+  }
+
+  .navigation-list a,
+  .business-menu-trigger {
+    font-size: 18px;
+    justify-content: space-between;
+    min-height: 56px;
+    padding: 0 24px;
+    width: 100%;
+  }
+
+  .business-menu-trigger .navigation-arrow,
+  .navigation-arrow {
+    height: 14px;
+    width: 14px;
+  }
+
+  .business-menu.is-open .business-menu-trigger .navigation-arrow {
+    transform: rotate(180deg);
+  }
+
+  .mega-panel-toolbar {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 4px 0 12px;
+  }
+
+  .mega-menu-close {
+    display: flex;
+  }
+
+  .business-mega-panel,
+  .our-group-mega-panel {
+    animation: mega-menu-open 320ms ease both;
+    background: rgb(18 18 18 / 98%);
+    border: 0;
+    border-radius: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    left: 0;
+    max-height: none;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 24px 20px calc(28px + env(safe-area-inset-bottom));
+    position: fixed;
+    right: 0;
+    top: 0;
+    transform: none;
+    width: 100%;
+    z-index: 120;
+  }
+
+  .our-group-mega-panel {
+    animation-name: mega-menu-open;
+  }
+
+  .our-group-mega-panel.is-closing,
+  .business-mega-panel.is-closing {
+    animation-name: mega-menu-close;
+  }
+
+  .business-mega-tabs {
+    border-bottom: 1px solid rgb(255 255 255 / 14%);
+    border-right: 0;
+    flex: 0 0 auto;
+    flex-direction: row;
+    gap: 18px;
+    overflow-x: auto;
+    padding: 0 0 16px;
+    scrollbar-width: none;
+    width: 100%;
+  }
+
+  .business-mega-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .business-mega-tab {
+    flex: 0 0 auto;
+    font-size: 15px;
+    white-space: nowrap;
+  }
+
+  .business-mega-tab-icon {
+    height: 18px;
+    margin-right: 8px;
+    width: 18px;
+  }
+
+  .business-mega-cards,
+  .project-mega-panel .business-mega-cards,
+  .our-group-mega-cards {
+    display: flex;
+    flex: 1 1 auto;
+    gap: 12px;
+    grid-template-columns: none;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    width: 100%;
+  }
+
+  .business-mega-cards::-webkit-scrollbar,
+  .our-group-mega-cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .business-mega-card,
+  .project-mega-panel .business-mega-card,
+  .our-group-mega-card {
+    aspect-ratio: 0.78;
+    flex: 0 0 min(72vw, 260px);
+    height: auto;
+    min-height: 320px;
+    scroll-snap-align: start;
+    width: min(72vw, 260px);
+  }
+
+  .business-mega-card-copy strong {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .business-mega-card-copy small {
+    font-size: 12px;
+  }
+
+  .business-mega-footer {
+    align-items: flex-start;
+    border-top: 1px solid rgb(255 255 255 / 14%);
+    flex-direction: column;
+    gap: 14px;
+    margin-top: auto;
+    min-height: 0;
+    padding: 18px 0 0;
+    position: static;
+  }
+
+  .business-mega-footer div {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 540px) {
   .navigation-list a,
   .business-menu-trigger {
     font-size: 16px;
   }
 
-  .business-mega-panel {
-    align-items: stretch;
-    flex-direction: column;
-    gap: 22px;
-    min-height: 0;
-    left: 0;
-    padding: 20px 24px 24px;
-    right: 0;
-    top: 100%;
-  }
-
-  .our-group-mega-panel {
-    animation-name: mega-menu-open;
-    left: 0;
-    padding: 20px 24px 136px;
-    right: 0;
-    top: 100%;
-    transform: none;
-    width: 100%;
-  }
-
-  .our-group-mega-panel.is-closing {
-    animation-name: mega-menu-close;
-  }
-
-  .our-group-mega-cards {
-    display: flex;
-    gap: 12px;
-    overflow-x: auto;
-  }
-
+  .business-mega-card,
+  .project-mega-panel .business-mega-card,
   .our-group-mega-card {
-    flex: 0 0 160px;
-    height: 190px;
-  }
-
-  .business-mega-tabs {
-    border-bottom: 1px solid #333333;
-    border-right: 0;
-    flex: 0 0 auto;
-    flex-direction: row;
-    gap: 24px;
-    overflow-x: auto;
-    padding: 0 0 16px;
-  }
-
-  .business-mega-tab {
-    flex: 0 0 auto;
-    font-size: 24px;
-  }
-
-  .business-mega-card {
-    flex-basis: 160px;
-  }
-
-  .project-mega-panel .business-mega-cards {
-    display: flex;
-    overflow-x: auto;
-  }
-
-  .project-mega-panel .business-mega-card {
-    flex-basis: 160px;
-    width: 160px;
-  }
-
-  .business-mega-footer {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
-    min-height: 112px;
-    padding: 16px 24px;
-  }
-
-  .business-mega-footer div {
-    gap: 16px;
+    flex-basis: min(78vw, 240px);
+    min-height: 300px;
+    width: min(78vw, 240px);
   }
 
   .site-footer {
@@ -2381,13 +2610,7 @@ a.about-button {
     flex: 0 0 214px;
 }
 
-a.business-mega-card {
-    height: 300px !important;
-}
-
-a.business-mega-card img {
-    height: 300px !important;
-}
+/* removed forced 300px mega-card heights that broke equal card layout */
 
 .business-mega-panel {
     min-height: 480px;
@@ -2844,4 +3067,144 @@ span.future-marquee-item {
 .footer-bottom {
     font-size: 14px;
 }
+}
+/* Final mobile nav / mega overrides — must win over earlier breakpoint clutter */
+@media (max-width: 1024px) {
+  ul.navigation-list {
+    gap: 0 !important;
+  }
+
+  header.site-header {
+    padding-inline: 0 !important;
+  }
+
+  .business-mega-panel,
+  .our-group-mega-panel,
+  .business-mega-panel.project-mega-panel {
+    animation: mega-menu-open 320ms ease both !important;
+    background: rgb(18 18 18 / 98%) !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    bottom: 0 !important;
+    gap: 10px !important;
+    height: 100% !important;
+    left: 0 !important;
+    max-height: none !important;
+    min-height: 100% !important;
+    padding: 14px 16px calc(16px + env(safe-area-inset-bottom)) !important;
+    position: fixed !important;
+    right: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    z-index: 120 !important;
+  }
+
+  .our-group-mega-panel.is-closing,
+  .business-mega-panel.is-closing {
+    animation-name: mega-menu-close !important;
+  }
+
+  .mega-panel-toolbar {
+    display: flex !important;
+    margin-bottom: 0 !important;
+    min-height: 40px;
+    padding: 0 0 4px !important;
+  }
+
+  .mega-panel-title {
+    font-size: 16px !important;
+  }
+
+  .mega-menu-close {
+    display: flex !important;
+    height: 40px !important;
+    width: 40px !important;
+  }
+
+  .business-mega-tabs {
+    gap: 14px !important;
+    margin: 0 !important;
+    padding: 0 0 8px !important;
+  }
+
+  .business-mega-tab {
+    font-size: 14px !important;
+  }
+
+  .business-mega-cards,
+  .project-mega-panel .business-mega-cards,
+  .our-group-mega-cards {
+    align-items: stretch !important;
+    display: flex !important;
+    flex: 0 0 auto !important;
+    gap: 10px !important;
+    grid-template-columns: none !important;
+    margin: 0 !important;
+    overflow-x: auto !important;
+    padding-bottom: 4px !important;
+    width: 100% !important;
+  }
+
+  .business-mega-card,
+  .project-mega-panel .business-mega-card,
+  .our-group-mega-card,
+  a.business-mega-card {
+    aspect-ratio: 3 / 4 !important;
+    display: block !important;
+    flex: 0 0 168px !important;
+    height: 224px !important;
+    max-height: 224px !important;
+    min-height: 224px !important;
+    overflow: hidden !important;
+    position: relative !important;
+    scroll-snap-align: start !important;
+    width: 168px !important;
+  }
+
+  .business-mega-card img,
+  .project-mega-panel .business-mega-card img,
+  .our-group-mega-card img,
+  a.business-mega-card img {
+    border-radius: 5px !important;
+    height: 100% !important;
+    inset: 0 !important;
+    max-height: none !important;
+    object-fit: cover !important;
+    position: absolute !important;
+    width: 100% !important;
+  }
+
+  .business-mega-card-shade {
+    inset: 0 !important;
+    position: absolute !important;
+  }
+
+  .business-mega-card-copy {
+    bottom: 12px !important;
+    left: 12px !important;
+    position: absolute !important;
+    right: 12px !important;
+  }
+
+  .business-mega-card-copy strong {
+    font-size: 15px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .business-mega-card-copy small {
+    font-size: 11px !important;
+    margin-top: 0 !important;
+  }
+
+  .business-mega-footer {
+    gap: 10px !important;
+    margin-top: 4px !important;
+    min-height: 0 !important;
+    padding: 10px 0 0 !important;
+  }
+
+  .business-mega-footer > span:last-child {
+    display: none !important;
+  }
 }

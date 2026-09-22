@@ -1,54 +1,21 @@
 import Image from "next/image";
 import Link from "next/link";
-import arrowDown from "../../assets/arrow-down.svg";
 import arrowRight from "../../assets/arrow-right.svg";
 import arrowUp from "../../assets/arrow-up.svg";
-import domenLogo from "../../assets/domen-logo.png";
 import footerLogo from "../../assets/footer-logo.png";
 import DolmenNumbers from "./dolmen-numbers";
 import DolmenHero from "./dolmen-hero";
-import BusinessMegaMenu from "./business-mega-menu";
 import FeaturedDevelopments from "./featured-developments";
 import FutureMarquee from "./future-marquee";
 import LatestUpdates from "./latest-updates";
 import ProjectSlides from "./project-slides";
 import ProjectOverviewSlider from "./project-overview-slider";
-import ProjectMegaMenu from "./project-mega-menu";
-import OurGroupMegaMenu from "./our-group-mega-menu";
-
-const navigationItems = ["OUR GROUP", "PROJECTS", "BUSINESSES", "REIT", "UPDATES"];
+import SiteHeader from "./site-header";
 
 export default function Home() {
   return (
     <div className="site-shell">
-      <header className="site-header">
-        <Link className="brand" href="/" aria-label="Dolmen home">
-          <Image src={domenLogo} alt="Dolmen" priority />
-        </Link>
-
-        <nav aria-label="Primary navigation">
-          <ul className="navigation-list">
-            {navigationItems.map((item) => (
-              item === "OUR GROUP" ? (
-                <OurGroupMegaMenu key={item} />
-              ) : item === "PROJECTS" ? (
-                <ProjectMegaMenu key={item} />
-              ) : item === "BUSINESSES" ? (
-                <BusinessMegaMenu key={item} />
-              ) : (
-                <li key={item}>
-                <a href={`#${item.toLowerCase()}`}>
-                  {item}
-                  {item === "PROJECTS" && (
-                    <Image className="navigation-arrow" src={arrowDown} alt="" aria-hidden="true" />
-                  )}
-                </a>
-                </li>
-              )
-            ))}
-          </ul>
-        </nav>
-      </header>
+      <SiteHeader />
 
       <DolmenHero />
 
