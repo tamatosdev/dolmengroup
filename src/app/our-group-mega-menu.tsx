@@ -8,6 +8,7 @@ import aboutCard from "../../assets/aboutus-card.png";
 import careersCard from "../../assets/careers-card.png";
 import contactCard from "../../assets/contact-card.png";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
+import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 
 const cards = [
   { image: aboutCard, title: "About", caption: "DISCOVER OUR STORY AND VALUES", href: "#about" },
@@ -56,6 +57,14 @@ export default function OurGroupMegaMenu() {
     acquireMegaLock();
     return () => releaseMegaLock();
   }, [isOpen, isClosing]);
+
+  useMegaMenuDismiss({
+    isOpen,
+    isClosing,
+    panelId: "our-group-mega-panel",
+    triggerSelector: ".business-menu.is-open > .business-menu-trigger",
+    onDismiss: beginClose,
+  });
 
   const toggleMenu = () => {
     if (isOpen) {

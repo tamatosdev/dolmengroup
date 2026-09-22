@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import arrowRight from "../../assets/arrow-right.svg";
 import arrowUp from "../../assets/arrow-up.svg";
+import brush from "../../assets/brush.svg";
 import footerLogo from "../../assets/footer-logo.png";
 import DolmenNumbers from "./dolmen-numbers";
 import DolmenHero from "./dolmen-hero";
@@ -10,6 +11,7 @@ import FutureMarquee from "./future-marquee";
 import LatestUpdates from "./latest-updates";
 import ProjectSlides from "./project-slides";
 import ProjectOverviewSlider from "./project-overview-slider";
+import ContactSection from "./contact-section";
 import SiteHeader from "./site-header";
 
 export default function Home() {
@@ -23,7 +25,17 @@ export default function Home() {
         <h2 className="about-title" id="about-title">
           Where Life, Business
           <br />
-          and Cities <span>Meet.</span>
+          and Cities{" "}
+          <span>
+            Meet.
+            <Image
+              className="title-brush"
+              src={brush}
+              alt=""
+              aria-hidden="true"
+              style={{ width: "100%", height: "9px" }}
+            />
+          </span>
         </h2>
 
         <div className="about-content">
@@ -54,6 +66,8 @@ export default function Home() {
       <FeaturedDevelopments />
 
       <DolmenNumbers />
+
+      <ContactSection />
 
       <ProjectOverviewSlider />
 

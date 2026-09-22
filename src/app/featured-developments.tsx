@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import type { CSSProperties } from "react";
-import { useState } from "react";
+import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
+import { useRef, useState } from "react";
 import arrowRight from "../../assets/arrow-right.svg";
 import corporateOfficeBlock from "../../assets/Development Project/Corporate-office-block.png";
 import dolmenCityIslamabad from "../../assets/Development Project/Dolmen City Islamabad.png";
@@ -33,12 +33,71 @@ const developments: Development[] = [
   { image: dolmenMallHyderi, subtitle: "YOUR NEIGHBOURHOOD MALL", title: "Dolmen Mall Hyderi" },
 ];
 
+const DRAG_THRESHOLD = 64;
+
 export default function FeaturedDevelopments() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartX = useRef(0);
+  const didDrag = useRef(false);
   const maxIndex = developments.length - 1;
 
   const move = (direction: number) => {
     setActiveIndex((currentIndex) => Math.min(maxIndex, Math.max(0, currentIndex + direction)));
+  };
+
+  const goTo = (index: number) => {
+    setActiveIndex(Math.min(maxIndex, Math.max(0, index)));
+  };
+
+  const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.button !== 0) {
+      return;
+    }
+
+    didDrag.current = false;
+    dragStartX.current = event.clientX;
+    setIsDragging(true);
+    setDragOffset(0);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const onPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!isDragging) {
+      return;
+    }
+
+    const delta = event.clientX - dragStartX.current;
+
+    if (Math.abs(delta) > 6) {
+      didDrag.current = true;
+    }
+
+    const resistance =
+      (activeIndex === 0 && delta > 0) || (activeIndex === maxIndex && delta < 0) ? 0.35 : 1;
+
+    setDragOffset(delta * resistance);
+  };
+
+  const endDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!isDragging) {
+      return;
+    }
+
+    const delta = event.clientX - dragStartX.current;
+
+    setIsDragging(false);
+    setDragOffset(0);
+
+    if (delta <= -DRAG_THRESHOLD) {
+      move(1);
+      return;
+    }
+
+    if (delta >= DRAG_THRESHOLD) {
+      move(-1);
+    }
   };
 
   return (
@@ -67,10 +126,27 @@ export default function FeaturedDevelopments() {
         </div>
       </div>
 
-      <div className="featured-developments-viewport">
+      <div
+        className={`featured-developments-viewport${isDragging ? " is-dragging" : ""}`}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+      >
         <div
           className="featured-developments-track"
-          style={{ "--development-index": activeIndex } as CSSProperties}
+          style={{
+            "--development-index": activeIndex,
+            "--drag-offset": `${dragOffset}px`,
+            transition: isDragging ? "none" : undefined,
+          } as CSSProperties}
+          onClickCapture={(event) => {
+            if (didDrag.current) {
+              event.preventDefault();
+              event.stopPropagation();
+              didDrag.current = false;
+            }
+          }}
         >
           {developments.map((development) => (
             <article className="development-card" key={development.title}>
@@ -80,6 +156,7 @@ export default function FeaturedDevelopments() {
                 alt=""
                 fill
                 sizes="(max-width: 700px) 86vw, 62vw"
+                draggable={false}
               />
               <div className="development-card-content">
                 <p>{development.subtitle}</p>
@@ -91,6 +168,26 @@ export default function FeaturedDevelopments() {
             </article>
           ))}
         </div>
+      </div>
+
+      <div className="featured-developments-progress">
+        <button
+          className="featured-developments-progress-track"
+          type="button"
+          aria-label={`Slide ${activeIndex + 1} of ${developments.length}`}
+          onClick={(event) => {
+            const rect = event.currentTarget.getBoundingClientRect();
+            const ratio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
+            goTo(Math.min(maxIndex, Math.floor(ratio * developments.length)));
+          }}
+        >
+          <span
+            className="featured-developments-progress-fill"
+            style={{
+              width: `${((activeIndex + 1) / developments.length) * 100}%`,
+            }}
+          />
+        </button>
       </div>
     </section>
   );

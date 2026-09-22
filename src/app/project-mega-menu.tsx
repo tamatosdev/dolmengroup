@@ -17,6 +17,7 @@ import domencity from "../../assets/Project Menu/domencity.png";
 import groveResidency from "../../assets/Project Menu/the-grove-resedency.png";
 import harbourFront from "../../assets/Project Menu/the-harbor-front.png";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
+import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 
 type ProjectCategory = "COMMUNITY" | "MALLS" | "OFFICES" | "RESIDENCES";
 type Project = { category: Exclude<ProjectCategory, "COMMUNITY">; image: typeof dolmenMallTariqRoad; title: string; caption: string };
@@ -81,6 +82,14 @@ export default function ProjectMegaMenu() {
     acquireMegaLock();
     return () => releaseMegaLock();
   }, [isOpen, isClosing]);
+
+  useMegaMenuDismiss({
+    isOpen,
+    isClosing,
+    panelId: "project-mega-panel",
+    triggerSelector: ".business-menu.is-open > .business-menu-trigger",
+    onDismiss: beginClose,
+  });
 
   const toggleMenu = () => {
     if (isOpen) {

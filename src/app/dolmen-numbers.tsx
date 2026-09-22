@@ -1,3 +1,8 @@
+"use client";
+
+import Image from "next/image";
+import brush from "../../assets/brush.svg";
+
 const figures = [
   {
     number: "18M+",
@@ -25,7 +30,17 @@ export default function DolmenNumbers() {
   return (
     <section className="dolmen-numbers" aria-labelledby="dolmen-numbers-title">
       <h2 id="dolmen-numbers-title">
-        Dolmen in <span>Numbers</span>
+        Dolmen in{" "}
+        <span>
+          Numbers
+          <Image
+            className="title-brush"
+            src={brush}
+            alt=""
+            aria-hidden="true"
+            style={{ width: "100%", height: "9px" }}
+          />
+        </span>
       </h2>
 
       <div className="dolmen-numbers-grid">

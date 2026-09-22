@@ -81,15 +81,6 @@ export default function ProjectOverviewSlider() {
         priority
         sizes="100vw"
       />
-      <button
-        className="project-overview-arrow project-overview-arrow-previous"
-        type="button"
-        onClick={() => move(-1)}
-        aria-label="Previous project"
-      >
-        <Image src={sliderArrowPrevious} alt="" aria-hidden="true" />
-      </button>
-
       <div className="project-overview-content">
         <h2>{activeSlide.title}</h2>
         <p>{activeSlide.location}</p>
@@ -99,35 +90,46 @@ export default function ProjectOverviewSlider() {
         </a>
       </div>
 
-      <div className="project-overview-thumbnail-viewport">
-        {outgoingSlide && (
+      <div className="project-overview-media">
+        <button
+          className="project-overview-arrow project-overview-arrow-previous"
+          type="button"
+          onClick={() => move(-1)}
+          aria-label="Previous project"
+        >
+          <Image src={sliderArrowPrevious} alt="" aria-hidden="true" />
+        </button>
+
+        <div className="project-overview-thumbnail-viewport">
+          {outgoingSlide && (
+            <Image
+              key={`thumbnail-outgoing-${outgoingSlide.thumbnail.src}`}
+              className={`project-overview-thumbnail project-overview-thumbnail-exiting is-${direction}`}
+              src={outgoingSlide.thumbnail}
+              alt={`${outgoingSlide.title} overview`}
+              fill
+              sizes="(max-width: 540px) calc(100vw - 48px), 38vw"
+            />
+          )}
           <Image
-            key={`thumbnail-outgoing-${outgoingSlide.thumbnail.src}`}
-            className={`project-overview-thumbnail project-overview-thumbnail-exiting is-${direction}`}
-            src={outgoingSlide.thumbnail}
-            alt={`${outgoingSlide.title} overview`}
+            key={`thumbnail-entering-${activeSlide.thumbnail.src}`}
+            className={`project-overview-thumbnail project-overview-thumbnail-entering is-${direction}`}
+            src={activeSlide.thumbnail}
+            alt={`${activeSlide.title} overview`}
             fill
             sizes="(max-width: 540px) calc(100vw - 48px), 38vw"
           />
-        )}
-        <Image
-          key={`thumbnail-entering-${activeSlide.thumbnail.src}`}
-          className={`project-overview-thumbnail project-overview-thumbnail-entering is-${direction}`}
-          src={activeSlide.thumbnail}
-          alt={`${activeSlide.title} overview`}
-          fill
-          sizes="(max-width: 540px) calc(100vw - 48px), 38vw"
-        />
-      </div>
+        </div>
 
-      <button
-        className="project-overview-arrow project-overview-arrow-next"
-        type="button"
-        onClick={() => move(1)}
-        aria-label="Next project"
-      >
-        <Image src={sliderArrowNext} alt="" aria-hidden="true" />
-      </button>
+        <button
+          className="project-overview-arrow project-overview-arrow-next"
+          type="button"
+          onClick={() => move(1)}
+          aria-label="Next project"
+        >
+          <Image src={sliderArrowNext} alt="" aria-hidden="true" />
+        </button>
+      </div>
     </section>
   );
 }

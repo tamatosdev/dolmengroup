@@ -9,6 +9,7 @@ import sindbadWonderland from "../../assets/sindbad-wonderland.png";
 import griordano from "../../assets/griordano.png";
 import balabala from "../../assets/balabala.png";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
+import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 
 type BusinessTab = "ENTERTAINMENT" | "RETAIL";
 
@@ -65,6 +66,14 @@ export default function BusinessMegaMenu() {
     acquireMegaLock();
     return () => releaseMegaLock();
   }, [isOpen, isClosing]);
+
+  useMegaMenuDismiss({
+    isOpen,
+    isClosing,
+    panelId: "business-mega-panel",
+    triggerSelector: ".business-menu.is-open > .business-menu-trigger",
+    onDismiss: beginClose,
+  });
 
   const toggleMenu = () => {
     if (isOpen) {

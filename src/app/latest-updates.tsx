@@ -1,5 +1,6 @@
 import Image from "next/image";
 import arrowRight from "../../assets/arrow-right.svg";
+import brush from "../../assets/brush.svg";
 import dolmenPopup from "../../assets/dolmen-popup.png";
 import dolmenUnitedPakistan from "../../assets/Dolmen-united-pakistan.png";
 import dolmenFestival from "../../assets/Dolmen-festival.png";
@@ -23,7 +24,17 @@ export default function LatestUpdates() {
       <h2 id="latest-updates-title">
         The Latest
         <br />
-        from <span>Dolmen.</span>
+        from{" "}
+        <span>
+          Dolmen.
+          <Image
+            className="title-brush"
+            src={brush}
+            alt=""
+            aria-hidden="true"
+            style={{ width: "100%", height: "9px" }}
+          />
+        </span>
       </h2>
 
       <div className="latest-updates-grid">
