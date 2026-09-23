@@ -2791,7 +2791,15 @@ header.site-header {
 }
 }
 @media (max-width: 640px){
-  .dolmen-hero-content {display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;gap: 20px;left: 30px;}
+  .dolmen-hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    left: 16px;
+    right: 16px;
+  }
 
 .about-section, .featured-developments {
     padding: 100px 0;
@@ -2973,7 +2981,15 @@ h2#about-title {
 }
 }
 @media (max-width: 640px){
- .dolmen-hero-content {display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;gap: 20px;left: 30px;}
+ .dolmen-hero-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    left: 16px;
+    right: 16px;
+  }
 
 .about-section, .featured-developments {
     padding: 100px 0;
