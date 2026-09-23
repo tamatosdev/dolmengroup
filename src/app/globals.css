@@ -2867,6 +2867,20 @@ span.future-marquee-item {
 .development-card-content a {
   font-size: 14px;
 }
+.about-content {
+  margin-top: 20px;
+  text-align: left;
+  gap: 16px;
+}
+.about-section.is-visible {
+  text-align: left;
+}
+.about-section {
+  text-align: left;
+}
+h2#about-title {
+  text-align: left;
+}
 }
 @media (max-width: 640px){
  .dolmen-hero-content {display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;gap: 20px;left: 30px;}
@@ -2943,6 +2957,21 @@ span.future-marquee-item {
 
 .about-section, .featured-developments, .dolmen-numbers, .latest-updates {
     padding: 60px 16px;
+}
+
+.about-content {
+  margin-top: 20px;
+  text-align: left;
+  gap: 16px;
+}
+
+.about-section.is-visible,
+.about-section {
+  text-align: left;
+}
+
+h2#about-title {
+  text-align: left;
 }
 
 .project-overview-media {
