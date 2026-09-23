@@ -978,6 +978,7 @@ body.site-loaded .dolmen-hero-stage {
 
 .about-button img {
   height: 15px;
+  transition: transform 180ms ease;
   width: 15px;
 }
 
@@ -985,6 +986,11 @@ body.site-loaded .dolmen-hero-stage {
 .about-button:focus-visible {
   background: #111111;
   color: #f8f2ea;
+}
+
+.about-button:hover img,
+.about-button:focus-visible img {
+  transform: translateX(8px);
 }
 
 .project-slides {
@@ -1735,19 +1741,24 @@ body.site-loaded .dolmen-hero-stage {
   min-height: 63px;
   padding: 0 118px;
   text-decoration: none;
-  transition: background 180ms ease, color 180ms ease, gap 180ms ease;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .future-marquee-contact a:hover,
 .future-marquee-contact a:focus-visible {
   background: #ffffff;
   color: #111111;
-  gap: 20px;
 }
 
 .future-marquee-contact a img {
   height: 15px;
+  transition: transform 180ms ease;
   width: 15px;
+}
+
+.future-marquee-contact a:hover img,
+.future-marquee-contact a:focus-visible img {
+  transform: translateX(8px);
 }
 
 @keyframes future-marquee-scroll {
@@ -1901,19 +1912,24 @@ article.dolmen-number:hover {
   margin-top: 80px;
   padding: 22px 48px;
   text-decoration: none;
-  transition: background 180ms ease, color 180ms ease, gap 180ms ease;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 .contact-section-button:hover,
 .contact-section-button:focus-visible {
   background: #ffffff;
   color: #111111;
-  gap: 20px;
 }
 
 .contact-section-button img {
   height: 15px;
+  transition: transform 180ms ease;
   width: 15px;
+}
+
+.contact-section-button:hover img,
+.contact-section-button:focus-visible img {
+  transform: translateX(8px);
 }
 
 .site-footer {
