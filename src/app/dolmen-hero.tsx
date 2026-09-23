@@ -4,62 +4,81 @@ import { useLenis } from "lenis/react";
 import { useEffect, useRef, useState } from "react";
 import thumbnail from "../../assets/Dolmanmall-video-thumbnail.png";
 
-/** ~30fps — skip seeks smaller than half a frame to reduce decoder thrash. */
+/** ~30fps — skip seeks smaller than ~2 frames to reduce decoder thrash. */
 const FRAME_DURATION = 1 / 30;
+const REVEAL_AT_SECONDS = 2;
 
 export default function DolmenHero() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isRevealed, setIsRevealed] = useState(false);
-  const revealRef = useRef(false);
+  const revealedRef = useRef(false);
   const targetTimeRef = useRef(0);
+  const lastAppliedRef = useRef(-1);
+  const unlockedRef = useRef(false);
   const isSeekingRef = useRef(false);
-  const isUnlockedRef = useRef(false);
-  const rafRef = useRef(0);
+  const seekTimeoutRef = useRef<number | null>(null);
 
   const bumpReveal = (time: number) => {
-    const shouldReveal = time >= 2;
-    if (shouldReveal === revealRef.current) {
-      return;
+    if (!revealedRef.current && time >= REVEAL_AT_SECONDS) {
+      revealedRef.current = true;
+      setIsRevealed(true);
     }
-    revealRef.current = shouldReveal;
-    setIsRevealed(shouldReveal);
   };
 
-  const queueSeek = () => {
-    if (rafRef.current) {
+  const clearSeekTimeout = () => {
+    if (seekTimeoutRef.current !== null) {
+      window.clearTimeout(seekTimeoutRef.current);
+      seekTimeoutRef.current = null;
+    }
+  };
+
+  const finishSeek = () => {
+    clearSeekTimeout();
+    isSeekingRef.current = false;
+    applyScrub();
+  };
+
+  const applyScrub = () => {
+    const video = videoRef.current;
+    if (!video?.duration || video.readyState < HTMLMediaElement.HAVE_METADATA) {
       return;
     }
 
-    rafRef.current = window.requestAnimationFrame(() => {
-      rafRef.current = 0;
-      const video = videoRef.current;
-      if (!video?.duration || video.readyState < HTMLMediaElement.HAVE_METADATA) {
-        return;
-      }
+    if (isSeekingRef.current) {
+      return;
+    }
 
-      // iOS blocks currentTime seeks until media has played once.
-      if (!isUnlockedRef.current) {
-        return;
-      }
+    if (!video.paused) {
+      video.pause();
+    }
 
-      const target = Math.min(video.duration, Math.max(0, targetTimeRef.current));
-      if (Math.abs(video.currentTime - target) < FRAME_DURATION * 0.45) {
-        bumpReveal(video.currentTime);
-        return;
-      }
+    const target = Math.min(video.duration, Math.max(0, targetTimeRef.current));
+    bumpReveal(target);
 
-      if (isSeekingRef.current || video.seeking) {
-        return;
-      }
+    if (Math.abs(lastAppliedRef.current - target) < FRAME_DURATION * 2) {
+      return;
+    }
+    if (Math.abs(video.currentTime - target) < FRAME_DURATION * 2) {
+      lastAppliedRef.current = target;
+      bumpReveal(video.currentTime);
+      return;
+    }
 
+    try {
       isSeekingRef.current = true;
-      try {
-        video.currentTime = target;
-      } catch {
-        isSeekingRef.current = false;
+      clearSeekTimeout();
+      seekTimeoutRef.current = window.setTimeout(finishSeek, 200);
+      video.currentTime = target;
+      lastAppliedRef.current = target;
+      if (target > 0.05) {
+        video.removeAttribute("poster");
       }
-    });
+    } catch {
+      isSeekingRef.current = false;
+      clearSeekTimeout();
+      lastAppliedRef.current = -1;
+    }
   };
 
   const updateFromScroll = () => {
@@ -76,7 +95,7 @@ export default function DolmenHero() {
     );
 
     targetTimeRef.current = progress * video.duration;
-    queueSeek();
+    applyScrub();
   };
 
   useEffect(() => {
@@ -85,73 +104,76 @@ export default function DolmenHero() {
       return;
     }
 
-    // Legacy iOS Safari attribute for inline playback / scrubbing.
     video.setAttribute("playsinline", "true");
     video.setAttribute("webkit-playsinline", "true");
     video.muted = true;
     video.defaultMuted = true;
     video.pause();
 
-    const unlockForScrubbing = async () => {
-      if (isUnlockedRef.current) {
-        queueSeek();
+    const onSeeked = () => {
+      bumpReveal(video.currentTime);
+      finishSeek();
+    };
+
+    const unlockOnGesture = () => {
+      if (unlockedRef.current) {
+        updateFromScroll();
         return;
       }
 
       video.muted = true;
       video.defaultMuted = true;
 
-      try {
-        // iOS requires a play() before programmatic seeking works reliably.
-        await video.play();
+      // iOS needs play/pause inside a user gesture before seeks stick.
+      // Never leave play() hanging — that blocks later currentTime writes.
+      const playAttempt = video.play();
+      const finish = () => {
         video.pause();
-        isUnlockedRef.current = true;
-        queueSeek();
-      } catch {
-        // Autoplay may still fail; unlock on first gesture below.
+        unlockedRef.current = true;
+        lastAppliedRef.current = -1;
+        updateFromScroll();
+      };
+
+      if (playAttempt !== undefined) {
+        const timeout = window.setTimeout(finish, 150);
+        void playAttempt
+          .then(() => {
+            window.clearTimeout(timeout);
+            finish();
+          })
+          .catch(() => {
+            window.clearTimeout(timeout);
+            finish();
+          });
+      } else {
+        finish();
       }
     };
 
-    const handleSeeked = () => {
-      isSeekingRef.current = false;
-      bumpReveal(video.currentTime);
-
-      if (Math.abs(video.currentTime - targetTimeRef.current) >= FRAME_DURATION * 0.45) {
-        queueSeek();
-      }
-    };
-
-    const handleReady = () => {
-      void unlockForScrubbing();
-    };
-
-    const unlockOnGesture = () => {
-      void unlockForScrubbing();
-    };
-
-    video.addEventListener("seeked", handleSeeked);
-    video.addEventListener("loadedmetadata", handleReady);
-    video.addEventListener("loadeddata", handleReady);
-    video.addEventListener("canplay", handleReady);
-    window.addEventListener("touchstart", unlockOnGesture, { passive: true, once: true });
-    window.addEventListener("scroll", unlockOnGesture, { passive: true, once: true });
+    video.addEventListener("seeked", onSeeked);
+    video.addEventListener("loadedmetadata", updateFromScroll);
+    video.addEventListener("loadeddata", updateFromScroll);
+    video.addEventListener("canplay", updateFromScroll);
+    window.addEventListener("touchstart", unlockOnGesture, { passive: true });
+    window.addEventListener("pointerdown", unlockOnGesture, { passive: true });
+    window.addEventListener("wheel", unlockOnGesture, { passive: true, once: true });
 
     if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
-      void unlockForScrubbing();
+      updateFromScroll();
     }
 
     return () => {
-      video.removeEventListener("seeked", handleSeeked);
-      video.removeEventListener("loadedmetadata", handleReady);
-      video.removeEventListener("loadeddata", handleReady);
-      video.removeEventListener("canplay", handleReady);
+      clearSeekTimeout();
+      video.removeEventListener("seeked", onSeeked);
+      video.removeEventListener("loadedmetadata", updateFromScroll);
+      video.removeEventListener("loadeddata", updateFromScroll);
+      video.removeEventListener("canplay", updateFromScroll);
       window.removeEventListener("touchstart", unlockOnGesture);
-      window.removeEventListener("scroll", unlockOnGesture);
-      window.cancelAnimationFrame(rafRef.current);
+      window.removeEventListener("pointerdown", unlockOnGesture);
+      window.removeEventListener("wheel", unlockOnGesture);
     };
   }, []);
 
-  // Native scroll fallback — Lenis can miss frames on iOS Safari.
   useEffect(() => {
     const onScroll = () => updateFromScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -174,11 +196,11 @@ export default function DolmenHero() {
         <video
           ref={videoRef}
           className="dolmen-hero-video"
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/dolmen-video-2.mp4?v=scrub-ios1`}
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/dolmen-video-3.mp4?v=scrub-smooth1`}
           muted
           playsInline
           preload="auto"
-          poster={`${thumbnail.src}?v=3`}
+          poster={`${thumbnail.src}?v=5`}
           aria-hidden="true"
           disablePictureInPicture
           controls={false}
@@ -189,7 +211,7 @@ export default function DolmenHero() {
             <span>Future</span>
           </h1>
           <p>
-            From everyday rituals to defining moments, Dolmen creates destinations designed to live beyond their architecture.
+            For over 35 years, Dolmen Group has shaped Pakistan’s real estate landscape with landmark destinations.
           </p>
         </div>
       </div>

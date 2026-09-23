@@ -32,7 +32,7 @@ export default function LatestUpdates() {
             src={brush}
             alt=""
             aria-hidden="true"
-            style={{ width: "100%", height: "9px" }}
+            style={{ width: "100%", height: "14px" }}
           />
         </span>
       </h2>

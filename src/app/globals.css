@@ -54,7 +54,7 @@
   }
 
   .about-section {
-    padding: clamp(125px, 10.416667vw, 200px) clamp(37.5px, 3.125vw, 60px) 50px;
+    padding: clamp(125px, 10.416667vw, 200px) clamp(37.5px, 3.125vw, 60px) clamp(62.5px, 5.208333vw, 100px);
   }
 
   .about-title {
@@ -63,6 +63,7 @@
 
   .about-statement {
     font-size: clamp(40px, 3.333333vw, 64px);
+    line-height: 1.1;
   }
 
   .about-claim {
@@ -103,7 +104,7 @@
   .development-card-content p,
   .development-card-content a,
   .project-overview-content p {
-    font-size: clamp(12.5px, 1.041667vw, 20px);
+    font-size: clamp(12.5px, 1.041667vw, 18px);
   }
 
   .development-card-content h3 {
@@ -246,6 +247,46 @@ body {
   color: var(--foreground);
   font-family: "NewBlack", sans-serif;
   margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "NewBlack", sans-serif;
+}
+
+p,
+button,
+input,
+textarea,
+select,
+label,
+.about-button,
+.contact-section-button,
+.project-overview-button,
+.contact-talk-submit,
+.newsletter-form input,
+.newsletter-form button,
+.development-card-content p,
+.development-card-content a,
+.dolmen-number p,
+.latest-update-card p,
+.latest-update-card a,
+.about-copy,
+.contact-section p,
+.footer-link-group a,
+.footer-property-group a,
+.footer-bottom,
+.project-overview-content p {
+  font-family: var(--font-inter), "Inter", sans-serif;
+}
+
+.navigation-list a,
+.business-menu-trigger {
+  font-family: "NewBlack", sans-serif;
 }
 
 .site-loader {
@@ -797,14 +838,19 @@ body.site-loaded .dolmen-hero-stage {
   grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
   left: 60px;
   opacity: 0;
+  pointer-events: none;
   position: absolute;
-  transform: translateY(100px);
-  transition: opacity 900ms ease, transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translateY(120px);
+  transition:
+    opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
   z-index: 2;
 }
 
 .dolmen-hero-content.is-visible {
   opacity: 1;
+  pointer-events: auto;
   transform: translateY(0);
 }
 
@@ -842,7 +888,7 @@ body.site-loaded .dolmen-hero-stage {
   background: #f8f2ea;
   color: #111111;
   opacity: 0;
-  padding: 200px 60px 50px;
+  padding: 200px 60px 100px;
   transform: translateY(200px);
   transition: opacity 900ms ease, transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -871,12 +917,12 @@ body.site-loaded .dolmen-hero-stage {
 
 .title-brush {
   display: block;
-  height: 9px;
+  height: 14px;
   left: 0;
   margin-top: 2px;
   max-width: none !important;
   position: absolute;
-  top: 100%;
+  top: 83%;
   width: 100% !important;
 }
 
@@ -888,9 +934,10 @@ body.site-loaded .dolmen-hero-stage {
 }
 
 .about-statement {
+  font-family: "NewBlack", sans-serif;
   font-size: 64px;
   letter-spacing: -0.03em;
-  line-height: 0.9;
+  line-height: 1.3;
   margin: 0;
 }
 
@@ -901,15 +948,16 @@ body.site-loaded .dolmen-hero-stage {
 .about-copy > p {
   font-size: 18px;
   letter-spacing: -0.03em;
-  line-height: 1.15;
+  line-height: 1.35;
   margin: 0;
   margin-bottom: 10px;
 }
 
 .about-copy .about-claim {
   color: #111111;
+  font-family: "NewBlack", sans-serif;
   font-size: 32px;
-  line-height: 1;
+  line-height: 1.3;
   margin: 12px 0 28px;
 }
 
@@ -1339,11 +1387,13 @@ body.site-loaded .dolmen-hero-stage {
 }
 
 .project-overview-content {
-  bottom: 35%;
+  bottom: 40%;
   color: #ffffff;
   left: 12%;
+  margin: auto;
   position: absolute;
   text-align: center;
+  width: 353px;
   z-index: 3;
 }
 
@@ -1352,15 +1402,15 @@ body.site-loaded .dolmen-hero-stage {
   font-weight: 200;
   letter-spacing: -0.03em;
   line-height: 0.95;
-  margin: 0 0 36px;
+  margin: 0 0 16px;
 }
 
 .project-overview-content p {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
   letter-spacing: 0.06em;
   line-height: 1;
-  margin: 0 0 60px;
+  margin: 0 0 15px;
   text-transform: uppercase;
 }
 
@@ -1770,7 +1820,7 @@ article.dolmen-number:hover {
   letter-spacing: -0.03em;
   line-height: 1.2;
   margin: 0;
-  max-width: 300px;
+  max-width: 90%;
 }
 
 .contact-section {
@@ -2446,6 +2496,10 @@ a.about-button {
     width: auto;
 }
 
+.project-slide-third {
+    --project-side-inset: 30px;
+}
+
 .latest-update-card {
     min-height: 650px;
 }
@@ -2728,7 +2782,12 @@ header.site-header {
 }
 
 .featured-developments-viewport {
-    padding-left: 30px !important;
+    padding-left: 0 !important;
+    padding-top: 10px;
+}
+
+.featured-developments-progress {
+    padding: 0;
 }
 
 .featured-developments-header {
@@ -2737,6 +2796,10 @@ header.site-header {
     gap: 20px;
     padding-left: 0 !important;
     padding-right: 30px !important;
+}
+
+.development-card {
+  aspect-ratio: 1.1;
 }
 
 .development-card-content {
@@ -2756,6 +2819,14 @@ header.site-header {
     font-size: 14px;
 }
 
+.dolmen-numbers > h2 {
+    margin-bottom: 40px;
+}
+
+#latest-updates-title {
+    margin-bottom: 40px;
+}
+
 section.project-overview {
     height: 70svh;
     display: flex;
@@ -2769,7 +2840,7 @@ section.project-overview {
 }
 
 .project-overview-content p {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .project-overview-content h2 {
@@ -2850,6 +2921,9 @@ span.future-marquee-item {
   left: 16px;
   right: 16px;
 }
+.project-slide-third {
+  --project-side-inset: 16px;
+}
 .project-slides-sticky {
   height: 100dvh;
   min-height: 100svh;
@@ -2890,7 +2964,12 @@ h2#about-title {
 }
 
 .featured-developments-viewport {
-    padding-left: 30px !important;
+    padding-left: 0 !important;
+    padding-top: 10px;
+}
+
+.featured-developments-progress {
+    padding: 0;
 }
 
 .featured-developments-header {
@@ -2899,6 +2978,10 @@ h2#about-title {
     gap: 20px;
     padding-left: 0 !important;
     padding-right: 30px !important;
+}
+
+.development-card {
+  aspect-ratio: 1.1;
 }
 
 .development-card-content {
@@ -2918,6 +3001,14 @@ h2#about-title {
     font-size: 14px;
 }
 
+.dolmen-numbers > h2 {
+    margin-bottom: 40px;
+}
+
+#latest-updates-title {
+    margin-bottom: 40px;
+}
+
 section.project-overview {
     height: 70svh;
     display: flex;
@@ -2931,7 +3022,7 @@ section.project-overview {
 }
 
 .project-overview-content p {
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .project-overview-content h2 {
@@ -3002,6 +3093,10 @@ h2#about-title {
 .project-slide-inset {
   left: 16px;
   right: 16px;
+}
+
+.project-slide-third {
+  --project-side-inset: 16px;
 }
 
 .project-slides-sticky {

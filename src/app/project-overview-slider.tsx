@@ -39,6 +39,7 @@ export default function ProjectOverviewSlider() {
   const [isDragging, setIsDragging] = useState(false);
   const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dragStartX = useRef(0);
+  const dragCurrentX = useRef(0);
   const didDrag = useRef(false);
   const activeSlide = slides[activeIndex];
 
@@ -76,6 +77,7 @@ export default function ProjectOverviewSlider() {
 
     didDrag.current = false;
     dragStartX.current = event.clientX;
+    dragCurrentX.current = event.clientX;
     setIsDragging(true);
     event.currentTarget.setPointerCapture(event.pointerId);
   };
@@ -84,6 +86,8 @@ export default function ProjectOverviewSlider() {
     if (!isDragging) {
       return;
     }
+
+    dragCurrentX.current = event.clientX;
 
     if (Math.abs(event.clientX - dragStartX.current) > 6) {
       didDrag.current = true;
@@ -95,17 +99,23 @@ export default function ProjectOverviewSlider() {
       return;
     }
 
-    const delta = event.clientX - dragStartX.current;
     setIsDragging(false);
 
-    if (delta <= -DRAG_THRESHOLD) {
-      move(1);
+    try {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    } catch {
+      // Capture may already be released.
+    }
+
+    // Use last pointermove X — pointerup clientX is often wrong on mobile touch.
+    const delta = dragCurrentX.current - dragStartX.current;
+
+    if (Math.abs(delta) < DRAG_THRESHOLD) {
       return;
     }
 
-    if (delta >= DRAG_THRESHOLD) {
-      move(-1);
-    }
+    // Swipe left → next; swipe right → previous
+    move(delta < 0 ? 1 : -1);
   };
 
   const outgoingSlide = outgoingIndex === null ? null : slides[outgoingIndex];

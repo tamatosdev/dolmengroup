@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import domenFavicon from "../../assets/domen-favicon.ico";
 import "./globals.css";
 import SmoothScroll from "./smooth-scroll";
 import SiteLoader from "./site-loader";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Dolmen Group",
@@ -16,7 +23,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className="h-full antialiased"
+      className={`h-full antialiased ${inter.variable}`}
     >
       <body className="min-h-full flex flex-col">
         <SiteLoader />

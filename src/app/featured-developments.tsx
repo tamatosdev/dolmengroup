@@ -10,6 +10,7 @@ import dolmenMallHyderi from "../../assets/Development Project/Dolman-Mall-Hyder
 import dolmenMallClifton from "../../assets/Development Project/Dolman-mall-clifton.png";
 import dolmenMallLahore from "../../assets/Development Project/Dolman-mall-lahore.png";
 import dolmenMallTariqRoad from "../../assets/Development Project/Dolman-Mall-tariq-road.png";
+import executiveTower from "../../assets/Development Project/Executive Tower.jpg";
 import groveResidency from "../../assets/Development Project/Grove Residency.png";
 import harbourFront from "../../assets/Development Project/The-Harbour-Front.png";
 import skyTower from "../../assets/Development Project/Sky-Tower.png";
@@ -28,7 +29,7 @@ const developments: Development[] = [
   { image: skyTower, subtitle: "ELEVATED BUSINESS, REDEFINED", title: "Sky Towers" },
   { image: dolmenMallTariqRoad, subtitle: "AT THE HEART OF KARACHI", title: "Dolmen Mall Tariq Road" },
   { image: corporateOfficeBlock, subtitle: "PRESTIGE IN EVERY DETAIL", title: "Corporate Office Block" },
-  { image: corporateOfficeBlock, subtitle: "THE ADDRESS OF DISTINCTION", title: "Executive Tower" },
+  { image: executiveTower, subtitle: "THE ADDRESS OF DISTINCTION", title: "Executive Tower" },
   { image: groveResidency, subtitle: "A PLACE CALLED HOME", title: "Grove Residency" },
   { image: dolmenMallHyderi, subtitle: "YOUR NEIGHBOURHOOD MALL", title: "Dolmen Mall Hyderi" },
 ];

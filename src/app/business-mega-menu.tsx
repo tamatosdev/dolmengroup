@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import arrowDown from "../../assets/arrow-down.svg";
 import menuIcon from "../../assets/menu-icon.png";
-import sindbadWonderland from "../../assets/sindbad-wonderland.png";
-import griordano from "../../assets/griordano.png";
-import balabala from "../../assets/balabala.png";
+import sindbadWonderland from "../../assets/mega menu images/Sindbad.jpg";
+import griordano from "../../assets/mega menu images/Giordano.jpg";
+import balabala from "../../assets/mega menu images/Bala bala.jpg";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
 import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 

@@ -5,17 +5,16 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import arrowDown from "../../assets/arrow-down.svg";
 import menuIcon from "../../assets/menu-icon.png";
-import dolmenMallTariqRoad from "../../assets/Project Menu/dolman-mall-tariqroad.png";
-import dolmenMallLahore from "../../assets/Project Menu/dolman-mall-lahore.png";
-import dolmenMallHyderi from "../../assets/Project Menu/dolman-mall-hyderi.png";
-import dolmenMallClifton from "../../assets/Project Menu/Dolman-mall-clifton.png";
-import dolmenCityIslamabad from "../../assets/Project Menu/dolman-city-islamabad.png";
-import skyTowers from "../../assets/Project Menu/sky-towers.png";
-import executiveTower from "../../assets/Project Menu/executive-tower.png";
-import corporateOfficeBlock from "../../assets/Project Overview/Corporate Office Block thumbnail.png";
-import domencity from "../../assets/Project Menu/domencity.png";
-import groveResidency from "../../assets/Project Menu/the-grove-resedency.png";
-import harbourFront from "../../assets/Project Menu/the-harbor-front.png";
+import dolmenMallTariqRoad from "../../assets/mega menu images/DMTR.jpg";
+import dolmenMallLahore from "../../assets/mega menu images/DML.jpg";
+import dolmenMallHyderi from "../../assets/mega menu images/DMH.jpg";
+import dolmenMallClifton from "../../assets/mega menu images/DMC.jpg";
+import dolmenCityIslamabad from "../../assets/mega menu images/Dolmen city islamabad.jpg";
+import skyTowers from "../../assets/mega menu images/Sky towers.jpg";
+import executiveTower from "../../assets/mega menu images/Executive towers.jpg";
+import corporateOfficeBlock from "../../assets/mega menu images/Corporate bloock.jpg";
+import groveResidency from "../../assets/mega menu images/Grove.jpg";
+import harbourFront from "../../assets/mega menu images/Harbor front.jpg";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
 import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 
@@ -32,7 +31,7 @@ const projects: Project[] = [
   { category: "OFFICES", image: corporateOfficeBlock, title: "Corporate Office Block", caption: "PRESTIGE IN EVERY DETAIL" },
   { category: "OFFICES", image: executiveTower, title: "Executive Tower", caption: "THE ADDRESS OF DISTINCTION" },
   { category: "RESIDENCES", image: groveResidency, title: "The Grove Residency", caption: "A PLACE CALLED HOME" },
-  { category: "RESIDENCES", image: domencity, title: "Dolmen City Islamabad", caption: "RESORT STYLE LIVING" },
+  { category: "RESIDENCES", image: dolmenCityIslamabad, title: "Dolmen City Islamabad", caption: "RESORT STYLE LIVING" },
 ];
 
 const categories: ProjectCategory[] = ["COMMUNITY", "MALLS", "OFFICES", "RESIDENCES"];

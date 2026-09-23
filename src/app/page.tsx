@@ -33,26 +33,24 @@ export default function Home() {
               src={brush}
               alt=""
               aria-hidden="true"
-              style={{ width: "100%", height: "9px" }}
+              style={{ width: "100%", height: "14px" }}
             />
           </span>
         </h2>
 
         <div className="about-content">
           <p className="about-statement">
-            A building occupies space.
-            <br />
-            Destination creates meaning.
+            Redefining Spaces. Enriching Lives. Shaping Tomorrow.
           </p>
 
           <div className="about-copy">
             <p>
-              Dolmen approaches development through the way people experience a place — how they arrive, move, meet, work, shop, unwind and return.
-            </p>
-            <p>
               For over 35 years, Dolmen Group has been shaping Pakistan&apos;s real estate landscape with landmark destinations.
             </p>
-            <p className="about-claim">We create places with a life beyond their walls.</p>
+            <p>
+              We create vibrant spaces from retail and commercial developments to integrated destinations that bring people, businesses and communities together.
+            </p>
+            <p className="about-claim">Building destinations that inspire, connect &amp; endure.</p>
             <a className="about-button" href="#about-story">
               Discover Our Story
               <Image src={arrowRight} alt="" aria-hidden="true" />

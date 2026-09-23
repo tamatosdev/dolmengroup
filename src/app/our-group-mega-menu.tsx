@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import arrowDown from "../../assets/arrow-down.svg";
-import aboutCard from "../../assets/aboutus-card.png";
-import careersCard from "../../assets/careers-card.png";
-import contactCard from "../../assets/contact-card.png";
+import aboutCard from "../../assets/mega menu images/About.jpg";
+import careersCard from "../../assets/mega menu images/Careers.jpg";
+import contactCard from "../../assets/mega menu images/Contact us.jpg";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
 import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 

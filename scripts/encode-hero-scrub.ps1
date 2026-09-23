@@ -7,8 +7,8 @@
 
 $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $PSScriptRoot
-$src = Join-Path $root "public\dolmen-video-2.mp4"
-$out = Join-Path $root "public\dolmen-video-2.scrub.mp4"
+$src = Join-Path $root "public\dolmen-video-3.mp4"
+$out = Join-Path $root "public\dolmen-video-3.scrub.mp4"
 
 if (-not (Get-Command ffmpeg -ErrorAction SilentlyContinue)) {
   Write-Error "ffmpeg not found. Install it, then re-run this script."
@@ -27,7 +27,7 @@ Write-Host "Encoding scrub-optimized hero video..."
 # scale       keep under ~1600px wide so file stays manageable
 ffmpeg -y -i $src `
   -vf "scale='min(1600,iw)':-2" `
-  -c:v libx264 -preset slow -crf 18 `
+  -c:v libx264 -preset medium -crf 20 `
   -g 1 -keyint_min 1 -sc_threshold 0 -bf 0 `
   -pix_fmt yuv420p `
   -movflags +faststart `
@@ -36,4 +36,4 @@ ffmpeg -y -i $src `
 
 Copy-Item $out $src -Force
 Remove-Item $out -Force
-Write-Host "Done. Replaced public/dolmen-video-2.mp4 with scrub-optimized encode."
+Write-Host "Done. Replaced public/dolmen-video-3.mp4 with scrub-optimized encode."

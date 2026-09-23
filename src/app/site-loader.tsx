@@ -44,6 +44,9 @@ export default function SiteLoader() {
       window.addEventListener("load", finishLoading, { once: true });
     }
 
+    // Large hero video can delay window "load"; don't leave the page blank.
+    const maxWaitTimer = window.setTimeout(finishLoading, 2200);
+
     const progressTimer = setInterval(() => {
       setProgress((currentProgress) => {
         if (currentProgress >= 88) {
@@ -57,6 +60,7 @@ export default function SiteLoader() {
     return () => {
       window.removeEventListener("load", finishLoading);
       clearInterval(progressTimer);
+      window.clearTimeout(maxWaitTimer);
       if (completeTimer) {
         clearTimeout(completeTimer);
       }

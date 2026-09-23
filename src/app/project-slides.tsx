@@ -3,27 +3,27 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import cultivatPassion from "../../assets/cultivat-passion.png";
-import sustainableConcepts from "../../assets/sustainable concepts.png";
-import nextLandmark from "../../assets/next landmark.png";
+import projectSlide1 from "../../assets/Project Overview/project-slide-1.jpg";
+import projectSlide2 from "../../assets/Project Overview/project-slide-2.jpg";
+import projectSlide3 from "../../assets/Project Overview/project-slide-3.jpg";
 
 type ProjectSlide = {
-  image: typeof cultivatPassion;
+  image: typeof projectSlide1;
   title: string;
 };
 
 const slides: ProjectSlide[] = [
   {
-    image: cultivatPassion,
-    title: "We cultivate our passion\nthrough bold projects.",
+    image: projectSlide1,
+    title: "We shape tomorrow\nthrough visionary spaces.",
   },
   {
-    image: sustainableConcepts,
+    image: projectSlide2,
     title: "We make innovative and\nsustainable concepts.",
   },
   {
-    image: nextLandmark,
-    title: "The next landmark\nstarts with a better question.",
+    image: projectSlide3,
+    title: "We create landmarks\nthrough enduring vision.",
   },
 ];
 
@@ -219,7 +219,11 @@ export default function ProjectSlides() {
     ? Math.min(1, scrollProgress / (2 / 3))
     : scrollProgress;
   const slideProgress = slideTrackProgress * (slides.length - 1);
-  const sideInsetProgress = Math.min(1, Math.max(0, (slideTrackProgress - 0.55) / 0.45));
+  // Desktop: ease out side inset across later track.
+  // Mobile: keep inset like slides 1–2 while entering, expand to full width at the top.
+  const sideInsetProgress = coverScroll
+    ? Math.min(1, Math.max(0, (slideTrackProgress - 0.55) / 0.45))
+    : Math.min(1, Math.max(0, (slideTrackProgress - 0.9) / 0.1));
   const title = slides[displaySlide].title;
 
   return (
