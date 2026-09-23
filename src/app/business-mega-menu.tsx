@@ -141,7 +141,7 @@ export default function BusinessMegaMenu() {
             ))}
           </div>
           <div className="business-mega-footer">
-            <a href="#contact" onClick={() => beginClose()}>CONTACT</a>
+            <a href="/contact/" onClick={() => beginClose()}>CONTACT</a>
             <div>
               <a href="#instagram">INSTAGRAM</a>
               <a href="#facebook">FACEBOOK</a>

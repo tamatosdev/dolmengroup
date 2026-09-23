@@ -13,7 +13,7 @@ import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 const cards = [
   { image: aboutCard, title: "About", caption: "DISCOVER OUR STORY AND VALUES", href: "#about" },
   { image: careersCard, title: "Careers", caption: "JOIN OUR GROWING TEAM", href: "#careers" },
-  { image: contactCard, title: "Contact", caption: "GET IN TOUCH TODAY", href: "#contact" },
+  { image: contactCard, title: "Contact", caption: "GET IN TOUCH TODAY", href: "/contact/" },
 ];
 
 export default function OurGroupMegaMenu() {
@@ -110,7 +110,7 @@ export default function OurGroupMegaMenu() {
             ))}
           </div>
           <div className="business-mega-footer">
-            <a href="#contact" onClick={() => beginClose()}>CONTACT</a>
+            <a href="/contact/" onClick={() => beginClose()}>CONTACT</a>
             <div>
               <a href="#instagram">INSTAGRAM</a>
               <a href="#facebook">FACEBOOK</a>

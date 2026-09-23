@@ -41,7 +41,7 @@ export default function ContactSection() {
           <p>
             Whether you&apos;re looking to connect, explore opportunities, discuss partnerships or simply learn more, get in touch with our team and we&apos;ll be happy to assist.
           </p>
-          <a className="contact-section-button" href="#contact-form">
+          <a className="contact-section-button" href="/contact/">
             Get In Touch
             <Image src={arrowRight} alt="" aria-hidden="true" />
           </a>

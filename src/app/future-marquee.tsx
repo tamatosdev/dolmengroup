@@ -25,7 +25,7 @@ export default function FutureMarquee() {
       </div>
       <div className="future-marquee-contact">
         <h2>We are here to<br />listen to you</h2>
-        <a href="#contact-form">
+        <a href="/contact/">
           Let&apos;s Talk
           <Image src={arrowRight} alt="" aria-hidden="true" />
         </a>
