@@ -30,6 +30,13 @@
     padding: clamp(23.75px, 1.979167vw, 38px) clamp(18.75px, 1.5625vw, 30px) clamp(70px, 5.833333vw, 112px);
   }
 
+  .our-group-mega-panel {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: fit-content;
+  }
+
   .business-mega-tabs {
     flex-basis: clamp(221.25px, 18.4375vw, 354px);
   }
@@ -718,15 +725,15 @@ body.site-loaded .site-header {
   border: 1px solid rgb(255 255 255 / 20%);
   border-radius: 0 0 18px 18px;
   bottom: auto;
+  left: 50%;
   min-height: 340px;
-  margin: 0 auto;
   overflow: hidden;
   padding: 38px 30px 112px;
   position: fixed;
-  left: 50%;
+  right: auto;
   top: 90px;
   transform: translateX(-50%);
-  width: 63%;
+  width: fit-content;
   z-index: 120;
   animation: our-group-mega-open 350ms ease both;
 }
@@ -763,15 +770,14 @@ body.site-loaded .site-header {
   display: flex;
   gap: 12px;
   min-width: 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: thin;
+  overflow: hidden;
+  width: fit-content;
 }
 
 .our-group-mega-card {
   color: #ffffff;
   flex: 0 0 320px;
-  height: 300px;
+  height: 390px;
   max-width: 320px;
   min-width: 320px;
   overflow: hidden;
@@ -3329,8 +3335,7 @@ h2#about-title {
 /* Keep mega cards fixed-size with horizontal scroll from tablet/desktop down to 1700 */
 @media (max-width: 1700px) and (min-width: 1025px) {
   .business-mega-cards,
-  .project-mega-panel .business-mega-cards,
-  .our-group-mega-cards {
+  .project-mega-panel .business-mega-cards {
     display: flex !important;
     flex-wrap: nowrap !important;
     grid-template-columns: none !important;
@@ -3341,7 +3346,6 @@ h2#about-title {
 
   .business-mega-card,
   .project-mega-panel .business-mega-card,
-  .our-group-mega-card,
   a.business-mega-card {
     flex: 0 0 320px !important;
     height: 390px !important;
@@ -3352,10 +3356,21 @@ h2#about-title {
     width: 320px !important;
   }
 
+  .our-group-mega-cards {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+    width: fit-content !important;
+  }
+
   .our-group-mega-card {
-    height: 300px !important;
-    max-height: 300px !important;
-    min-height: 300px !important;
+    flex: 0 0 320px !important;
+    height: 390px !important;
+    max-height: 390px !important;
+    max-width: 320px !important;
+    min-height: 390px !important;
+    min-width: 320px !important;
+    width: 320px !important;
   }
 }
 

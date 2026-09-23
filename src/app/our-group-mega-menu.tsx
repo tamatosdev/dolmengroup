@@ -100,7 +100,7 @@ export default function OurGroupMegaMenu() {
           <div className="our-group-mega-cards">
             {cards.map((card) => (
               <a className="our-group-mega-card" href={card.href} key={card.title} onClick={() => beginClose()}>
-                <Image src={card.image} alt="" fill sizes="(max-width: 1024px) 70vw, 220px" />
+                <Image src={card.image} alt="" fill sizes="(max-width: 1024px) 70vw, 320px" />
                 <span className="business-mega-card-shade" />
                 <span className="business-mega-card-copy">
                   <strong>{card.title}</strong>
