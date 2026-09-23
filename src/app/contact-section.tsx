@@ -37,7 +37,7 @@ export default function ContactSection() {
         <Image className="contact-section-background" src={placesSectionBackground} alt="" fill aria-hidden="true" />
         <div className="contact-section-content">
           <Image className="contact-section-logo" src={darkLogo} alt="Dolmen - Building a better future" />
-          <h2 id="contact-title">Creating places that<br />shape the way cities live</h2>
+          <h2 id="contact-title">Creating places that<br /> shape the way cities live</h2>
           <p>
             Whether you&apos;re looking to connect, explore opportunities, discuss partnerships or simply learn more, get in touch with our team and we&apos;ll be happy to assist.
           </p>

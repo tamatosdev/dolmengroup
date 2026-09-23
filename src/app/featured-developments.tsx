@@ -162,7 +162,8 @@ export default function FeaturedDevelopments() {
                 <p>{development.subtitle}</p>
                 <h3>{development.title}</h3>
                 <a href={`#${development.title.toLowerCase().replaceAll(" ", "-")}`}>
-                  Explore <span aria-hidden="true">-&gt;</span>
+                  Explore
+                  <Image src={arrowRight} alt="" aria-hidden="true" />
                 </a>
               </div>
             </article>

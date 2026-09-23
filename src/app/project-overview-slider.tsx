@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import type { PointerEvent as ReactPointerEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 import arrowRight from "../../assets/arrow-right.svg";
 import sliderArrowNext from "../../assets/slider-arrow-next.png";
@@ -28,22 +29,27 @@ const slides: OverviewSlide[] = [
   { background: dolmenMallLahoreBackground, location: "LAHORE", thumbnail: dolmenMallLahoreThumbnail, title: "Dolmen Mall" },
 ];
 
+const DRAG_THRESHOLD = 64;
+
 export default function ProjectOverviewSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [outgoingIndex, setOutgoingIndex] = useState<number | null>(null);
   const [direction, setDirection] = useState<"next" | "previous">("next");
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const transitionTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dragStartX = useRef(0);
+  const didDrag = useRef(false);
   const activeSlide = slides[activeIndex];
 
-  const move = (direction: number) => {
+  const move = (step: number) => {
     if (isTransitioning) {
       return;
     }
 
     setOutgoingIndex(activeIndex);
-    setDirection(direction > 0 ? "next" : "previous");
-    setActiveIndex((activeIndex + direction + slides.length) % slides.length);
+    setDirection(step > 0 ? "next" : "previous");
+    setActiveIndex((activeIndex + step + slides.length) % slides.length);
     setIsTransitioning(true);
 
     transitionTimer.current = setTimeout(() => {
@@ -58,10 +64,68 @@ export default function ProjectOverviewSlider() {
     }
   }, []);
 
+  const onPointerDown = (event: ReactPointerEvent<HTMLElement>) => {
+    if (event.button !== 0) {
+      return;
+    }
+
+    const target = event.target as HTMLElement;
+    if (target.closest("a, button")) {
+      return;
+    }
+
+    didDrag.current = false;
+    dragStartX.current = event.clientX;
+    setIsDragging(true);
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const onPointerMove = (event: ReactPointerEvent<HTMLElement>) => {
+    if (!isDragging) {
+      return;
+    }
+
+    if (Math.abs(event.clientX - dragStartX.current) > 6) {
+      didDrag.current = true;
+    }
+  };
+
+  const endDrag = (event: ReactPointerEvent<HTMLElement>) => {
+    if (!isDragging) {
+      return;
+    }
+
+    const delta = event.clientX - dragStartX.current;
+    setIsDragging(false);
+
+    if (delta <= -DRAG_THRESHOLD) {
+      move(1);
+      return;
+    }
+
+    if (delta >= DRAG_THRESHOLD) {
+      move(-1);
+    }
+  };
+
   const outgoingSlide = outgoingIndex === null ? null : slides[outgoingIndex];
 
   return (
-    <section className="project-overview" aria-label="Project overview">
+    <section
+      className={`project-overview${isDragging ? " is-dragging" : ""}`}
+      aria-label="Project overview"
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={endDrag}
+      onPointerCancel={endDrag}
+      onClickCapture={(event) => {
+        if (didDrag.current) {
+          event.preventDefault();
+          event.stopPropagation();
+          didDrag.current = false;
+        }
+      }}
+    >
       {outgoingSlide && (
         <Image
           key={`background-outgoing-${outgoingSlide.background.src}`}
@@ -70,6 +134,7 @@ export default function ProjectOverviewSlider() {
           alt=""
           fill
           sizes="100vw"
+          draggable={false}
         />
       )}
       <Image
@@ -80,6 +145,7 @@ export default function ProjectOverviewSlider() {
         fill
         priority
         sizes="100vw"
+        draggable={false}
       />
       <div className="project-overview-content">
         <h2>{activeSlide.title}</h2>
@@ -108,7 +174,8 @@ export default function ProjectOverviewSlider() {
               src={outgoingSlide.thumbnail}
               alt={`${outgoingSlide.title} overview`}
               fill
-              sizes="(max-width: 540px) calc(100vw - 48px), 38vw"
+              sizes="(max-width: 640px) calc(100vw - 48px), 38vw"
+              draggable={false}
             />
           )}
           <Image
@@ -117,7 +184,8 @@ export default function ProjectOverviewSlider() {
             src={activeSlide.thumbnail}
             alt={`${activeSlide.title} overview`}
             fill
-            sizes="(max-width: 540px) calc(100vw - 48px), 38vw"
+            sizes="(max-width: 640px) calc(100vw - 48px), 38vw"
+            draggable={false}
           />
         </div>
 
