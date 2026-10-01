@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FormEvent } from "react";
 import arrowDown from "../../assets/arrow-down.svg";
 import arrowRight from "../../assets/arrow-right.svg";
+import contactSectionImage from "../../assets/contact-section-imge.jpg";
 
 const enquiryOptions = [
   "Shopping Mall (Retail Outlets)",
@@ -95,12 +96,11 @@ export default function ContactTalk() {
         </div>
 
         <div className="contact-talk-map">
-          <iframe
-            title="Dolmen Group head office map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.8146724451635!2d67.0261608857379!3d24.801798790808633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33d46c229528d%3A0x5e4e32b036b27f38!2sSky%20Tower!5e0!3m2!1sen!2s!4v1790166465917!5m2!1sen!2s"
-            loading="lazy"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
+          <Image
+            src={contactSectionImage}
+            alt="Dolmen Group head office location"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
           />
         </div>
       </div>

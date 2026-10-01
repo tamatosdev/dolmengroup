@@ -17,8 +17,8 @@ export default function SiteFooter() {
 
         <div className="footer-link-group">
           <h2>Company</h2>
-          <a href="/#about">About</a>
-          <a href="/#updates">Updates</a>
+          <Link href="/#about">About</Link>
+          <Link href="/#updates">Updates</Link>
           <Link href="/contact/">Contact</Link>
         </div>
 

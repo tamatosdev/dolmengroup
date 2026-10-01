@@ -11,6 +11,7 @@ import ProjectMegaMenu from "./project-mega-menu";
 const simpleLinks = [
   { label: "REIT", href: "#reit" },
   { label: "UPDATES", href: "#updates" },
+  { label: "CONTACT", href: "/contact/" },
 ];
 
 export default function SiteHeader() {
@@ -121,15 +122,27 @@ export default function SiteHeader() {
           <BusinessMegaMenu />
           {simpleLinks.map((item) => (
             <li key={item.label}>
-              <a
-                href={item.href}
-                onClick={() => {
-                  restoreMobileNavRef.current = false;
-                  setIsMobileNavOpen(false);
-                }}
-              >
-                {item.label}
-              </a>
+              {item.href.startsWith("/") ? (
+                <Link
+                  href={item.href}
+                  onClick={() => {
+                    restoreMobileNavRef.current = false;
+                    setIsMobileNavOpen(false);
+                  }}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  href={item.href}
+                  onClick={() => {
+                    restoreMobileNavRef.current = false;
+                    setIsMobileNavOpen(false);
+                  }}
+                >
+                  {item.label}
+                </a>
+              )}
             </li>
           ))}
         </ul>

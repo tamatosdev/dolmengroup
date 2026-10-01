@@ -16,6 +16,7 @@ import corporateOfficeBlock from "../../assets/mega menu images/Corporate bloock
 import groveResidency from "../../assets/mega menu images/Grove.jpg";
 import harbourFront from "../../assets/mega menu images/Harbor front.jpg";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
+import { useIsClient } from "./use-is-client";
 import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 
 type ProjectCategory = "COMMUNITY" | "MALLS" | "OFFICES" | "RESIDENCES";
@@ -40,15 +41,11 @@ export default function ProjectMegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [activeCategory, setActiveCategory] = useState<ProjectCategory>("COMMUNITY");
-  const [isMounted, setIsMounted] = useState(false);
+  const isMounted = useIsClient();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const visibleProjects = activeCategory === "COMMUNITY"
     ? [{ image: dolmenCityIslamabad, title: "Dolmen City Islamabad", caption: "RESORT STYLE LIVING" }]
     : projects.filter((project) => project.category === activeCategory);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const beginClose = (restoreMobileNav = false) => {
     setIsClosing(true);

@@ -6,25 +6,20 @@ import { createPortal } from "react-dom";
 import arrowDown from "../../assets/arrow-down.svg";
 import aboutCard from "../../assets/mega menu images/About.jpg";
 import careersCard from "../../assets/mega menu images/Careers.jpg";
-import contactCard from "../../assets/mega menu images/Contact us.jpg";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
+import { useIsClient } from "./use-is-client";
 import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 
 const cards = [
   { image: aboutCard, title: "About", caption: "DISCOVER OUR STORY AND VALUES", href: "#about" },
   { image: careersCard, title: "Careers", caption: "JOIN OUR GROWING TEAM", href: "#careers" },
-  { image: contactCard, title: "Contact", caption: "GET IN TOUCH TODAY", href: "/contact/" },
 ];
 
 export default function OurGroupMegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const isMounted = useIsClient();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const beginClose = (restoreMobileNav = false) => {
     setIsClosing(true);

@@ -9,6 +9,7 @@ import sindbadWonderland from "../../assets/mega menu images/Sindbad.jpg";
 import griordano from "../../assets/mega menu images/Giordano.jpg";
 import balabala from "../../assets/mega menu images/Bala bala.jpg";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
+import { useIsClient } from "./use-is-client";
 import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 
 type BusinessTab = "ENTERTAINMENT" | "RETAIL";
@@ -28,12 +29,8 @@ export default function BusinessMegaMenu() {
   const [isClosing, setIsClosing] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [activeTab, setActiveTab] = useState<BusinessTab>("ENTERTAINMENT");
-  const [isMounted, setIsMounted] = useState(false);
+  const isMounted = useIsClient();
   const items = businessItems[activeTab];
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
 
   const beginClose = (restoreMobileNav = false) => {
     setIsClosing(true);

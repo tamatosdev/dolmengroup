@@ -24,7 +24,10 @@ export function useMegaMenuDismiss({
 }: UseMegaMenuDismissOptions) {
   const onDismissRef = useRef(onDismiss);
   const lastScrollRef = useRef<number | null>(null);
-  onDismissRef.current = onDismiss;
+
+  useEffect(() => {
+    onDismissRef.current = onDismiss;
+  }, [onDismiss]);
 
   useLenis((lenis) => {
     if (!isOpen || isClosing) {

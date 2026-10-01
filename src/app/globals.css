@@ -3544,13 +3544,14 @@ h2#about-title {
   border-radius: 5px;
   height: 400px;
   overflow: hidden;
+  position: relative;
   width: 100%;
 }
 
-.contact-talk-map iframe {
-  border: 0;
+.contact-talk-map img {
   display: block;
   height: 100%;
+  object-fit: cover;
   width: 100%;
 }
 

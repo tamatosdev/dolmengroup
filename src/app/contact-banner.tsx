@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import contactBanner from "../../assets/contact-banner.jpg";
+import contactBanner from "../../assets/contact-banner2.jpg";
 
 export default function ContactBanner() {
   const [isVisible, setIsVisible] = useState(false);
