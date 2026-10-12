@@ -1,0 +1,38 @@
+[
+  {
+    "line": 509,
+    "path": "D:\\Dolmen-group\\src\\app\\contact-section.tsx",
+    "old": "          <a className=\"contact-section-button\" href=\"#contact-form\">\n            Get In Touch\n            <Image src={a",
+    "new": "          <a className=\"contact-section-button\" href=\"/contact/\">\n            Get In Touch\n            <Image src={arrow"
+  },
+  {
+    "line": 509,
+    "path": "D:\\Dolmen-group\\src\\app\\our-group-mega-menu.tsx",
+    "old": "  { image: contactCard, title: \"Contact\", caption: \"GET IN TOUCH TODAY\", href: \"#contact\" },",
+    "new": "  { image: contactCard, title: \"Contact\", caption: \"GET IN TOUCH TODAY\", href: \"/contact/\" },"
+  },
+  {
+    "line": 510,
+    "path": "D:\\Dolmen-group\\src\\app\\future-marquee.tsx",
+    "old": "        <a href=\"#contact-form\">\n          Let&apos;s Talk\n          <Image src={arrowRight} alt=\"\" aria-hidden=\"true\" /",
+    "new": "        <a href=\"/contact/\">\n          Let&apos;s Talk\n          <Image src={arrowRight} alt=\"\" aria-hidden=\"true\" />\n  "
+  },
+  {
+    "line": 510,
+    "path": "D:\\Dolmen-group\\src\\app\\our-group-mega-menu.tsx",
+    "old": "            <a href=\"#contact\" onClick={() => beginClose()}>CONTACT</a>",
+    "new": "            <a href=\"/contact/\" onClick={() => beginClose()}>CONTACT</a>"
+  },
+  {
+    "line": 510,
+    "path": "D:\\Dolmen-group\\src\\app\\project-mega-menu.tsx",
+    "old": "            <a href=\"#contact\" onClick={() => beginClose()}>CONTACT</a>",
+    "new": "            <a href=\"/contact/\" onClick={() => beginClose()}>CONTACT</a>"
+  },
+  {
+    "line": 510,
+    "path": "D:\\Dolmen-group\\src\\app\\business-mega-menu.tsx",
+    "old": "            <a href=\"#contact\" onClick={() => beginClose()}>CONTACT</a>",
+    "new": "            <a href=\"/contact/\" onClick={() => beginClose()}>CONTACT</a>"
+  }
+]

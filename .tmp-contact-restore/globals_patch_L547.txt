@@ -1,0 +1,4 @@
+{
+  "old": "  .contact-talk {\n    gap: clamp(40px, 3.333vw, 64px);\n    padding: clamp(70px, 5.2vw, 100px) clamp(37.5px, 3.125vw, 60px) 150px;\n  }",
+  "new": "  .contact-talk {\n    padding: clamp(70px, 5.2vw, 100px) clamp(37.5px, 3.125vw, 60px) 150px;\n  }"
+}

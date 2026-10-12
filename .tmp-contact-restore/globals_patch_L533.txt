@@ -1,0 +1,4 @@
+{
+  "old": ".contact-banner-scroll:hover,\n.contact-banner-scroll:focus-visible {\n  background: #f0f0f0;\n  color: #000;\n}",
+  "new": ".contact-banner-scroll:hover,\n.contact-banner-scroll:focus-visible {\n  background: #efe8de;\n  color: #000;\n}"
+}

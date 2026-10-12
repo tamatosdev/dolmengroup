@@ -1,0 +1,4 @@
+{
+  "old": ".about-section, .featured-developments, .dolmen-numbers, .latest-updates {\n    padding: 60px 16px;\n}",
+  "new": ".about-section, .featured-developments, .dolmen-numbers, .latest-updates, .contact-talk {\n    padding: 60px 16px;\n}"
+}

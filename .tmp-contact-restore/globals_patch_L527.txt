@@ -1,0 +1,4 @@
+{
+  "old": ".contact-banner-content {\n  align-items: flex-start;\n  bottom: 40px;\n  flex-direction: column;\n  gap: 28px;\n  left: 30px;\n  right: 30px;\n}\n\n.contact-banner-content h1 {\n  font-size: 48px;\n  max-width: none;\n}\n\n.contact-banner-aside {\n  align-items: flex-start;\n  max-width: none;\n  width: 100%;\n}\n\n.contact-banner-aside p {\n  font-size: 16px;\n  text-align: left;\n}\n\n.about-section, .featured-developments {\n    padding: 100px 0;\n}",
+  "new": ".contact-banner-content {\n  align-items: flex-start;\n  bottom: 120px;\n  flex-direction: column;\n  gap: 24px;\n  left: 30px;\n  right: 30px;\n}\n\n.contact-banner-content h1 {\n  font-size: 48px;\n}\n\n.contact-banner-content p {\n  font-size: 16px;\n  max-width: none;\n  text-align: left;\n}\n\n.contact-banner-scroll {\n  bottom: 40px;\n  right: 30px;\n}\n\n.about-section, .featured-developments {\n    padding: 100px 0;\n}"
+}

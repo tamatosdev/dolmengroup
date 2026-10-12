@@ -1,0 +1,252 @@
+[
+  {
+    "line": 22,
+    "op": "Shell",
+    "detail": "git checkout -b cursor/add-newblack-typeface-fonts; git add font/; git commit -m @\"\nAdd NewBlackTypeface font files.\n\nInclude the brand typeface weights for use across the Next.js site.\n\"@; git status; git log -2 --oneline"
+  },
+  {
+    "line": 48,
+    "op": "Shell",
+    "detail": "git checkout master; git merge cursor/add-newblack-typeface-fonts -m \"Merge homepage and assets into master\"; git push -u origin master; git status -sb; git log --oneline -5"
+  },
+  {
+    "line": 154,
+    "op": "Shell",
+    "detail": "git checkout HEAD -- package.json package-lock.json; git add assets/Dolmanmall-video-thumbnail.png \"assets/Project Overview/Corporate Office Block thumbnail.png\" assets/corporate-office-block.png public/dolmen-video-2.mp4 scripts/ src/app/business-mega-menu.tsx src/app/dolmen-hero.tsx src/app/global"
+  },
+  {
+    "line": 403,
+    "op": "Shell",
+    "detail": "git add assets/brush.svg src/app/use-mega-menu-dismiss.ts src/app/business-mega-menu.tsx src/app/dolmen-numbers.tsx src/app/featured-developments.tsx src/app/globals.css src/app/latest-updates.tsx src/app/our-group-mega-menu.tsx src/app/page.tsx src/app/project-mega-menu.tsx src/app/project-overview"
+  },
+  {
+    "line": 484,
+    "op": "Shell",
+    "detail": "git add src/app/contact-section.tsx src/app/dolmen-hero.tsx src/app/featured-developments.tsx src/app/globals.css src/app/project-overview-slider.tsx; git commit -m @\"\nFix iOS hero scrub video and tighten mobile layout.\n\nUnlock scroll-scrub seeking on Safari, improve project-slide image cover, and r"
+  },
+  {
+    "line": 503,
+    "op": "Shell",
+    "detail": "Get-ChildItem -Path \"D:\\Dolmen-group\\assets\" -Recurse | Select-Object FullName, Length; Get-ChildItem -Path \"D:\\Dolmen-group\\public\" -Recurse -ErrorAction SilentlyContinue | Select-Object FullName; Get-ChildItem -Path \"D:\\Dolmen-group\" -Filter \"*contact*\" -Recurse -ErrorAction SilentlyContinue | Sel"
+  },
+  {
+    "line": 508,
+    "op": "Write",
+    "key": "contact-banner.tsx",
+    "len": 1254
+  },
+  {
+    "line": 508,
+    "op": "Write",
+    "key": "site-footer.tsx",
+    "len": 3430
+  },
+  {
+    "line": 508,
+    "op": "Write",
+    "key": "contact/page.tsx",
+    "len": 549
+  },
+  {
+    "line": 511,
+    "op": "CSS",
+    "len": 1918
+  },
+  {
+    "line": 514,
+    "op": "CSS",
+    "len": 433
+  },
+  {
+    "line": 514,
+    "op": "CSS",
+    "len": 543
+  },
+  {
+    "line": 516,
+    "op": "CSS",
+    "len": 566
+  },
+  {
+    "line": 525,
+    "op": "Write",
+    "key": "contact-banner.tsx",
+    "len": 1207
+  },
+  {
+    "line": 525,
+    "op": "CSS",
+    "len": 1913
+  },
+  {
+    "line": 527,
+    "op": "CSS",
+    "len": 297
+  },
+  {
+    "line": 527,
+    "op": "CSS",
+    "len": 404
+  },
+  {
+    "line": 530,
+    "op": "CSS",
+    "len": 179
+  },
+  {
+    "line": 533,
+    "op": "CSS",
+    "len": 462
+  },
+  {
+    "line": 533,
+    "op": "CSS",
+    "len": 108
+  },
+  {
+    "line": 538,
+    "op": "Write",
+    "key": "contact-talk.tsx",
+    "len": 5145
+  },
+  {
+    "line": 538,
+    "op": "StrReplace-OK",
+    "key": "contact-banner.tsx"
+  },
+  {
+    "line": 538,
+    "op": "StrReplace-OK",
+    "key": "contact/page.tsx"
+  },
+  {
+    "line": 538,
+    "op": "CSS",
+    "len": 3299
+  },
+  {
+    "line": 540,
+    "op": "CSS",
+    "len": 138
+  },
+  {
+    "line": 541,
+    "op": "CSS",
+    "len": 226
+  },
+  {
+    "line": 541,
+    "op": "CSS",
+    "len": 402
+  },
+  {
+    "line": 541,
+    "op": "CSS",
+    "len": 615
+  },
+  {
+    "line": 546,
+    "op": "CSS",
+    "len": 1653
+  },
+  {
+    "line": 547,
+    "op": "CSS",
+    "len": 96
+  },
+  {
+    "line": 550,
+    "op": "StrReplace-OK",
+    "key": "contact-talk.tsx"
+  },
+  {
+    "line": 553,
+    "op": "StrReplace-OK",
+    "key": "contact-talk.tsx"
+  },
+  {
+    "line": 557,
+    "op": "StrReplace-OK",
+    "key": "contact-talk.tsx"
+  },
+  {
+    "line": 562,
+    "op": "CSS",
+    "len": 97
+  },
+  {
+    "line": 568,
+    "op": "CSS",
+    "len": 294
+  },
+  {
+    "line": 568,
+    "op": "CSS",
+    "len": 680
+  },
+  {
+    "line": 568,
+    "op": "CSS",
+    "len": 570
+  },
+  {
+    "line": 568,
+    "op": "CSS",
+    "len": 97
+  },
+  {
+    "line": 568,
+    "op": "CSS",
+    "len": 97
+  },
+  {
+    "line": 568,
+    "op": "CSS",
+    "len": 97
+  },
+  {
+    "line": 568,
+    "op": "CSS",
+    "len": 172
+  },
+  {
+    "line": 569,
+    "op": "CSS",
+    "len": 421
+  },
+  {
+    "line": 575,
+    "op": "CSS",
+    "len": 176
+  },
+  {
+    "line": 575,
+    "op": "CSS",
+    "len": 116
+  },
+  {
+    "line": 575,
+    "op": "CSS",
+    "len": 302
+  },
+  {
+    "line": 575,
+    "op": "CSS",
+    "len": 116
+  },
+  {
+    "line": 575,
+    "op": "CSS",
+    "len": 459
+  },
+  {
+    "line": 575,
+    "op": "CSS",
+    "len": 115
+  },
+  {
+    "line": 632,
+    "op": "Shell",
+    "detail": "git restore assets/Dolmanmall-video-thumbnail.png src/app/business-mega-menu.tsx src/app/contact-section.tsx src/app/dolmen-hero.tsx src/app/future-marquee.tsx src/app/globals.css src/app/our-group-mega-menu.tsx src/app/page.tsx src/app/project-mega-menu.tsx src/app/site-loader.tsx; Remove-Item -Rec"
+  }
+]

@@ -1,0 +1,4 @@
+{
+  "old": ".contact-talk-select-arrow {\n  height: 10px;\n  pointer-events: none;\n  position: absolute;\n  right: 18px;\n  top: calc(50% + 10px);\n  transform: translateY(-50%);\n  width: 14px;\n}",
+  "new": ".contact-talk-select-arrow {\n  bottom: 20px;\n  height: 10px;\n  pointer-events: none;\n  position: absolute;\n  right: 18px;\n  width: 14px;\n}"
+}

@@ -1,0 +1,4 @@
+{
+  "old": ".about-statement, .project-overview-content h2 {\n    font-size: 24.9px;\n}\n\n.about-copy .about-claim {\n    font-size: 20px;\n}",
+  "new": ".about-statement, .project-overview-content h2, .contact-talk-info h2 {\n    font-size: 24.9px;\n}\n\n.about-copy .about-claim, .contact-talk-detail h3 {\n    font-size: 20px;\n}"
+}

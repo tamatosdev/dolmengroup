@@ -1,0 +1,37 @@
+[
+  {
+    "line": 514,
+    "old": "  .dolmen-hero-content {display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;gap: 20px;left: 30px;}\n\n.about-section, .featured-developments {",
+    "new": "  .dolmen-hero-content {display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;gap: 20px;left: 30px;}\n\n.contact-banner-content {\n  align-items: flex-start;\n  bottom: 40px;\n  flex-direction: column;\n  gap: 28px;\n  left: 30px;\n  right: 30px;\n}\n\n.contact-banner-content h1 {\n  font-size: 48px;\n  max-width: none;\n}\n\n.contact-banner-aside {\n  align-items: flex-start;\n  max-width: none;\n  width: 100%;\n}\n\n.contact-banner-aside p {\n  font-size: 16px;\n  text-align: left;\n}\n\n.about-section, .featured-developments {"
+  },
+  {
+    "line": 516,
+    "old": " .dolmen-hero-content {display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;gap: 20px;left: 30px;}\n\n.about-section, .featured-developments {\n    padding: 100px 0;\n}",
+    "new": " .dolmen-hero-content {display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;gap: 20px;left: 30px;}\n\n.contact-banner-content {\n  align-items: flex-start;\n  bottom: 40px;\n  flex-direction: column;\n  gap: 28px;\n  left: 30px;\n  right: 30px;\n}\n\n.contact-banner-content h1 {\n  font-size: 48px;\n  max-width: none;\n}\n\n.contact-banner-aside {\n  align-items: flex-start;\n  max-width: none;\n  width: 100%;\n}\n\n.contact-banner-aside p {\n  font-size: 16px;\n  text-align: left;\n}\n\n.about-section, .featured-developments {\n    padding: 100px 0;\n}"
+  },
+  {
+    "line": 527,
+    "old": ".contact-banner-content {\n  align-items: flex-start;\n  bottom: 40px;\n  flex-direction: column;\n  gap: 28px;\n  left: 30px;\n  right: 30px;\n}\n\n.contact-banner-content h1 {\n  font-size: 48px;\n  max-width: none;\n}\n\n.contact-banner-aside {\n  align-items: flex-start;\n  max-width: none;\n  width: 100%;\n}\n\n.contact-banner-aside p {\n  font-size: 16px;\n  text-align: left;\n}\n\n.about-section, .featured-developments {\n    padding: 100px 0;\n}",
+    "new": ".contact-banner-content {\n  align-items: flex-start;\n  bottom: 120px;\n  flex-direction: column;\n  gap: 24px;\n  left: 30px;\n  right: 30px;\n}\n\n.contact-banner-content h1 {\n  font-size: 48px;\n}\n\n.contact-banner-content p {\n  font-size: 16px;\n  max-width: none;\n  text-align: left;\n}\n\n.contact-banner-scroll {\n  bottom: 40px;\n  right: 30px;\n}\n\n.about-section, .featured-developments {\n    padding: 100px 0;\n}"
+  },
+  {
+    "line": 541,
+    "old": ".contact-banner-scroll {\n  bottom: 40px;\n  right: 30px;\n}\n\n.about-section, .featured-developments {\n    padding: 100px 0;\n}",
+    "new": ".contact-banner-scroll {\n  bottom: 40px;\n  right: 30px;\n}\n\n.contact-talk {\n  gap: 40px;\n  grid-template-columns: 1fr;\n  padding: 60px 16px 100px;\n}\n\n.contact-talk-info h2 {\n  font-size: 40px;\n  margin-bottom: 20px;\n}\n\n.contact-talk-intro {\n  font-size: 16px;\n  margin-bottom: 32px;\n  max-width: none;\n}\n\n.contact-talk-details {\n  grid-template-columns: 1fr;\n  margin-bottom: 28px;\n}\n\n.contact-talk-form-row {\n  grid-template-columns: 1fr;\n}\n\n.contact-talk-submit {\n  font-size: 16px;\n  padding: 16px 18px;\n  width: 100%;\n  justify-content: center;\n}\n\n.about-section, .featured-developments {\n    padding: 100px 0;\n}"
+  },
+  {
+    "line": 568,
+    "old": "  .about-statement {\n    font-size: clamp(40px, 3.333333vw, 64px);\n  }\n\n  .about-claim {\n    font-size: clamp(20px, 1.666667vw, 32px);\n  }",
+    "new": "  .about-statement {\n    font-size: clamp(40px, 3.333333vw, 64px);\n  }\n\n  .contact-talk-info h2 {\n    font-size: clamp(40px, 3.333333vw, 64px);\n  }\n\n  .about-claim {\n    font-size: clamp(20px, 1.666667vw, 32px);\n  }\n\n  .contact-talk-detail h3 {\n    font-size: clamp(20px, 1.666667vw, 32px);\n  }"
+  },
+  {
+    "line": 569,
+    "old": ".contact-talk {\n  gap: 40px;\n  grid-template-columns: 1fr;\n  padding: 60px 16px 100px;\n}\n\n.contact-talk-info h2 {\n  font-size: 40px;\n  margin-bottom: 20px;\n}\n\n.contact-talk-intro {\n  font-size: 16px;\n  margin-bottom: 32px;\n  max-width: none;\n}\n\n.contact-talk-details {\n  grid-template-columns: 1fr;\n  margin-bottom: 28px;\n}\n\n.contact-talk-form-row {\n  grid-template-columns: 1fr;\n}\n\n.contact-talk-submit {\n  font-size: 16px;\n  padding: 16px 18px;\n  width: 100%;\n  justify-content: center;\n}",
+    "new": ".contact-talk {\n  gap: 40px;\n  grid-template-columns: 1fr;\n  padding: 60px 16px 100px;\n}\n\n.contact-talk-intro {\n  font-size: 16px;\n  margin-bottom: 32px;\n  max-width: none;\n}\n\n.contact-talk-details {\n  grid-template-columns: 1fr;\n  margin-bottom: 28px;\n}\n\n.contact-talk-form-row {\n  grid-template-columns: 1fr;\n}\n\n.contact-talk-submit {\n  font-size: 16px;\n  padding: 16px 18px;\n  width: 100%;\n  justify-content: center;\n}"
+  },
+  {
+    "line": 575,
+    "old": ".contact-talk {\n  gap: 40px;\n  grid-template-columns: 1fr;\n  padding: 60px 16px 100px;\n}\n\n.contact-talk-intro {\n  font-size: 16px;\n  margin-bottom: 32px;\n  max-width: none;\n}\n\n.contact-talk-details {\n  grid-template-columns: 1fr;\n  margin-bottom: 28px;\n}\n\n.contact-talk-form-row {\n  grid-template-columns: 1fr;\n}\n\n.contact-talk-submit {\n  font-size: 16px;\n  padding: 16px 18px;\n  width: 100%;\n  justify-content: center;\n}\n\n.about-section, .featured-developments {\n    padding: 100px 0;\n}",
+    "new": ".contact-talk {\n  gap: 40px;\n  grid-template-columns: 1fr;\n}\n\n.contact-talk-intro {\n  font-size: 16px;\n  margin-bottom: 32px;\n  max-width: none;\n}\n\n.contact-talk-details {\n  grid-template-columns: 1fr;\n  margin-bottom: 28px;\n}\n\n.contact-talk-form-row {\n  grid-template-columns: 1fr;\n}\n\n.contact-talk-submit {\n  font-size: 16px;\n  padding: 16px 18px;\n  width: 100%;\n  justify-content: center;\n}\n\n.about-section, .featured-developments {\n    padding: 100px 0;\n}"
+  }
+]

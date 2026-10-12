@@ -147,19 +147,17 @@ export default function ProjectMegaMenu() {
                 <span className="business-mega-card-shade" />
                 <span className="business-mega-card-copy">
                   <strong>{project.title}</strong>
-                  <small>{project.caption}</small>
                 </span>
               </a>
             ))}
           </div>
           <div className="business-mega-footer">
-            <a href="/contact/" onClick={() => beginClose()}>CONTACT</a>
             <div>
-              <a href="#instagram">INSTAGRAM</a>
-              <a href="#facebook">FACEBOOK</a>
-              <a href="#linkedin">LINKEDIN</a>
+              <a href="#instagram" onClick={() => beginClose()}>INSTAGRAM</a>
+              <a href="#facebook" onClick={() => beginClose()}>FACEBOOK</a>
+              <a href="#linkedin" onClick={() => beginClose()}>LINKEDIN</a>
             </div>
-            <span>© 2026 DOLMEN GROUP</span>
+            {visibleProjects.length > 1 ? <span>© 2026 DOLMEN GROUP</span> : null}
           </div>
         </div>,
         document.body,

@@ -1,0 +1,249 @@
+/* Reconstructed contact CSS (last body per selector, non-media) */
+
+.contact-banner-content {
+  align-items: flex-start;
+  bottom: 120px;
+  flex-direction: column;
+  gap: 24px;
+  left: 30px;
+  right: 30px;
+}
+
+.contact-banner-content h1 {
+  font-size: 48px;
+}
+
+.contact-banner-scroll {
+  bottom: 40px;
+  right: 30px;
+}
+
+.contact-talk {
+  gap: 40px;
+  grid-template-columns: 1fr;
+}
+
+p, button, input, textarea, select, label, .about-button, .contact-section-button, .project-overview-button, .contact-talk-submit, .newsletter-form input, .newsletter-form button, .development-card-content p, .development-card-content a, .dolmen-number p, .latest-update-card p, .latest-update-card a, .about-copy, .contact-section p, .footer-link-group a, .footer-property-group a, .footer-bottom, .project-overview-content p {
+  font-family: var(--font-inter), "Inter", sans-serif;
+}
+
+.contact-banner {
+  height: 100svh;
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.contact-banner::after {
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 42%) 0%,
+    rgb(0 0 0 / 12%) 28%,
+    rgb(0 0 0 / 18%) 55%,
+    rgb(0 0 0 / 55%) 100%
+  );
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.contact-banner-image {
+  inset: 0;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.contact-banner-content.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-banner-content p {
+  color: #f8f2ea;
+  letter-spacing: -0.03em;
+  text-align: left;
+  flex: none;
+  max-width: 33%;
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.contact-banner-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contact-banner-scroll:hover, .contact-banner-scroll:focus-visible {
+  background: #efe8de;
+  color: #000;
+}
+
+.contact-talk-info h2 {
+    font-size: clamp(40px, 3.333333vw, 64px);
+  }
+
+.contact-talk-intro {
+  font-size: 16px;
+  margin-bottom: 32px;
+  max-width: none;
+}
+
+.contact-talk-details {
+  grid-template-columns: 1fr;
+  margin-bottom: 28px;
+}
+
+.contact-talk-detail h3 {
+    font-size: clamp(20px, 1.666667vw, 32px);
+  }
+
+.contact-talk-detail a, .contact-talk-detail p {
+  align-items: flex-start;
+  color: #111;
+  display: flex;
+  font-size: 18px;
+  gap: 10px;
+  letter-spacing: -0.03em;
+  line-height: 1.4;
+  margin: 0 0 14px;
+  text-decoration: none;
+}
+
+.contact-talk-detail a:last-child, .contact-talk-detail p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-talk-detail svg {
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.contact-talk-map {
+  border-radius: 5px;
+  height: 400px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.contact-talk-map iframe {
+  border: 0;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.contact-talk-form {
+  display: flex;
+  flex-direction: column;
+  gap: 53px;
+}
+
+.contact-talk-form-row {
+  grid-template-columns: 1fr;
+}
+
+.contact-talk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.contact-talk-field span {
+  font-size: 18px;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.contact-talk-field input, .contact-talk-field select, .contact-talk-field textarea {
+  background: #fff;
+  border: 1px solid #d6d0c8;
+  border-radius: 5px;
+  color: #111;
+  font: inherit;
+  font-size: 16px;
+  letter-spacing: -0.03em;
+  outline: none;
+  padding: 16px 18px;
+  width: 100%;
+}
+
+.contact-talk-field input::placeholder, .contact-talk-field textarea::placeholder {
+  color: #9a958d;
+}
+
+.contact-talk-field input:focus, .contact-talk-field select:focus, .contact-talk-field textarea:focus {
+  border-color: #111;
+}
+
+.contact-talk-field textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+.contact-talk-select {
+  position: relative;
+}
+
+.contact-talk-select select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 44px;
+}
+
+.contact-talk-select-arrow {
+  bottom: 20px;
+  height: 10px;
+  pointer-events: none;
+  position: absolute;
+  right: 18px;
+  width: 14px;
+}
+
+.contact-talk-submit {
+  font-size: 16px;
+  padding: 16px 18px;
+  width: 100%;
+  justify-content: center;
+}
+
+.contact-talk-submit img {
+  height: 15px;
+  width: 15px;
+}
+
+.contact-talk-submit:hover, .contact-talk-submit:focus-visible {
+  background: #111;
+  color: #f8f2ea;
+}
+
+.about-statement, .project-overview-content h2, .contact-talk-info h2 {
+    font-size: 24.9px;
+}
+
+.about-copy .about-claim, .contact-talk-detail h3 {
+    font-size: 20px;
+}
+
+.dolmen-number h3, .latest-update-card h3, .footer-link-group h2, .newsletter h2, .contact-talk-detail h3 {
+  font-size: 22px;
+}
+
+.about-section, .featured-developments, .dolmen-numbers, .latest-updates, .contact-talk {
+    padding: 60px 16px;
+}
+
+.contact-banner-aside {
+  align-items: flex-start;
+  max-width: none;
+  width: 100%;
+}
+
+.contact-banner-aside p {
+  font-size: 16px;
+  text-align: left;
+}
+

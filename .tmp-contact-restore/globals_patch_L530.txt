@@ -1,0 +1,4 @@
+{
+  "old": ".contact-banner-content p {\n  color: #f8f2ea;\n  flex: 0 0 auto;\n  font-size: 18px;\n  letter-spacing: -0.03em;\n  line-height: 1.35;\n  margin: 0;\n  max-width: 380px;\n  text-align: right;\n}",
+  "new": ".contact-banner-content p {\n  color: #f8f2ea;\n  letter-spacing: -0.03em;\n  text-align: left;\n  flex: none;\n  max-width: 33%;\n  margin: 0;\n  font-size: 18px;\n  line-height: 1.35;\n}"
+}

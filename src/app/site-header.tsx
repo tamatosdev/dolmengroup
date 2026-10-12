@@ -4,13 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import domenLogo from "../../assets/domen-logo.png";
-import BusinessMegaMenu from "./business-mega-menu";
+import EntertainmentMegaMenu from "./entertainment-mega-menu";
 import OurGroupMegaMenu from "./our-group-mega-menu";
 import ProjectMegaMenu from "./project-mega-menu";
+import RetailMegaMenu from "./retail-mega-menu";
 
 const simpleLinks = [
-  { label: "REIT", href: "#reit" },
-  { label: "UPDATES", href: "#updates" },
+  { label: "CAREERS", href: "#careers" },
   { label: "CONTACT", href: "/contact/" },
 ];
 
@@ -119,7 +119,8 @@ export default function SiteHeader() {
         <ul className="navigation-list">
           <OurGroupMegaMenu />
           <ProjectMegaMenu />
-          <BusinessMegaMenu />
+          <EntertainmentMegaMenu />
+          <RetailMegaMenu />
           {simpleLinks.map((item) => (
             <li key={item.label}>
               {item.href.startsWith("/") ? (

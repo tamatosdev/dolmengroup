@@ -1,0 +1,212 @@
+
+/* from failed patch L514 */
+  .dolmen-hero-content {display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;gap: 20px;left: 30px;}
+
+.contact-banner-content {
+  align-items: flex-start;
+  bottom: 40px;
+  flex-direction: column;
+  gap: 28px;
+  left: 30px;
+  right: 30px;
+}
+
+.contact-banner-content h1 {
+  font-size: 48px;
+  max-width: none;
+}
+
+.contact-banner-aside {
+  align-items: flex-start;
+  max-width: none;
+  width: 100%;
+}
+
+.contact-banner-aside p {
+  font-size: 16px;
+  text-align: left;
+}
+
+.about-section, .featured-developments {
+
+/* from failed patch L516 */
+ .dolmen-hero-content {display: flex;flex-direction: column;justify-content: flex-start;align-items: flex-start;gap: 20px;left: 30px;}
+
+.contact-banner-content {
+  align-items: flex-start;
+  bottom: 40px;
+  flex-direction: column;
+  gap: 28px;
+  left: 30px;
+  right: 30px;
+}
+
+.contact-banner-content h1 {
+  font-size: 48px;
+  max-width: none;
+}
+
+.contact-banner-aside {
+  align-items: flex-start;
+  max-width: none;
+  width: 100%;
+}
+
+.contact-banner-aside p {
+  font-size: 16px;
+  text-align: left;
+}
+
+.about-section, .featured-developments {
+    padding: 100px 0;
+}
+
+/* from failed patch L527 */
+.contact-banner-content {
+  align-items: flex-start;
+  bottom: 120px;
+  flex-direction: column;
+  gap: 24px;
+  left: 30px;
+  right: 30px;
+}
+
+.contact-banner-content h1 {
+  font-size: 48px;
+}
+
+.contact-banner-content p {
+  font-size: 16px;
+  max-width: none;
+  text-align: left;
+}
+
+.contact-banner-scroll {
+  bottom: 40px;
+  right: 30px;
+}
+
+.about-section, .featured-developments {
+    padding: 100px 0;
+}
+
+/* from failed patch L541 */
+.contact-banner-scroll {
+  bottom: 40px;
+  right: 30px;
+}
+
+.contact-talk {
+  gap: 40px;
+  grid-template-columns: 1fr;
+  padding: 60px 16px 100px;
+}
+
+.contact-talk-info h2 {
+  font-size: 40px;
+  margin-bottom: 20px;
+}
+
+.contact-talk-intro {
+  font-size: 16px;
+  margin-bottom: 32px;
+  max-width: none;
+}
+
+.contact-talk-details {
+  grid-template-columns: 1fr;
+  margin-bottom: 28px;
+}
+
+.contact-talk-form-row {
+  grid-template-columns: 1fr;
+}
+
+.contact-talk-submit {
+  font-size: 16px;
+  padding: 16px 18px;
+  width: 100%;
+  justify-content: center;
+}
+
+.about-section, .featured-developments {
+    padding: 100px 0;
+}
+
+/* from failed patch L568 */
+  .about-statement {
+    font-size: clamp(40px, 3.333333vw, 64px);
+  }
+
+  .contact-talk-info h2 {
+    font-size: clamp(40px, 3.333333vw, 64px);
+  }
+
+  .about-claim {
+    font-size: clamp(20px, 1.666667vw, 32px);
+  }
+
+  .contact-talk-detail h3 {
+    font-size: clamp(20px, 1.666667vw, 32px);
+  }
+
+/* from failed patch L569 */
+.contact-talk {
+  gap: 40px;
+  grid-template-columns: 1fr;
+  padding: 60px 16px 100px;
+}
+
+.contact-talk-intro {
+  font-size: 16px;
+  margin-bottom: 32px;
+  max-width: none;
+}
+
+.contact-talk-details {
+  grid-template-columns: 1fr;
+  margin-bottom: 28px;
+}
+
+.contact-talk-form-row {
+  grid-template-columns: 1fr;
+}
+
+.contact-talk-submit {
+  font-size: 16px;
+  padding: 16px 18px;
+  width: 100%;
+  justify-content: center;
+}
+
+/* from failed patch L575 */
+.contact-talk {
+  gap: 40px;
+  grid-template-columns: 1fr;
+}
+
+.contact-talk-intro {
+  font-size: 16px;
+  margin-bottom: 32px;
+  max-width: none;
+}
+
+.contact-talk-details {
+  grid-template-columns: 1fr;
+  margin-bottom: 28px;
+}
+
+.contact-talk-form-row {
+  grid-template-columns: 1fr;
+}
+
+.contact-talk-submit {
+  font-size: 16px;
+  padding: 16px 18px;
+  width: 100%;
+  justify-content: center;
+}
+
+.about-section, .featured-developments {
+    padding: 100px 0;
+}
