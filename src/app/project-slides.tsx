@@ -81,7 +81,7 @@ function getSlideMotion(
 }
 
 export default function ProjectSlides() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [enterProgress, setEnterProgress] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(1080);
