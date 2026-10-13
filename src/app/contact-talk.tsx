@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FormEvent } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import arrowDown from "../../assets/arrow-down.svg";
 import arrowRight from "../../assets/arrow-right.svg";
 import contactSectionImage from "../../assets/contact-section-imge.jpg";
@@ -59,10 +59,88 @@ function PinIcon() {
   );
 }
 
-export default function ContactTalk() {
+function ContactForm() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
+
+  return (
+    <form className="contact-talk-form" onSubmit={handleSubmit} noValidate>
+      <div className="contact-talk-form-row">
+        <label className="contact-talk-field">
+          <span>Name *</span>
+          <input
+            type="text"
+            name="name"
+            placeholder="Insert your name"
+            required
+            autoComplete="name"
+            suppressHydrationWarning
+          />
+        </label>
+        <label className="contact-talk-field">
+          <span>Phone Number *</span>
+          <input
+            type="tel"
+            name="phone"
+            placeholder="+92 333 000-0000"
+            required
+            autoComplete="tel"
+            suppressHydrationWarning
+          />
+        </label>
+      </div>
+
+      <label className="contact-talk-field">
+        <span>Email *</span>
+        <input
+          type="email"
+          name="email"
+          placeholder="myemail@email.com"
+          required
+          autoComplete="email"
+          suppressHydrationWarning
+        />
+      </label>
+
+      <label className="contact-talk-field contact-talk-select">
+        <span>What is your enquiry about?</span>
+        <select name="enquiry" defaultValue={enquiryOptions[0]} required suppressHydrationWarning>
+          {enquiryOptions.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+        <Image className="contact-talk-select-arrow" src={arrowDown} alt="" aria-hidden="true" />
+      </label>
+
+      <label className="contact-talk-field">
+        <span>Message *</span>
+        <textarea
+          name="message"
+          placeholder="Type your message..."
+          rows={6}
+          required
+          suppressHydrationWarning
+        />
+      </label>
+
+      <button className="contact-talk-submit" type="submit">
+        Send Message
+        <Image src={arrowRight} alt="" aria-hidden="true" />
+      </button>
+    </form>
+  );
+}
+
+export default function ContactTalk() {
+  // Mount form after hydration so password-manager extensions cannot alter SSR HTML.
+  const [formReady, setFormReady] = useState(false);
+
+  useEffect(() => {
+    setFormReady(true);
+  }, []);
 
   return (
     <section className="contact-talk" id="contact" aria-labelledby="talk-to-us-title">
@@ -111,57 +189,7 @@ export default function ContactTalk() {
         </div>
       </div>
 
-      <form className="contact-talk-form" onSubmit={handleSubmit} noValidate>
-        <div className="contact-talk-form-row">
-          <label className="contact-talk-field">
-            <span>Name *</span>
-            <input type="text" name="name" placeholder="Insert your name" required autoComplete="name" />
-          </label>
-          <label className="contact-talk-field">
-            <span>Phone Number *</span>
-            <input
-              type="tel"
-              name="phone"
-              placeholder="+92 333 000-0000"
-              required
-              autoComplete="tel"
-            />
-          </label>
-        </div>
-
-        <label className="contact-talk-field">
-          <span>Email *</span>
-          <input
-            type="email"
-            name="email"
-            placeholder="myemail@email.com"
-            required
-            autoComplete="email"
-          />
-        </label>
-
-        <label className="contact-talk-field contact-talk-select">
-          <span>What is your enquiry about?</span>
-          <select name="enquiry" defaultValue={enquiryOptions[0]} required>
-            {enquiryOptions.map((option) => (
-              <option key={option} value={option}>
-                {option}
-              </option>
-            ))}
-          </select>
-          <Image className="contact-talk-select-arrow" src={arrowDown} alt="" aria-hidden="true" />
-        </label>
-
-        <label className="contact-talk-field">
-          <span>Message *</span>
-          <textarea name="message" placeholder="Type your message..." rows={6} required />
-        </label>
-
-        <button className="contact-talk-submit" type="submit">
-          Send Message
-          <Image src={arrowRight} alt="" aria-hidden="true" />
-        </button>
-      </form>
+      {formReady ? <ContactForm /> : <div className="contact-talk-form" aria-hidden="true" />}
     </section>
   );
 }

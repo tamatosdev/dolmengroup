@@ -14,6 +14,7 @@ import executiveTower from "../../assets/Development Project/Executive Tower.jpg
 import groveResidency from "../../assets/grove-project-image.jpg";
 import harbourFront from "../../assets/Development Project/The-Harbour-Front.png";
 import skyTower from "../../assets/Development Project/Sky-Tower.png";
+import { SHOW_DOLMEN_CITY_ISLAMABAD } from "./project-visibility";
 
 type Development = {
   image: typeof dolmenMallClifton;
@@ -23,7 +24,9 @@ type Development = {
 const developments: Development[] = [
   { image: dolmenMallClifton, title: "Dolmen Mall Clifton" },
   { image: dolmenMallLahore, title: "Dolmen Mall Lahore" },
-  { image: dolmenCityIslamabad, title: "Dolmen City Islamabad" },
+  ...(SHOW_DOLMEN_CITY_ISLAMABAD
+    ? [{ image: dolmenCityIslamabad, title: "Dolmen City Islamabad" } satisfies Development]
+    : []),
   { image: harbourFront, title: "The Harbour Front" },
   { image: skyTower, title: "Sky Towers" },
   { image: dolmenMallTariqRoad, title: "Dolmen Mall Tariq Road" },

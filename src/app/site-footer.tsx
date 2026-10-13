@@ -3,6 +3,7 @@ import Link from "next/link";
 import arrowRight from "../../assets/arrow-right.svg";
 import arrowUp from "../../assets/arrow-up.svg";
 import footerLogo from "../../assets/footer-logo.png";
+import { SHOW_DOLMEN_CITY_ISLAMABAD } from "./project-visibility";
 
 export default function SiteFooter() {
   return (
@@ -68,7 +69,9 @@ export default function SiteFooter() {
           <div className="footer-property-group">
             <h2>Residences</h2>
             <a href="#the-grove-residency">The Grove Residency</a>
-            <a href="#dolmen-city-islamabad">Dolmen City Islamabad</a>
+            {SHOW_DOLMEN_CITY_ISLAMABAD ? (
+              <a href="#dolmen-city-islamabad">Dolmen City Islamabad</a>
+            ) : null}
             <a href="#dolmen-mall-lahore-residences">Dolmen Mall Lahore</a>
             <a href="#dolmen-city-karachi">Dolmen City Karachi</a>
           </div>

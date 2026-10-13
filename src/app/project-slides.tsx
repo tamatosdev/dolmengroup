@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import groveProjectImage from "../../assets/grove-project-image.jpg";
 import dolmenIslamabadProject from "../../assets/dolmen-islamabad-project.jpg";
+import { SHOW_DOLMEN_CITY_ISLAMABAD } from "./project-visibility";
 
 type ProjectSlide = {
   image: typeof groveProjectImage;
@@ -16,10 +17,14 @@ const slides: ProjectSlide[] = [
     image: groveProjectImage,
     title: "Grove Residency Karachi",
   },
-  {
-    image: dolmenIslamabadProject,
-    title: "Dolmen City Islamabad",
-  },
+  ...(SHOW_DOLMEN_CITY_ISLAMABAD
+    ? [
+        {
+          image: dolmenIslamabadProject,
+          title: "Dolmen City Islamabad",
+        } satisfies ProjectSlide,
+      ]
+    : []),
 ];
 
 type TitlePhase = "idle" | "blur-out" | "blur-in";

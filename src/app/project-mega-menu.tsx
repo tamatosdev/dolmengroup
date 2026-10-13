@@ -17,6 +17,7 @@ import corporateOfficeBlock from "../../assets/corporate-office-new.jpg";
 import groveResidency from "../../assets/grove-new.jpg";
 import harbourFront from "../../assets/harbour-front-new.jpg";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
+import { SHOW_DOLMEN_CITY_ISLAMABAD } from "./project-visibility";
 import { useIsClient } from "./use-is-client";
 import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 
@@ -33,11 +34,28 @@ const projects: Project[] = [
   { category: "OFFICES", image: corporateOfficeBlock, title: "Corporate Office Block", caption: "PRESTIGE IN EVERY DETAIL" },
   { category: "OFFICES", image: executiveTower, title: "Executive Tower", caption: "THE ADDRESS OF DISTINCTION" },
   { category: "RESIDENCES", image: groveResidency, title: "The Grove Residency", caption: "A PLACE CALLED HOME" },
-  { category: "RESIDENCES", image: dolmenCityIslamabad, title: "Dolmen City Islamabad", caption: "RESORT STYLE LIVING" },
+  ...(SHOW_DOLMEN_CITY_ISLAMABAD
+    ? [
+        {
+          category: "RESIDENCES" as const,
+          image: dolmenCityIslamabad,
+          title: "Dolmen City Islamabad",
+          caption: "RESORT STYLE LIVING",
+        } satisfies Project,
+      ]
+    : []),
 ];
 
 const communityProjects = [
-  { image: dolmenCityIslamabad, title: "Dolmen City Islamabad", caption: "RESORT STYLE LIVING" },
+  ...(SHOW_DOLMEN_CITY_ISLAMABAD
+    ? [
+        {
+          image: dolmenCityIslamabad,
+          title: "Dolmen City Islamabad",
+          caption: "RESORT STYLE LIVING",
+        },
+      ]
+    : []),
   { image: dolmenCityKarachi, title: "Dolmen City Karachi", caption: "RESORT STYLE LIVING" },
 ];
 
