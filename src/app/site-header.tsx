@@ -5,9 +5,12 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import domenLogo from "../../assets/domen-logo.png";
 import EntertainmentMegaMenu from "./entertainment-mega-menu";
-import OurGroupMegaMenu from "./our-group-mega-menu";
 import ProjectMegaMenu from "./project-mega-menu";
 import RetailMegaMenu from "./retail-mega-menu";
+
+const leadingLinks = [
+  { label: "OUR GROUP", href: "#about" },
+];
 
 const simpleLinks = [
   { label: "CAREERS", href: "#careers" },
@@ -117,7 +120,19 @@ export default function SiteHeader() {
         aria-label="Primary navigation"
       >
         <ul className="navigation-list">
-          <OurGroupMegaMenu />
+          {leadingLinks.map((item) => (
+            <li key={item.label}>
+              <a
+                href={item.href}
+                onClick={() => {
+                  restoreMobileNavRef.current = false;
+                  setIsMobileNavOpen(false);
+                }}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
           <ProjectMegaMenu />
           <EntertainmentMegaMenu />
           <RetailMegaMenu />

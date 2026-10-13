@@ -1,6 +1,6 @@
 "use client";
 
-import sindbadWonderland from "../../assets/sindbad-wonderland.jpg";
+import sindbadWonderland from "../../assets/sindbad-logo-image.jpg";
 import CardsMegaMenu from "./cards-mega-menu";
 
 export default function EntertainmentMegaMenu() {

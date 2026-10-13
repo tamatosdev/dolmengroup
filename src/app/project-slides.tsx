@@ -3,27 +3,22 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import projectSlide1 from "../../assets/Project Overview/project-slide-1.jpg";
-import projectSlide2 from "../../assets/Project Overview/project-slide-2.jpg";
-import projectSlide3 from "../../assets/Project Overview/project-slide-3.jpg";
+import groveProjectImage from "../../assets/grove-project-image.jpg";
+import dolmenIslamabadProject from "../../assets/dolmen-islamabad-project.jpg";
 
 type ProjectSlide = {
-  image: typeof projectSlide1;
+  image: typeof groveProjectImage;
   title: string;
 };
 
 const slides: ProjectSlide[] = [
   {
-    image: projectSlide1,
-    title: "We shape tomorrow\nthrough visionary spaces.",
+    image: groveProjectImage,
+    title: "Grove Residency Karachi",
   },
   {
-    image: projectSlide2,
-    title: "We make innovative and\nsustainable concepts.",
-  },
-  {
-    image: projectSlide3,
-    title: "We create landmarks\nthrough enduring vision.",
+    image: dolmenIslamabadProject,
+    title: "Dolmen City Islamabad",
   },
 ];
 
@@ -117,19 +112,29 @@ export default function ProjectSlides() {
   }, [titlePhase]);
 
   useEffect(() => {
+    if (displaySlide > slides.length - 1) {
+      setDisplaySlide(slides.length - 1);
+      displaySlideRef.current = slides.length - 1;
+    }
+    if (activeSlide > slides.length - 1) {
+      setActiveSlide(slides.length - 1);
+    }
+  }, [activeSlide, displaySlide]);
+  useEffect(() => {
     const clearTimers = () => {
       timersRef.current.forEach((id) => window.clearTimeout(id));
       timersRef.current = [];
     };
 
     const morphTo = (nextSlide: number) => {
+      const clamped = Math.min(Math.max(nextSlide, 0), slides.length - 1);
       clearTimers();
       setTitlePhase("blur-out");
       phaseRef.current = "blur-out";
 
       const swapId = window.setTimeout(() => {
-        setDisplaySlide(nextSlide);
-        displaySlideRef.current = nextSlide;
+        setDisplaySlide(clamped);
+        displaySlideRef.current = clamped;
         setTitlePhase("blur-in");
         phaseRef.current = "blur-in";
       }, BLUR_MS);
@@ -224,62 +229,70 @@ export default function ProjectSlides() {
   const sideInsetProgress = coverScroll
     ? Math.min(1, Math.max(0, (slideTrackProgress - 0.55) / 0.45))
     : Math.min(1, Math.max(0, (slideTrackProgress - 0.9) / 0.1));
-  const title = slides[displaySlide].title;
+  const lastSlideIndex = slides.length - 1;
+  const safeDisplaySlide = Math.min(Math.max(displaySlide, 0), lastSlideIndex);
+  const title = slides[safeDisplaySlide]?.title ?? slides[0].title;
 
   return (
-    <section
-      ref={sectionRef}
-      className={`project-slides${isSectionVisible ? " is-visible" : ""}`}
-      aria-label="Dolmen projects"
-    >
-      <div className="project-slides-sticky">
-        <div className={`project-slides-heading${isSectionVisible ? " is-visible" : ""}`}>
-          <h2 className={`project-slides-title is-${titlePhase}`}>
-            {title.split("\n").map((line, lineIndex) => (
-              <span key={`${displaySlide}-${line}`}>
-                {line}
-                {lineIndex === 0 && <br />}
-              </span>
-            ))}
-          </h2>
-        </div>
+    <section className="latest-developments" aria-labelledby="latest-developments-title">
+      <h2 className="latest-developments-title" id="latest-developments-title">
+        Latest Developments
+      </h2>
 
-        <div className="project-slides-list">
-          {slides.map((slide, index) => {
-            const motion = getSlideMotion(index, slideProgress, viewportHeight, enterProgress);
+      <div
+        ref={sectionRef}
+        className={`project-slides${isSectionVisible ? " is-visible" : ""}`}
+      >
+        <div className="project-slides-sticky">
+          <div className={`project-slides-heading${isSectionVisible ? " is-visible" : ""}`}>
+            <h3 className={`project-slides-title is-${titlePhase}`}>
+              {title.split("\n").map((line, lineIndex) => (
+                <span key={`${safeDisplaySlide}-${line}`}>
+                  {line}
+                  {lineIndex < title.split("\n").length - 1 && <br />}
+                </span>
+              ))}
+            </h3>
+          </div>
 
-            return (
-              <article
-                className={`project-slide${index < 2 ? " project-slide-inset" : " project-slide-third"}`}
-                style={{
-                  zIndex: index + 1,
-                  transform: `translate3d(0, ${motion.y}px, 0)`,
-                  ...(index === 2
-                    ? {
-                        "--third-progress": sideInsetProgress,
-                      }
-                    : {}),
-                } as CSSProperties}
-                key={slide.title}
-              >
-                <div
-                  className="project-slide-background-wrap"
+          <div className="project-slides-list">
+            {slides.map((slide, index) => {
+              const motion = getSlideMotion(index, slideProgress, viewportHeight, enterProgress);
+              const isLastSlide = index === lastSlideIndex;
+
+              return (
+                <article
+                  className={`project-slide${isLastSlide ? " project-slide-third" : " project-slide-inset"}`}
                   style={{
-                    transform: `translate3d(0, ${motion.bgY}px, 0) scale(${motion.scale})`,
-                  }}
+                    zIndex: index + 1,
+                    transform: `translate3d(0, ${motion.y}px, 0)`,
+                    ...(isLastSlide
+                      ? {
+                          "--third-progress": sideInsetProgress,
+                        }
+                      : {}),
+                  } as CSSProperties}
+                  key={slide.title}
                 >
-                  <Image
-                    className="project-slide-background"
-                    src={slide.image}
-                    alt=""
-                    fill
-                    sizes="100vw"
-                    priority={index === 0}
-                  />
-                </div>
-              </article>
-            );
-          })}
+                  <div
+                    className="project-slide-background-wrap"
+                    style={{
+                      transform: `translate3d(0, ${motion.bgY}px, 0) scale(${motion.scale})`,
+                    }}
+                  >
+                    <Image
+                      className="project-slide-background"
+                      src={slide.image}
+                      alt=""
+                      fill
+                      sizes="100vw"
+                      priority={index === 0}
+                    />
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

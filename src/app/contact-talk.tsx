@@ -65,9 +65,13 @@ export default function ContactTalk() {
   };
 
   return (
-    <section className="contact-talk" id="talk-to-us" aria-labelledby="talk-to-us-title">
+    <section className="contact-talk" id="contact" aria-labelledby="talk-to-us-title">
       <div className="contact-talk-info">
-        <h2 id="talk-to-us-title">Talk to us</h2>
+        <h2 id="talk-to-us-title">
+          Creating places that
+          <br />
+          shape the way cities live
+        </h2>
         <p className="contact-talk-intro">
           Whether you&apos;re looking to connect, explore opportunities, discuss partnerships or simply
           learn more, get in touch with our team and we will be happy to assist.
@@ -90,7 +94,9 @@ export default function ContactTalk() {
             <h3>Address</h3>
             <p>
               <PinIcon />
-              <span>Abdul Sattar Edhi Avenue, Road, Block 4 Clifton, Karachi</span>
+              <span>
+                Head Office, 17th Floor, The Harbour Front, Dolmen City, HC-3, Block 4 Clifton, Karachi.
+              </span>
             </p>
           </div>
         </div>

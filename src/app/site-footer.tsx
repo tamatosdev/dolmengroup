@@ -18,7 +18,9 @@ export default function SiteFooter() {
         <div className="footer-link-group">
           <h2>Company</h2>
           <Link href="/#about">About</Link>
+          <a href="#reit">REIT</a>
           <Link href="/#updates">Updates</Link>
+          <Link href="/#careers">Careers</Link>
           <Link href="/contact/">Contact</Link>
         </div>
 
@@ -52,7 +54,7 @@ export default function SiteFooter() {
             <a href="#dolmen-mall-clifton">Dolmen Mall Clifton</a>
             <a href="#dolmen-mall-lahore">Dolmen Mall Lahore</a>
             <a href="#dolmen-mall-tariq-road">Dolmen Mall Tariq Road</a>
-            <a href="#dolmen-mall-hyleri">Dolmen Mall Hyderi</a>
+            <a href="#dolmen-mall-hyderi">Dolmen Mall Hyderi</a>
           </div>
 
           <div className="footer-property-group">
@@ -68,6 +70,7 @@ export default function SiteFooter() {
             <a href="#the-grove-residency">The Grove Residency</a>
             <a href="#dolmen-city-islamabad">Dolmen City Islamabad</a>
             <a href="#dolmen-mall-lahore-residences">Dolmen Mall Lahore</a>
+            <a href="#dolmen-city-karachi">Dolmen City Karachi</a>
           </div>
 
           <div className="footer-property-group">

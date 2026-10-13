@@ -5,16 +5,17 @@ import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import arrowDown from "../../assets/arrow-down.svg";
 import menuIcon from "../../assets/menu-icon.png";
-import dolmenMallTariqRoad from "../../assets/mega menu images/DMTR.jpg";
-import dolmenMallLahore from "../../assets/mega menu images/DML.jpg";
-import dolmenMallHyderi from "../../assets/mega menu images/DMH.jpg";
-import dolmenMallClifton from "../../assets/mega menu images/DMC.jpg";
-import dolmenCityIslamabad from "../../assets/mega menu images/Dolmen city islamabad.jpg";
-import skyTowers from "../../assets/mega menu images/Sky towers.jpg";
-import executiveTower from "../../assets/mega menu images/Executive towers.jpg";
-import corporateOfficeBlock from "../../assets/mega menu images/Corporate bloock.jpg";
-import groveResidency from "../../assets/mega menu images/Grove.jpg";
-import harbourFront from "../../assets/mega menu images/Harbor front.jpg";
+import dolmenMallTariqRoad from "../../assets/dolmenmall-tariqroad-new.jpg";
+import dolmenMallLahore from "../../assets/dolmenmal-lahore-new.jpg";
+import dolmenMallHyderi from "../../assets/dolmenmall-hyderi-new.jpg";
+import dolmenMallClifton from "../../assets/dolmen-mall-cliftan-new.jpg";
+import dolmenCityIslamabad from "../../assets/dolmen-city-islamabad-new.jpg";
+import dolmenCityKarachi from "../../assets/dolmen-city-karachi-new.jpg";
+import skyTowers from "../../assets/sky-towe-new.jpg";
+import executiveTower from "../../assets/executive-tower-new.jpg";
+import corporateOfficeBlock from "../../assets/corporate-office-new.jpg";
+import groveResidency from "../../assets/grove-new.jpg";
+import harbourFront from "../../assets/harbour-front-new.jpg";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
 import { useIsClient } from "./use-is-client";
 import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
@@ -23,8 +24,8 @@ type ProjectCategory = "COMMUNITY" | "MALLS" | "OFFICES" | "RESIDENCES";
 type Project = { category: Exclude<ProjectCategory, "COMMUNITY">; image: typeof dolmenMallTariqRoad; title: string; caption: string };
 
 const projects: Project[] = [
-  { category: "MALLS", image: dolmenMallClifton, title: "Dolmen Mall Clifton", caption: "REVOLUTIONIZING SHOPPING EXPERIENCE" },
   { category: "MALLS", image: dolmenMallLahore, title: "Dolmen Mall Lahore", caption: "DESTINATION OF CHOICE" },
+  { category: "MALLS", image: dolmenMallClifton, title: "Dolmen Mall Clifton", caption: "REVOLUTIONIZING SHOPPING EXPERIENCE" },
   { category: "MALLS", image: dolmenMallTariqRoad, title: "Dolmen Mall Tariq Road", caption: "AT THE HEART OF KARACHI" },
   { category: "MALLS", image: dolmenMallHyderi, title: "Dolmen Mall Hyderi", caption: "YOUR NEIGHBOURHOOD MALL" },
   { category: "OFFICES", image: harbourFront, title: "The Harbour Front", caption: "WHERE BUSINESS MEETS THE SEA" },
@@ -33,6 +34,11 @@ const projects: Project[] = [
   { category: "OFFICES", image: executiveTower, title: "Executive Tower", caption: "THE ADDRESS OF DISTINCTION" },
   { category: "RESIDENCES", image: groveResidency, title: "The Grove Residency", caption: "A PLACE CALLED HOME" },
   { category: "RESIDENCES", image: dolmenCityIslamabad, title: "Dolmen City Islamabad", caption: "RESORT STYLE LIVING" },
+];
+
+const communityProjects = [
+  { image: dolmenCityIslamabad, title: "Dolmen City Islamabad", caption: "RESORT STYLE LIVING" },
+  { image: dolmenCityKarachi, title: "Dolmen City Karachi", caption: "RESORT STYLE LIVING" },
 ];
 
 const categories: ProjectCategory[] = ["COMMUNITY", "MALLS", "OFFICES", "RESIDENCES"];
@@ -44,7 +50,7 @@ export default function ProjectMegaMenu() {
   const isMounted = useIsClient();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const visibleProjects = activeCategory === "COMMUNITY"
-    ? [{ image: dolmenCityIslamabad, title: "Dolmen City Islamabad", caption: "RESORT STYLE LIVING" }]
+    ? communityProjects
     : projects.filter((project) => project.category === activeCategory);
 
   const beginClose = (restoreMobileNav = false) => {

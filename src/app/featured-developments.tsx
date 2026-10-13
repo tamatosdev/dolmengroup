@@ -11,27 +11,26 @@ import dolmenMallClifton from "../../assets/Development Project/Dolman-mall-clif
 import dolmenMallLahore from "../../assets/Development Project/Dolman-mall-lahore.png";
 import dolmenMallTariqRoad from "../../assets/Development Project/Dolman-Mall-tariq-road.png";
 import executiveTower from "../../assets/Development Project/Executive Tower.jpg";
-import groveResidency from "../../assets/Development Project/Grove Residency.png";
+import groveResidency from "../../assets/grove-project-image.jpg";
 import harbourFront from "../../assets/Development Project/The-Harbour-Front.png";
 import skyTower from "../../assets/Development Project/Sky-Tower.png";
 
 type Development = {
   image: typeof dolmenMallClifton;
-  subtitle: string;
   title: string;
 };
 
 const developments: Development[] = [
-  { image: dolmenMallClifton, subtitle: "REVOLUTIONIZING SHOPPING EXPERIENCE", title: "Dolmen Mall Clifton" },
-  { image: dolmenMallLahore, subtitle: "DESTINATION OF CHOICE", title: "Dolmen Mall Lahore" },
-  { image: dolmenCityIslamabad, subtitle: "RESORT STYLE LIVING", title: "Dolmen City Islamabad" },
-  { image: harbourFront, subtitle: "WHERE BUSINESS MEETS THE SEA", title: "The Harbour Front" },
-  { image: skyTower, subtitle: "ELEVATED BUSINESS, REDEFINED", title: "Sky Towers" },
-  { image: dolmenMallTariqRoad, subtitle: "AT THE HEART OF KARACHI", title: "Dolmen Mall Tariq Road" },
-  { image: corporateOfficeBlock, subtitle: "PRESTIGE IN EVERY DETAIL", title: "Corporate Office Block" },
-  { image: executiveTower, subtitle: "THE ADDRESS OF DISTINCTION", title: "Executive Tower" },
-  { image: groveResidency, subtitle: "A PLACE CALLED HOME", title: "Grove Residency" },
-  { image: dolmenMallHyderi, subtitle: "YOUR NEIGHBOURHOOD MALL", title: "Dolmen Mall Hyderi" },
+  { image: dolmenMallClifton, title: "Dolmen Mall Clifton" },
+  { image: dolmenMallLahore, title: "Dolmen Mall Lahore" },
+  { image: dolmenCityIslamabad, title: "Dolmen City Islamabad" },
+  { image: harbourFront, title: "The Harbour Front" },
+  { image: skyTower, title: "Sky Towers" },
+  { image: dolmenMallTariqRoad, title: "Dolmen Mall Tariq Road" },
+  { image: corporateOfficeBlock, title: "Corporate Office Block" },
+  { image: executiveTower, title: "Executive Tower" },
+  { image: groveResidency, title: "Grove Residency" },
+  { image: dolmenMallHyderi, title: "Dolmen Mall Hyderi" },
 ];
 
 const DRAG_THRESHOLD = 64;
@@ -156,11 +155,10 @@ export default function FeaturedDevelopments() {
                 src={development.image}
                 alt=""
                 fill
-                sizes="(max-width: 700px) 86vw, 62vw"
+                sizes="(max-width: 700px) 86vw, 40vw"
                 draggable={false}
               />
               <div className="development-card-content">
-                <p>{development.subtitle}</p>
                 <h3>{development.title}</h3>
                 <a href={`#${development.title.toLowerCase().replaceAll(" ", "-")}`}>
                   Explore

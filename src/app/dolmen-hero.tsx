@@ -1,101 +1,88 @@
 "use client";
 
-import { useLenis } from "lenis/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
 import thumbnail from "../../assets/Dolmanmall-video-thumbnail.png";
 
-/** ~30fps — skip seeks smaller than ~2 frames to reduce decoder thrash. */
-const FRAME_DURATION = 1 / 30;
-const REVEAL_AT_SECONDS = 2;
+/** Preview loop length while idle / static. */
+const LOOP_END_SECONDS = 12;
+
+function PlayIcon() {
+  return (
+    <svg width="10" height="12" viewBox="0 0 10 12" fill="none" aria-hidden="true">
+      <path d="M0 0v12l10-6L0 0Z" fill="currentColor" />
+    </svg>
+  );
+}
 
 export default function DolmenHero() {
-  const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [isRevealed, setIsRevealed] = useState(false);
-  const revealedRef = useRef(false);
-  const targetTimeRef = useRef(0);
-  const lastAppliedRef = useRef(-1);
-  const unlockedRef = useRef(false);
-  const isSeekingRef = useRef(false);
-  const seekTimeoutRef = useRef<number | null>(null);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const isExpandedRef = useRef(false);
+  const loopingRef = useRef(false);
 
-  const bumpReveal = (time: number) => {
-    if (!revealedRef.current && time >= REVEAL_AT_SECONDS) {
-      revealedRef.current = true;
-      setIsRevealed(true);
+  useEffect(() => {
+    isExpandedRef.current = isExpanded;
+  }, [isExpanded]);
+
+  const playMuted = async (video: HTMLVideoElement) => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.setAttribute("muted", "");
+    try {
+      await video.play();
+      return true;
+    } catch {
+      return false;
     }
   };
 
-  const clearSeekTimeout = () => {
-    if (seekTimeoutRef.current !== null) {
-      window.clearTimeout(seekTimeoutRef.current);
-      seekTimeoutRef.current = null;
-    }
-  };
-
-  const finishSeek = () => {
-    clearSeekTimeout();
-    isSeekingRef.current = false;
-    applyScrub();
-  };
-
-  const applyScrub = () => {
+  const startPreviewLoop = async () => {
     const video = videoRef.current;
-    if (!video?.duration || video.readyState < HTMLMediaElement.HAVE_METADATA) {
+    if (!video || loopingRef.current) {
       return;
     }
 
-    if (isSeekingRef.current) {
+    loopingRef.current = true;
+    video.loop = false;
+
+    // Avoid hard seek when already near the start — prevents visible jerk.
+    if (video.currentTime > LOOP_END_SECONDS || video.ended) {
+      try {
+        video.currentTime = 0;
+      } catch {
+        // ignore
+      }
+    }
+
+    const ok = await playMuted(video);
+    loopingRef.current = false;
+    if (!ok) {
+      // Will retry on next user gesture / visibility
+    }
+  };
+
+  const playFullVideo = async () => {
+    const video = videoRef.current;
+    if (!video) {
       return;
     }
 
-    if (!video.paused) {
-      video.pause();
-    }
+    video.loop = false;
 
-    const target = Math.min(video.duration, Math.max(0, targetTimeRef.current));
-    bumpReveal(target);
-
-    if (Math.abs(lastAppliedRef.current - target) < FRAME_DURATION * 2) {
-      return;
-    }
-    if (Math.abs(video.currentTime - target) < FRAME_DURATION * 2) {
-      lastAppliedRef.current = target;
-      bumpReveal(video.currentTime);
+    // Keep playback continuous from the preview — no seek = no jerk.
+    // Play muted first (gesture-safe), then unmute.
+    const playing = await playMuted(video);
+    if (!playing) {
       return;
     }
 
     try {
-      isSeekingRef.current = true;
-      clearSeekTimeout();
-      seekTimeoutRef.current = window.setTimeout(finishSeek, 200);
-      video.currentTime = target;
-      lastAppliedRef.current = target;
-      if (target > 0.05) {
-        video.removeAttribute("poster");
-      }
+      video.muted = false;
+      video.defaultMuted = false;
+      video.removeAttribute("muted");
     } catch {
-      isSeekingRef.current = false;
-      clearSeekTimeout();
-      lastAppliedRef.current = -1;
+      video.muted = true;
     }
-  };
-
-  const updateFromScroll = () => {
-    const section = sectionRef.current;
-    const video = videoRef.current;
-    if (!section || !video?.duration) {
-      return;
-    }
-
-    const scrollDistance = Math.max(1, section.offsetHeight - window.innerHeight);
-    const progress = Math.min(
-      1,
-      Math.max(0, -section.getBoundingClientRect().top / scrollDistance),
-    );
-
-    targetTimeRef.current = progress * video.duration;
-    applyScrub();
   };
 
   useEffect(() => {
@@ -104,99 +91,132 @@ export default function DolmenHero() {
       return;
     }
 
-    video.setAttribute("playsinline", "true");
-    video.setAttribute("webkit-playsinline", "true");
     video.muted = true;
     video.defaultMuted = true;
-    video.pause();
+    video.playsInline = true;
+    video.setAttribute("playsinline", "true");
+    video.setAttribute("webkit-playsinline", "true");
+    video.setAttribute("muted", "");
 
-    const onSeeked = () => {
-      bumpReveal(video.currentTime);
-      finishSeek();
+    let started = false;
+
+    const tryStart = () => {
+      if (started || isExpandedRef.current) {
+        return;
+      }
+      started = true;
+      void startPreviewLoop();
     };
 
-    const unlockOnGesture = () => {
-      if (unlockedRef.current) {
-        updateFromScroll();
+    const onTimeUpdate = () => {
+      if (isExpandedRef.current) {
         return;
       }
 
-      video.muted = true;
-      video.defaultMuted = true;
-
-      // iOS needs play/pause inside a user gesture before seeks stick.
-      // Never leave play() hanging — that blocks later currentTime writes.
-      const playAttempt = video.play();
-      const finish = () => {
-        video.pause();
-        unlockedRef.current = true;
-        lastAppliedRef.current = -1;
-        updateFromScroll();
-      };
-
-      if (playAttempt !== undefined) {
-        const timeout = window.setTimeout(finish, 150);
-        void playAttempt
-          .then(() => {
-            window.clearTimeout(timeout);
-            finish();
-          })
-          .catch(() => {
-            window.clearTimeout(timeout);
-            finish();
-          });
-      } else {
-        finish();
+      // Soft wrap for the 3s preview loop.
+      if (video.currentTime >= LOOP_END_SECONDS) {
+        try {
+          video.currentTime = 0;
+        } catch {
+          // ignore
+        }
       }
     };
 
-    video.addEventListener("seeked", onSeeked);
-    video.addEventListener("loadedmetadata", updateFromScroll);
-    video.addEventListener("loadeddata", updateFromScroll);
-    video.addEventListener("canplay", updateFromScroll);
-    window.addEventListener("touchstart", unlockOnGesture, { passive: true });
-    window.addEventListener("pointerdown", unlockOnGesture, { passive: true });
-    window.addEventListener("wheel", unlockOnGesture, { passive: true, once: true });
+    const onEnded = () => {
+      if (isExpandedRef.current) {
+        isExpandedRef.current = false;
+        setIsExpanded(false);
+      }
+      void startPreviewLoop();
+    };
 
-    if (video.readyState >= HTMLMediaElement.HAVE_METADATA) {
-      updateFromScroll();
+    const onVisibility = () => {
+      if (document.hidden || isExpandedRef.current) {
+        return;
+      }
+      if (video.paused) {
+        void startPreviewLoop();
+      }
+    };
+
+    // Unlock autoplay after first interaction if blocked.
+    const unlock = () => {
+      if (!isExpandedRef.current && video.paused) {
+        void startPreviewLoop();
+      }
+    };
+
+    video.addEventListener("loadeddata", tryStart);
+    video.addEventListener("canplay", tryStart);
+    video.addEventListener("timeupdate", onTimeUpdate);
+    video.addEventListener("ended", onEnded);
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("pointerdown", unlock, { passive: true });
+
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      tryStart();
     }
 
     return () => {
-      clearSeekTimeout();
-      video.removeEventListener("seeked", onSeeked);
-      video.removeEventListener("loadedmetadata", updateFromScroll);
-      video.removeEventListener("loadeddata", updateFromScroll);
-      video.removeEventListener("canplay", updateFromScroll);
-      window.removeEventListener("touchstart", unlockOnGesture);
-      window.removeEventListener("pointerdown", unlockOnGesture);
-      window.removeEventListener("wheel", unlockOnGesture);
+      video.removeEventListener("loadeddata", tryStart);
+      video.removeEventListener("canplay", tryStart);
+      video.removeEventListener("timeupdate", onTimeUpdate);
+      video.removeEventListener("ended", onEnded);
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("pointerdown", unlock);
     };
   }, []);
 
-  useEffect(() => {
-    const onScroll = () => updateFromScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    onScroll();
+  const togglePlayback = () => {
+    const video = videoRef.current;
+    if (!video) {
+      return;
+    }
 
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-  }, []);
+    if (isExpanded) {
+      setIsExpanded(false);
+      isExpandedRef.current = false;
+      void startPreviewLoop();
+      return;
+    }
 
-  useLenis(() => {
-    updateFromScroll();
-  });
+    setIsExpanded(true);
+    isExpandedRef.current = true;
+    void playFullVideo();
+  };
+
+  const handleBannerClick = () => {
+    if (!isExpanded) {
+      return;
+    }
+    togglePlayback();
+  };
+
+  const handleWatchClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    togglePlayback();
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      togglePlayback();
+    }
+  };
 
   return (
-    <section ref={sectionRef} className="dolmen-hero" aria-label="Building a Better Future">
+    <section
+      className={`dolmen-hero${isExpanded ? " is-expanded" : ""}`}
+      aria-label="Building a Better Future"
+      onClick={handleBannerClick}
+    >
       <div className="dolmen-hero-stage">
         <video
           ref={videoRef}
           className="dolmen-hero-video"
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/dolmen-video-3.mp4?v=scrub-smooth1`}
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/dolmen-video-3.mp4?v=hero-fast1`}
+          autoPlay
           muted
           playsInline
           preload="auto"
@@ -205,15 +225,34 @@ export default function DolmenHero() {
           disablePictureInPicture
           controls={false}
         />
-        <div className={`dolmen-hero-content${isRevealed ? " is-visible" : ""}`}>
+        <div className={`dolmen-hero-content${!isExpanded ? " is-visible" : ""}`}>
+          <button
+            className="dolmen-hero-watch"
+            type="button"
+            onClick={handleWatchClick}
+            onKeyDown={handleKeyDown}
+            aria-pressed={isExpanded}
+          >
+            <PlayIcon />
+            Watch Full Video
+          </button>
           <h1>
-            <span>Building a Better</span>
-            <span>Future</span>
+            <span className="dolmen-hero-title-top">Building a Better</span>
+            <span className="dolmen-hero-title-row">
+              <span className="dolmen-hero-title-future">Future</span>
+              <span className="dolmen-hero-copy">
+                For over 35 years, Dolmen Group has redefined Pakistan’s real estate landscape with landmark destinations.
+              </span>
+            </span>
           </h1>
-          <p>
-            For over 35 years, Dolmen Group has shaped Pakistan’s real estate landscape with landmark destinations.
-          </p>
         </div>
+        <a
+          className="dolmen-hero-scroll"
+          href="#about"
+          onClick={(event) => event.stopPropagation()}
+        >
+          Scroll
+        </a>
       </div>
     </section>
   );
