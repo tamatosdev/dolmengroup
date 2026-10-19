@@ -5,6 +5,7 @@ import { FormEvent, useEffect, useState } from "react";
 import arrowDown from "../../assets/arrow-down.svg";
 import arrowRight from "../../assets/arrow-right.svg";
 import contactSectionImage from "../../assets/contact-section-imge.jpg";
+import { submitMail } from "./submit-mail";
 
 const enquiryOptions = [
   "Shopping Mall (Retail Outlets)",
@@ -60,8 +61,35 @@ function PinIcon() {
 }
 
 function ContactForm() {
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [feedback, setFeedback] = useState("");
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setStatus("loading");
+    setFeedback("");
+
+    const result = await submitMail({
+      type: "contact",
+      name: String(formData.get("name") || ""),
+      phone: String(formData.get("phone") || ""),
+      email: String(formData.get("email") || ""),
+      enquiry: String(formData.get("enquiry") || ""),
+      message: String(formData.get("message") || ""),
+    });
+
+    if (!result.ok) {
+      setStatus("error");
+      setFeedback(result.error || "Something went wrong. Please try again.");
+      return;
+    }
+
+    setStatus("success");
+    setFeedback(result.message || "Message sent successfully.");
+    form.reset();
   };
 
   return (
@@ -126,10 +154,16 @@ function ContactForm() {
         />
       </label>
 
-      <button className="contact-talk-submit" type="submit">
-        Send Message
+      <button className="contact-talk-submit" type="submit" disabled={status === "loading"}>
+        {status === "loading" ? "Sending..." : "Send Message"}
         <Image src={arrowRight} alt="" aria-hidden="true" />
       </button>
+
+      {feedback ? (
+        <p className={`contact-talk-feedback is-${status}`} role="status">
+          {feedback}
+        </p>
+      ) : null}
     </form>
   );
 }
