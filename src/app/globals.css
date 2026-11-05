@@ -4724,3 +4724,79 @@ h2#about-title {
     width: 160px;
   }
 }
+
+/* Laptop widths (incl. 1920px screens at 125–150% zoom): scale these with the
+   viewport, in proportion to their 1920px size (value / 19.2 = vw), so the page
+   reads like a smaller 1920 layout. Readable text never drops below 15px.
+   Only 1025–1440px is touched; 1441px+ and tablet/mobile are unchanged. */
+@media (min-width: 1025px) and (max-width: 1440px) {
+  .latest-developments-title,
+  .project-slides-title {
+    font-size: max(32px, 3.75vw);
+  }
+
+  .featured-developments-arrow {
+    height: max(44px, 3.646vw);
+    width: max(44px, 3.646vw);
+  }
+
+  .featured-developments-arrow img {
+    height: max(16px, 1.2vw);
+    width: max(16px, 1.2vw);
+  }
+
+  .contact-section p,
+  .contact-talk-intro,
+  .contact-talk-field span {
+    font-size: max(15px, 0.9375vw);
+  }
+
+  .contact-section-button {
+    font-size: max(15px, 0.9375vw);
+    padding: max(12px, 1.146vw) max(24px, 2.5vw);
+  }
+
+  .contact-talk-field input,
+  .contact-talk-field textarea {
+    font-size: 15px;
+    padding: max(10px, 0.833vw) max(14px, 0.9375vw);
+  }
+
+  .contact-talk-field select {
+    font-size: 15px;
+    padding-block: max(10px, 0.833vw);
+    padding-left: max(14px, 0.9375vw);
+  }
+
+  .contact-talk-submit {
+    font-size: max(15px, 0.9375vw);
+    padding-block: max(14px, 1.25vw);
+  }
+
+  .dolmen-hero-watch {
+    font-size: 14px;
+  }
+
+  .dolmen-hero-scroll {
+    font-size: 13px;
+  }
+
+  /* Values first set by hand for 1280/1366, now proportional too. */
+  .navigation-list a,
+  .business-menu-trigger,
+  .dolmen-number h3 {
+    font-size: max(15px, 1.146vw);
+  }
+
+  .featured-developments-track .development-card-content a {
+    font-size: max(15px, 1.04vw);
+  }
+
+  .latest-update-card {
+    min-height: 36.77vw;
+  }
+
+  .contact-talk-map {
+    height: max(200px, 16.67vw);
+  }
+}
