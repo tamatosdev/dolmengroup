@@ -163,7 +163,8 @@ const DUPLICATE_WINDOW_SECONDS = 120;
 /**
  * Claim a submission so the same form data is mailed only once within
  * DUPLICATE_WINDOW_SECONDS (double clicks, resubmits). Returns the lock path,
- * or null when an identical submission was already sent.
+ * '' when no lock could be written (send anyway), or null when an identical
+ * submission was already sent.
  */
 function claim_submission(array $fields): ?string {
   $normalized = array_map(static function ($value) {
@@ -171,8 +172,8 @@ function claim_submission(array $fields): ?string {
   }, $fields);
   $path = sys_get_temp_dir() . '/dolmen-mail-' . sha1(json_encode($normalized));
 
-  if (is_file($path)) {
-    if (time() - (int) filemtime($path) < DUPLICATE_WINDOW_SECONDS) {
+  if (@is_file($path)) {
+    if (time() - (int) @filemtime($path) < DUPLICATE_WINDOW_SECONDS) {
       return null;
     }
     @unlink($path);
@@ -181,7 +182,10 @@ function claim_submission(array $fields): ?string {
   // 'x' fails if another request created the lock first, so only one sends.
   $handle = @fopen($path, 'x');
   if ($handle === false) {
-    return null;
+    clearstatcache(true, $path);
+    // Lost the race to a parallel identical request: that one sends.
+    // Otherwise the temp dir isn't writable here: never drop a real enquiry.
+    return @is_file($path) ? null : '';
   }
   fclose($handle);
 
@@ -254,7 +258,7 @@ try {
   echo json_encode(['ok' => true, 'message' => 'Message sent successfully.']);
 } catch (Throwable $error) {
   // Sending failed: release the lock so the visitor can retry right away.
-  if ($lockPath !== null) {
+  if ($lockPath !== null && $lockPath !== '') {
     @unlink($lockPath);
   }
   http_response_code(500);
