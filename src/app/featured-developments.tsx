@@ -4,16 +4,16 @@ import Image from "next/image";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { useRef, useState } from "react";
 import arrowRight from "../../assets/arrow-right.svg";
-import corporateOfficeBlock from "../../assets/Development Project/Corporate-office-block.png";
+import corporateOfficeBlock from "../../assets/Featured Project/Corporate Office Block.jpg";
 import dolmenCityIslamabad from "../../assets/Development Project/Dolmen City Islamabad.png";
-import dolmenMallHyderi from "../../assets/Development Project/Dolman-Mall-Hyderi.png";
-import dolmenMallClifton from "../../assets/Development Project/Dolman-mall-clifton.png";
-import dolmenMallLahore from "../../assets/Development Project/Dolman-mall-lahore.png";
-import dolmenMallTariqRoad from "../../assets/Development Project/Dolman-Mall-tariq-road.png";
-import executiveTower from "../../assets/Development Project/Executive Tower.jpg";
-import groveResidency from "../../assets/grove-project-image.jpg";
-import harbourFront from "../../assets/Development Project/The-Harbour-Front.png";
-import skyTower from "../../assets/Development Project/Sky-Tower.png";
+import dolmenMallHyderi from "../../assets/Featured Project/Dolmen Mall Hyderi.jpg";
+import dolmenMallClifton from "../../assets/Featured Project/Dolmen Mall Clifton.jpg";
+import dolmenMallLahore from "../../assets/Featured Project/Dolmen Mall Lahore.jpg";
+import dolmenMallTariqRoad from "../../assets/Featured Project/Dolmen Mall Tariq Road.jpg";
+import executiveTower from "../../assets/Featured Project/Executive Tower.png";
+import groveResidency from "../../assets/Featured Project/Grove Residency.jpg";
+import harbourFront from "../../assets/Featured Project/The Harbour Front.jpg";
+import skyTower from "../../assets/Featured Project/Sky Towers.jpg";
 import { SHOW_DOLMEN_CITY_ISLAMABAD } from "./project-visibility";
 
 type Development = {
@@ -22,18 +22,18 @@ type Development = {
 };
 
 const developments: Development[] = [
-  { image: dolmenMallClifton, title: "Dolmen Mall Clifton" },
+  { image: groveResidency, title: "Grove Residency" },
   { image: dolmenMallLahore, title: "Dolmen Mall Lahore" },
+  { image: skyTower, title: "Sky Towers" },
+  { image: corporateOfficeBlock, title: "Corporate Office Block" },
+  { image: dolmenMallClifton, title: "Dolmen Mall Clifton" },
+  { image: dolmenMallHyderi, title: "Dolmen Mall Hyderi" },
+  { image: harbourFront, title: "The Harbour Front" },
+  { image: executiveTower, title: "Executive Tower" },
+  { image: dolmenMallTariqRoad, title: "Dolmen Mall Tariq Road" },
   ...(SHOW_DOLMEN_CITY_ISLAMABAD
     ? [{ image: dolmenCityIslamabad, title: "Dolmen City Islamabad" } satisfies Development]
     : []),
-  { image: harbourFront, title: "The Harbour Front" },
-  { image: skyTower, title: "Sky Towers" },
-  { image: dolmenMallTariqRoad, title: "Dolmen Mall Tariq Road" },
-  { image: corporateOfficeBlock, title: "Corporate Office Block" },
-  { image: executiveTower, title: "Executive Tower" },
-  { image: groveResidency, title: "Grove Residency" },
-  { image: dolmenMallHyderi, title: "Dolmen Mall Hyderi" },
 ];
 
 const DRAG_THRESHOLD = 64;
@@ -153,14 +153,16 @@ export default function FeaturedDevelopments() {
         >
           {developments.map((development) => (
             <article className="development-card" key={development.title}>
-              <Image
-                className="development-card-image"
-                src={development.image}
-                alt=""
-                fill
-                sizes="(max-width: 700px) 86vw, 40vw"
-                draggable={false}
-              />
+              <div className="development-card-media">
+                <Image
+                  className="development-card-image"
+                  src={development.image}
+                  alt=""
+                  fill
+                  sizes="(max-width: 700px) 86vw, 40vw"
+                  draggable={false}
+                />
+              </div>
               <div className="development-card-content">
                 <h3>{development.title}</h3>
                 <a href={`#${development.title.toLowerCase().replaceAll(" ", "-")}`}>

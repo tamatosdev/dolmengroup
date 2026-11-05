@@ -9,8 +9,8 @@ return [
   'from_email' => 'info@dolmengroup.com',
   'from_name' => 'Dolmen Website',
   'smtp_host' => 'mail.dolmengroup.com',
-  'smtp_port' => 465,
-  'smtp_secure' => 'ssl', // ssl | tls
+  'smtp_port' => 587,
+  'smtp_secure' => 'tls', // ssl (port 465) | tls (port 587, STARTTLS)
   'smtp_user' => 'info@dolmengroup.com',
   'smtp_pass' => 'YOUR_EMAIL_PASSWORD_HERE',
 ];

@@ -12,10 +12,9 @@ import { submitMail } from "./submit-mail";
 function FacebookIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <circle cx="12" cy="12" r="10" fill="currentColor" />
       <path
-        d="M13.2 19.2v-6.4h2.1l.3-2.4h-2.4V8.9c0-.7.2-1.2 1.2-1.2h1.3V5.5c-.2 0-1-.1-1.9-.1-1.9 0-3.2 1.2-3.2 3.3v1.8H8.4v2.4h2.2v6.4h2.6Z"
-        fill="#111111"
+        d="M13.5 21v-7.5h2.53l.38-2.94H13.5V8.69c0-.85.24-1.43 1.46-1.43h1.54V4.63a21 21 0 0 0-2.26-.13c-2.24 0-3.77 1.37-3.77 3.88v2.18H7.94v2.94h2.53V21h3.03Z"
+        fill="currentColor"
       />
     </svg>
   );
@@ -34,10 +33,9 @@ function InstagramIcon() {
 function LinkedInIcon() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="2.5" y="2.5" width="19" height="19" rx="3.2" fill="currentColor" />
       <path
-        d="M7.4 10.1H5.2V18h2.2v-7.9ZM6.3 6.2c-.7 0-1.3.6-1.3 1.3s.6 1.3 1.3 1.3 1.3-.6 1.3-1.3-.6-1.3-1.3-1.3ZM18.8 13.3c0-1.9-1-3.2-2.7-3.2-.9 0-1.6.5-1.9 1.1h-.1v-.9h-2.1V18h2.2v-4.2c0-1.1.2-2.2 1.6-2.2s1.4 1 1.4 2.3V18h2.2v-4.7Z"
-        fill="#111111"
+        d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 1 1 0-4.125 2.062 2.062 0 0 1 0 4.125Zm1.782 13.019H3.555V9h3.564v11.452Z"
+        fill="currentColor"
       />
     </svg>
   );
@@ -83,10 +81,6 @@ export default function SiteFooter() {
 
         <div className="newsletter">
           <h2>Stay Updated</h2>
-          <p>
-            Subscribe to get fresh property listings, market updates, and expert tips delivered
-            straight to your inbox.
-          </p>
           <form className="newsletter-form" onSubmit={handleNewsletterSubmit} noValidate>
             <label className="sr-only" htmlFor="email">
               Email address
@@ -112,7 +106,7 @@ export default function SiteFooter() {
         </div>
       </div>
 
-      <div className="footer-nav">
+      <nav className="footer-nav" aria-label="Footer">
         <div className="footer-link-group">
           <h2>Company</h2>
           <Link href="/#about">About</Link>
@@ -146,17 +140,20 @@ export default function SiteFooter() {
           ) : null}
         </div>
 
-        <div className="footer-link-group">
-          <h2>Entertainment</h2>
-          <a href="#sindbads-wonderland">Sindbad&apos;s Wonderland</a>
-        </div>
+        {/* Entertainment and Retail share the last column, one above the other. */}
+        <div className="footer-nav-stack">
+          <div className="footer-link-group">
+            <h2>Entertainment</h2>
+            <a href="#sindbads-wonderland">Sindbad&apos;s Wonderland</a>
+          </div>
 
-        <div className="footer-link-group">
-          <h2>Retail</h2>
-          <a href="#giordano">Giordano</a>
-          <a href="#bala-bala">Bala Bala</a>
+          <div className="footer-link-group">
+            <h2>Retail</h2>
+            <a href="#giordano">Giordano</a>
+            <a href="#bala-bala">Bala Bala</a>
+          </div>
         </div>
-      </div>
+      </nav>
 
       <div className="footer-bottom">
         <div className="footer-socials">
@@ -166,13 +163,18 @@ export default function SiteFooter() {
           <a href="#instagram" aria-label="Instagram">
             <InstagramIcon />
           </a>
-          <a href="#linkedin" aria-label="LinkedIn">
+          <a
+            href="https://www.linkedin.com/company/dolmengroup/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
             <LinkedInIcon />
           </a>
         </div>
 
         <span className="footer-copy">
-          © 2026 Dolmen Group. All rights reserved. Design and Developed by{" "}
+          © 2026 Dolmen Group. All rights reserved. Designed and Developed by{" "}
           <a className="footer-credit" href="https://tamatos.com/" target="_blank" rel="noopener noreferrer">
             tamatos
           </a>

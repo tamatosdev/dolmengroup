@@ -5,8 +5,8 @@ $defaults = [
   'from_email' => 'info@dolmengroup.com',
   'from_name' => 'Dolmen Website',
   'smtp_host' => 'mail.dolmengroup.com',
-  'smtp_port' => 465,
-  'smtp_secure' => 'ssl',
+  'smtp_port' => 587,
+  'smtp_secure' => 'tls',
   'smtp_user' => 'info@dolmengroup.com',
   'smtp_pass' => '',
 ];

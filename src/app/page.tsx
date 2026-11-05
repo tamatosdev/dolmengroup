@@ -11,6 +11,7 @@ import ContactSection from "./contact-section";
 import ContactTalk from "./contact-talk";
 import SiteFooter from "./site-footer";
 import SiteHeader from "./site-header";
+import { SHOW_EXPLORE_BUTTONS } from "./project-visibility";
 
 export default function Home() {
   return (
@@ -48,10 +49,12 @@ export default function Home() {
             <p>
               We create vibrant spaces from retail and commercial developments to integrated destinations that bring people, businesses and communities together.
             </p>
-            <a className="about-button" href="#about-story">
-              Discover Our Story
-              <Image src={arrowRight} alt="" aria-hidden="true" />
-            </a>
+            {SHOW_EXPLORE_BUTTONS ? (
+              <a className="about-button" href="#about-story">
+                Discover Our Story
+                <Image src={arrowRight} alt="" aria-hidden="true" />
+              </a>
+            ) : null}
           </div>
         </div>
 

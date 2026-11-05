@@ -215,7 +215,14 @@ export default function CardsMegaMenu({
             <div>
               <a href="#instagram" onClick={() => beginClose()}>INSTAGRAM</a>
               <a href="#facebook" onClick={() => beginClose()}>FACEBOOK</a>
-              <a href="#linkedin" onClick={() => beginClose()}>LINKEDIN</a>
+              <a
+                href="https://www.linkedin.com/company/dolmengroup/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => beginClose()}
+              >
+                LINKEDIN
+              </a>
             </div>
             {shouldShowCopyright ? <span>© 2026 DOLMEN GROUP</span> : null}
           </div>

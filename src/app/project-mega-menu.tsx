@@ -10,7 +10,7 @@ import dolmenMallLahore from "../../assets/dolmenmal-lahore-new.jpg";
 import dolmenMallHyderi from "../../assets/dolmenmall-hyderi-new.jpg";
 import dolmenMallClifton from "../../assets/dolmen-mall-cliftan-new.jpg";
 import dolmenCityIslamabad from "../../assets/dolmen-city-islamabad-new.jpg";
-import dolmenCityKarachi from "../../assets/dolmen-city-karachi-new.jpg";
+import dolmenCityKarachi from "../../assets/dolmen-city-karachi-2.jpg";
 import skyTowers from "../../assets/sky-towe-new.jpg";
 import executiveTower from "../../assets/executive-tower-new.jpg";
 import corporateOfficeBlock from "../../assets/corporate-office-new.jpg";
@@ -179,7 +179,14 @@ export default function ProjectMegaMenu() {
             <div>
               <a href="#instagram" onClick={() => beginClose()}>INSTAGRAM</a>
               <a href="#facebook" onClick={() => beginClose()}>FACEBOOK</a>
-              <a href="#linkedin" onClick={() => beginClose()}>LINKEDIN</a>
+              <a
+                href="https://www.linkedin.com/company/dolmengroup/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => beginClose()}
+              >
+                LINKEDIN
+              </a>
             </div>
             {visibleProjects.length > 1 ? <span>© 2026 DOLMEN GROUP</span> : null}
           </div>
