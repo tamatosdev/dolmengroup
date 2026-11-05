@@ -69,6 +69,12 @@ function ContactForm() {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
+    if (formData.get("consent") !== "yes") {
+      setStatus("error");
+      setFeedback("Please agree to the Privacy Policy and Terms of Service.");
+      return;
+    }
+
     setStatus("loading");
     setFeedback("");
 
@@ -79,6 +85,7 @@ function ContactForm() {
       email: String(formData.get("email") || ""),
       enquiry: String(formData.get("enquiry") || ""),
       message: String(formData.get("message") || ""),
+      consent: true,
     });
 
     if (!result.ok) {
@@ -154,6 +161,15 @@ function ContactForm() {
         />
       </label>
 
+      <label className="contact-talk-consent">
+        <input type="checkbox" name="consent" value="yes" required suppressHydrationWarning />
+        <span>
+          I agree to the <a href="#privacy-policy">Privacy Policy</a> and{" "}
+          <a href="#terms-of-service">Terms of Service</a>, and consent to my information being used to
+          respond to my inquiry.
+        </span>
+      </label>
+
       <button className="contact-talk-submit" type="submit" disabled={status === "loading"}>
         {status === "loading" ? "Sending..." : "Send Message"}
         <Image src={arrowRight} alt="" aria-hidden="true" />
@@ -196,9 +212,9 @@ export default function ContactTalk() {
               <MailIcon />
               info@dolmengroup.com
             </a>
-            <a href="tel:+922100000000">
+            <a href="tel:+92(21)35296062">
               <PhoneIcon />
-              +92 21 0000 0000
+              +92 (21) 35296062
             </a>
           </div>
 

@@ -17,15 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $config = require __DIR__ . '/config.php';
 
-if (empty($config['smtp_pass'])) {
-  http_response_code(500);
-  echo json_encode([
-    'ok' => false,
-    'error' => 'SMTP is not configured. Add public/mail/config.local.php with smtp_pass.',
-  ]);
-  exit;
-}
-
 $raw = file_get_contents('php://input');
 $data = json_decode($raw, true);
 
@@ -82,7 +73,14 @@ function send_smtp_mail(array $config, string $subject, string $body, string $re
 
   if ($secure === 'tls') {
     smtp_command($socket, 'STARTTLS', [220]);
-    if (!stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+    $cryptoMethod = STREAM_CRYPTO_METHOD_TLS_CLIENT;
+    if (defined('STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT')) {
+      $cryptoMethod |= STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;
+    }
+    if (defined('STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT')) {
+      $cryptoMethod |= STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT;
+    }
+    if (!stream_socket_enable_crypto($socket, true, $cryptoMethod)) {
       throw new RuntimeException('Could not enable TLS');
     }
     smtp_command($socket, 'EHLO dolmengroup.com', [250]);
@@ -122,6 +120,80 @@ function send_smtp_mail(array $config, string $subject, string $body, string $re
   fclose($socket);
 }
 
+/**
+ * Send through the web server's own mailer (PHP mail()). Needs no mailbox
+ * password: the domain's SPF record ("a") authorises this server to send
+ * as @dolmengroup.com.
+ */
+function send_server_mail(array $config, string $subject, string $body, string $replyTo = ''): void {
+  $fromEmail = clean_line($config['from_email']);
+  $fromName = clean_line($config['from_name']);
+  $toEmail = clean_line($config['to_email']);
+
+  $headers = [
+    'From: ' . sprintf('"%s" <%s>', $fromName, $fromEmail),
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: 8bit',
+  ];
+
+  if ($replyTo !== '') {
+    $headers[] = 'Reply-To: ' . clean_line($replyTo);
+  }
+
+  $encodedSubject = '=?UTF-8?B?' . base64_encode(clean_line($subject)) . '?=';
+  $sent = mail($toEmail, $encodedSubject, $body, implode("\r\n", $headers), '-f' . $fromEmail);
+
+  if (!$sent) {
+    throw new RuntimeException('The server could not send the email. Please try again later.');
+  }
+}
+
+function send_mail(array $config, string $subject, string $body, string $replyTo = ''): void {
+  if (empty($config['smtp_pass'])) {
+    send_server_mail($config, $subject, $body, $replyTo);
+    return;
+  }
+
+  send_smtp_mail($config, $subject, $body, $replyTo);
+}
+
+const DUPLICATE_WINDOW_SECONDS = 120;
+
+/**
+ * Claim a submission so the same form data is mailed only once within
+ * DUPLICATE_WINDOW_SECONDS (double clicks, resubmits). Returns the lock path,
+ * '' when no lock could be written (send anyway), or null when an identical
+ * submission was already sent.
+ */
+function claim_submission(array $fields): ?string {
+  $normalized = array_map(static function ($value) {
+    return strtolower(trim((string) $value));
+  }, $fields);
+  $path = sys_get_temp_dir() . '/dolmen-mail-' . sha1(json_encode($normalized));
+
+  if (@is_file($path)) {
+    if (time() - (int) @filemtime($path) < DUPLICATE_WINDOW_SECONDS) {
+      return null;
+    }
+    @unlink($path);
+  }
+
+  // 'x' fails if another request created the lock first, so only one sends.
+  $handle = @fopen($path, 'x');
+  if ($handle === false) {
+    clearstatcache(true, $path);
+    // Lost the race to a parallel identical request: that one sends.
+    // Otherwise the temp dir isn't writable here: never drop a real enquiry.
+    return @is_file($path) ? null : '';
+  }
+  fclose($handle);
+
+  return $path;
+}
+
+$lockPath = null;
+
 try {
   if ($type === 'newsletter') {
     $email = isset($data['email']) ? trim((string) $data['email']) : '';
@@ -129,9 +201,17 @@ try {
       respond_error('Please enter a valid email address.');
     }
 
+    $lockPath = claim_submission(['newsletter', $email]);
+    if ($lockPath === null) {
+      echo json_encode(['ok' => true, 'message' => 'Subscribed successfully.']);
+      exit;
+    }
+
     $subject = 'Newsletter subscription — Dolmen website';
     $body = "New newsletter subscription\n\nEmail: {$email}\nSubmitted: " . date('Y-m-d H:i:s');
-    send_smtp_mail($config, $subject, $body, $email);
+    // No Reply-To: a free-mail Reply-To on a message From our own domain is
+    // scored as spoofing (FREEMAIL_FORGED_REPLYTO) and gets filtered.
+    send_mail($config, $subject, $body);
 
     echo json_encode(['ok' => true, 'message' => 'Subscribed successfully.']);
     exit;
@@ -151,19 +231,36 @@ try {
     respond_error('Please enter a valid email address.');
   }
 
+  if (empty($data['consent'])) {
+    respond_error('Please agree to the Privacy Policy and Terms of Service.');
+  }
+
+  $lockPath = claim_submission(['contact', $name, $phone, $email, $enquiry, $message]);
+  if ($lockPath === null) {
+    echo json_encode(['ok' => true, 'message' => 'Message sent successfully.']);
+    exit;
+  }
+
   $subject = 'Website enquiry' . ($enquiry !== '' ? " — {$enquiry}" : '');
   $body = "New enquiry from the Dolmen website\n\n"
+    . "Reply to the visitor at: {$email}\n\n"
     . "Name: {$name}\n"
     . "Phone: {$phone}\n"
     . "Email: {$email}\n"
     . "Enquiry: {$enquiry}\n\n"
     . "Message:\n{$message}\n\n"
+    . "Consent: Agreed to the Privacy Policy and Terms of Service\n"
     . 'Submitted: ' . date('Y-m-d H:i:s');
 
-  send_smtp_mail($config, $subject, $body, $email);
+  // Visitor email is in the body, not Reply-To (see newsletter note above).
+  send_mail($config, $subject, $body);
 
   echo json_encode(['ok' => true, 'message' => 'Message sent successfully.']);
 } catch (Throwable $error) {
+  // Sending failed: release the lock so the visitor can retry right away.
+  if ($lockPath !== null && $lockPath !== '') {
+    @unlink($lockPath);
+  }
   http_response_code(500);
   echo json_encode(['ok' => false, 'error' => $error->getMessage()]);
 }

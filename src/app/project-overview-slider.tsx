@@ -14,6 +14,7 @@ import groveResidencyBackground from "../../assets/Project Overview/Grove Reside
 import groveResidencyThumbnail from "../../assets/Project Overview/Grove Residency thumbnail.png";
 import dolmenMallLahoreBackground from "../../assets/Project Overview/Dolmen Mall Lahore bg.png";
 import dolmenMallLahoreThumbnail from "../../assets/Project Overview/Dolmen Mall Lahore thumbnail.png";
+import { SHOW_EXPLORE_BUTTONS } from "./project-visibility";
 
 type OverviewSlide = {
   background: typeof dolmenCityBackground;
@@ -160,10 +161,12 @@ export default function ProjectOverviewSlider() {
       <div className="project-overview-content">
         <h2>{activeSlide.title}</h2>
         <p>{activeSlide.location}</p>
-        <a className="project-overview-button" href={`#${activeSlide.title.toLowerCase().replaceAll(" ", "-")}`}>
-          Explore More
-          <Image src={arrowRight} alt="" aria-hidden="true" />
-        </a>
+        {SHOW_EXPLORE_BUTTONS ? (
+          <a className="project-overview-button" href={`#${activeSlide.title.toLowerCase().replaceAll(" ", "-")}`}>
+            Explore More
+            <Image src={arrowRight} alt="" aria-hidden="true" />
+          </a>
+        ) : null}
       </div>
 
       <div className="project-overview-media">
