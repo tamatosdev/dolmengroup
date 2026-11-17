@@ -134,7 +134,7 @@ export default function SiteFooter() {
 
         <div className="footer-link-group">
           <h2>Residences</h2>
-          <a href="#the-grove-residency">The Grove Residency</a>
+          <Link href="/the-grove-residency/">The Grove Residency</Link>
           {SHOW_DOLMEN_CITY_ISLAMABAD ? (
             <a href="#dolmen-city-islamabad">Dolmen City Islamabad</a>
           ) : null}

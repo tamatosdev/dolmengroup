@@ -14,6 +14,8 @@ import executiveTower from "../../assets/Featured Project/Executive Tower.png";
 import groveResidency from "../../assets/Featured Project/Grove Residency.jpg";
 import harbourFront from "../../assets/Featured Project/The Harbour Front.jpg";
 import skyTower from "../../assets/Featured Project/Sky Towers.jpg";
+import Link from "next/link";
+import { projectHref } from "./project-pages";
 import { SHOW_DOLMEN_CITY_ISLAMABAD } from "./project-visibility";
 
 type Development = {
@@ -165,10 +167,10 @@ export default function FeaturedDevelopments() {
               </div>
               <div className="development-card-content">
                 <h3>{development.title}</h3>
-                <a href={`#${development.title.toLowerCase().replaceAll(" ", "-")}`}>
+                <Link href={projectHref(development.title)}>
                   Explore
                   <Image src={arrowRight} alt="" aria-hidden="true" />
-                </a>
+                </Link>
               </div>
             </article>
           ))}

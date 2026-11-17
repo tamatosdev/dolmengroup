@@ -19,6 +19,8 @@ import harbourFront from "../../assets/harbour-front-new.jpg";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
 import { SHOW_DOLMEN_CITY_ISLAMABAD } from "./project-visibility";
 import { useIsClient } from "./use-is-client";
+import Link from "next/link";
+import { projectHref } from "./project-pages";
 import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
 
 type ProjectCategory = "COMMUNITY" | "MALLS" | "OFFICES" | "RESIDENCES";
@@ -161,9 +163,9 @@ export default function ProjectMegaMenu() {
           </div>
           <div className="business-mega-cards" key={activeCategory}>
             {visibleProjects.map((project) => (
-              <a
+              <Link
                 className="business-mega-card"
-                href={`#${project.title.toLowerCase().replaceAll(" ", "-")}`}
+                href={projectHref(project.title)}
                 key={project.title}
                 onClick={() => beginClose()}
               >
@@ -172,7 +174,7 @@ export default function ProjectMegaMenu() {
                 <span className="business-mega-card-copy">
                   <strong>{project.title}</strong>
                 </span>
-              </a>
+              </Link>
             ))}
           </div>
           <div className="business-mega-footer">

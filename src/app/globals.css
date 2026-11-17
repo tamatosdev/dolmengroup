@@ -4800,3 +4800,489 @@ h2#about-title {
     height: max(200px, 16.67vw);
   }
 }
+
+/* Project inner pages: full-screen hero (category pill, large title, copy beside it).
+   Sizes in vw follow the design's proportions; text has readable minimums. */
+.project-hero {
+  height: 100svh;
+  isolation: isolate;
+  min-height: 560px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.project-hero::after {
+  background: linear-gradient(
+    180deg,
+    rgb(0 0 0 / 30%) 0%,
+    rgb(0 0 0 / 0%) 22%,
+    rgb(0 0 0 / 0%) 55%,
+    rgb(0 0 0 / 45%) 100%
+  );
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.project-hero-image {
+  object-fit: cover;
+  z-index: 0;
+}
+
+.project-hero-content {
+  bottom: clamp(32px, 3.9vw, 72px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 1.6vw, 28px);
+  left: clamp(16px, 3.125vw, 60px);
+  opacity: 0;
+  position: absolute;
+  right: clamp(16px, 3.125vw, 60px);
+  transform: translateY(40px);
+  transition: opacity 900ms ease, transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 2;
+}
+
+.project-hero-content.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.project-hero-category {
+  align-self: flex-start;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgb(248 242 234 / 28%);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: clamp(11px, 0.85vw, 15px);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  padding: clamp(7px, 0.6vw, 10px) clamp(12px, 1.1vw, 18px);
+  text-transform: uppercase;
+}
+
+.project-hero-title-row {
+  align-items: flex-end;
+  display: flex;
+  gap: clamp(16px, 1.4vw, 28px);
+}
+
+.project-hero-title-row h1 {
+  color: #f8f2ea;
+  flex: 0 0 auto;
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(56px, 7.6vw, 150px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  margin: 0;
+}
+
+.project-hero-title-row h1 span {
+  display: block;
+}
+
+.project-hero-title-row p {
+  color: #f8f2ea;
+  font-size: clamp(14px, 1.05vw, 20px);
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  margin: 0 0 0.6em;
+  max-width: max(300px, 34vw);
+}
+
+@media (max-width: 768px) {
+  .project-hero-title-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .project-hero-title-row h1 {
+    font-size: clamp(44px, 12vw, 80px);
+  }
+
+  .project-hero-title-row p {
+    margin: 0;
+    max-width: 560px;
+  }
+}
+
+/* Project inner pages: intro (heading + copy + wide image on the left, tall image on the right).
+   Column widths and sizes follow the design's proportions. */
+.project-intro {
+  align-items: stretch;
+  background: #f8f2ea;
+  color: #111111;
+  display: grid;
+  gap: clamp(16px, 2.4vw, 46px);
+  grid-template-columns: minmax(0, 1.31fr) minmax(0, 1fr);
+  padding: clamp(64px, 13vw, 250px) clamp(16px, 3.125vw, 60px) clamp(56px, 10.3vw, 198px);
+}
+
+.project-intro-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.project-intro-title {
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(36px, 4.45vw, 86px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  margin: 0;
+}
+
+.project-intro-line {
+  display: block;
+}
+
+.project-intro-highlight {
+  display: inline-block;
+  position: relative;
+}
+
+.project-intro-highlight .title-brush {
+  height: clamp(8px, 0.75vw, 14px);
+  left: -7%;
+  top: 86%;
+  width: 114% !important;
+}
+
+.project-intro-copy {
+  color: #414141;
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(14px, 0.95vw, 18px);
+  gap: 1.1em;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  margin: clamp(24px, 3.2vw, 60px) 0 clamp(24px, 2.6vw, 50px);
+  max-width: 88%;
+}
+
+.project-intro-copy p {
+  margin: 0;
+}
+
+.project-intro-image {
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+}
+
+.project-intro-image img {
+  object-fit: cover;
+}
+
+.project-intro-image-wide {
+  aspect-ratio: 2.56;
+  margin-top: auto;
+}
+
+/* Fills the row height set by the left column (no aspect-ratio here: with a
+   stretched height it would widen the image past its column). */
+.project-intro-image-tall {
+  align-self: stretch;
+  min-height: 100%;
+}
+
+@media (max-width: 768px) {
+  .project-intro {
+    grid-template-columns: 1fr;
+  }
+
+  .project-intro-copy {
+    max-width: none;
+  }
+
+  .project-intro-image-tall {
+    aspect-ratio: 0.895;
+  }
+}
+
+/* Project inner pages: key figures (bordered cells, yellow value, title, short text).
+   Sizes in vw follow the design's proportions; text has readable minimums. */
+.project-stats {
+  background: #f8f2ea;
+  color: #111111;
+  padding: 0 clamp(16px, 3.125vw, 60px) clamp(56px, 6vw, 120px);
+}
+
+.project-stats-grid {
+  background: #dcd6cd;
+  border: 1px solid #dcd6cd;
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(var(--project-stats-count, 3), minmax(0, 1fr));
+}
+
+.project-stat {
+  background: #f8f2ea;
+  padding: clamp(24px, 2.6vw, 50px) clamp(20px, 3.36vw, 64px) clamp(26px, 2.9vw, 56px);
+  transition: background 200ms ease;
+}
+
+.project-stat:hover {
+  background: #f7ebdf;
+}
+
+.project-stat strong {
+  color: #fec50d;
+  display: block;
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(40px, 4.3vw, 82px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+  margin-bottom: clamp(14px, 1.6vw, 30px);
+}
+
+.project-stat h3 {
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(15px, 1.07vw, 20px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.2;
+  margin: 0 0 clamp(6px, 0.75vw, 14px);
+}
+
+.project-stat p {
+  color: #414141;
+  font-size: clamp(14px, 0.84vw, 16px);
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  margin: 0;
+  max-width: 92%;
+}
+
+@media (max-width: 640px) {
+  .project-stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-stat p {
+    max-width: none;
+  }
+}
+
+/* Project inner pages: gallery (centred heading, large image with its title,
+   thumbnails of the other images on the right; click a thumbnail to swap). */
+.project-gallery {
+  background: #f8f2ea;
+  color: #111111;
+  padding: clamp(56px, 8.3vw, 160px) clamp(16px, 3.125vw, 60px) clamp(56px, 10.5vw, 200px);
+}
+
+.project-gallery-title {
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(32px, 4vw, 77px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin: 0 0 clamp(28px, 5.3vw, 102px);
+  text-align: center;
+}
+
+.project-gallery-stage {
+  aspect-ratio: 2.03;
+  border-radius: 5px;
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+}
+
+.project-gallery-image {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.project-gallery-image.is-active {
+  opacity: 1;
+}
+
+.project-gallery-shade {
+  background: linear-gradient(20deg, rgb(0 0 0 / 55%) 0%, rgb(0 0 0 / 0%) 45%);
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+.project-gallery-caption {
+  bottom: clamp(20px, 3.8vw, 72px);
+  color: #ffffff;
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(22px, 2.6vw, 50px);
+  font-weight: 400;
+  left: clamp(20px, 4.3vw, 82px);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+  max-width: min(32%, 14ch);
+  position: absolute;
+  z-index: 2;
+}
+
+.project-gallery-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.6vw, 12px);
+  position: absolute;
+  right: 1.75%;
+  top: 22.5%;
+  width: 11.6%;
+  z-index: 2;
+}
+
+.project-gallery-thumb {
+  aspect-ratio: 1.48;
+  background: none;
+  border: clamp(2px, 0.25vw, 4px) solid transparent;
+  cursor: pointer;
+  display: block;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.project-gallery-thumb.is-active {
+  border-color: rgb(255 255 255 / 50%);
+}
+
+.project-gallery-thumb img {
+  object-fit: cover;
+}
+
+.project-gallery-thumb:focus-visible {
+  outline: 2px solid #fec50d;
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .project-gallery-stage {
+    aspect-ratio: 4 / 5;
+  }
+
+  .project-gallery-caption {
+    max-width: 60%;
+  }
+
+  .project-gallery-thumbs {
+    right: 12px;
+    top: 16px;
+    width: 30%;
+  }
+}
+
+/* Latest Developments: whole slide links to the project page when it has one. */
+.project-slide-link {
+  inset: 0;
+  position: absolute;
+  z-index: 3;
+}
+
+.project-slide-link:focus-visible {
+  outline: 3px solid #fec50d;
+  outline-offset: -3px;
+}
+
+/* Project inner pages: motion, in the same spirit as the homepage.
+   Hero image settles from a slight zoom; sections fade up as they scroll in
+   (ScrollReveal adds .is-revealed); the gallery image grows in like the
+   homepage Careers card; intro images zoom a little on hover. */
+.project-hero-image {
+  transform: scale(1.08);
+  transition: transform 1800ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-hero.is-visible .project-hero-image {
+  transform: scale(1);
+}
+
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(60px);
+  transition:
+    opacity 900ms ease var(--reveal-delay, 0ms),
+    transform 900ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms);
+}
+
+.reveal-ready [data-reveal="scale"] {
+  transform: scale(0.92);
+}
+
+.reveal-ready [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+.project-intro-image img {
+  transition: transform 650ms ease;
+}
+
+.project-intro-image:hover img {
+  transform: scale(1.035);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-hero-image,
+  .project-hero.is-visible .project-hero-image,
+  .project-intro-image:hover img {
+    transform: none;
+    transition: none;
+  }
+
+  .reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Project intro: optional external link button under the copy. */
+.project-intro-button {
+  align-items: center;
+  align-self: flex-start;
+  background: #111111;
+  border-radius: 4px;
+  color: #ffffff;
+  display: inline-flex;
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-size: clamp(14px, 1vw, 18px);
+  gap: clamp(10px, 1vw, 16px);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-top: clamp(4px, 0.6vw, 12px);
+  padding: clamp(13px, 1.15vw, 22px) clamp(20px, 2.3vw, 42px);
+  text-decoration: none;
+  transition: background 180ms ease;
+}
+
+.project-intro-button img {
+  height: clamp(12px, 0.9vw, 16px);
+  transform: rotate(-45deg);
+  transition: transform 180ms ease;
+  width: clamp(12px, 0.9vw, 16px);
+}
+
+.project-intro-button:hover,
+.project-intro-button:focus-visible {
+  background: #2a2a2a;
+}
+
+.project-intro-button:hover img,
+.project-intro-button:focus-visible img {
+  transform: rotate(-45deg) translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-intro-button img {
+    transition: none;
+  }
+}
