@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import elevatedPodiumGarden from "../../../assets/groove-page/Elevated Podium Garden.png";
-import exclusiveResidentLounge from "../../../assets/groove-page/Exclusive Resident Lounge.png";
+import dedicatedPrayerHall from "../../../assets/groove-page/Dedicated Prayer Hall.jpg";
+import elevatedDiningExperience from "../../../assets/groove-page/Elevated Dining Experience.jpg";
+import elevatedTerraceGarden from "../../../assets/groove-page/Elevated Terrace Garden.jpg";
+import kidsFunPlayArea from "../../../assets/groove-page/Kids Fun & Play Area.jpg";
+import welcomingResidentLobby from "../../../assets/groove-page/Welcoming Resident Lobby.jpg";
 import groveBedroom from "../../../assets/groove-page/grove-1.jpg";
 import groveDining from "../../../assets/groove-page/grove-2.jpg";
-import modernSpaciousLiving from "../../../assets/groove-page/Modern Spacious Living.png";
+import modernSpaciousLiving from "../../../assets/groove-page/Modern Spacious Living.jpg";
 import groveResidencyImage from "../../../assets/grove-project-image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
@@ -45,13 +48,13 @@ export default function GroveResidencyPage() {
         stats={[
           {
             value: "2026",
-            title: "Operational From",
+            title: "Operational Since",
             text: "A new destination for modern living, thoughtfully designed for tomorrow.",
           },
           {
             value: "1M+",
             title: "Sq. Ft. Total Built-up Area",
-            text: "Expansive spaces designed to bring comfort, convenience community together.",
+            text: "Expansive spaces designed to bring comfort, convenience and community together.",
           },
           {
             value: "3",
@@ -66,8 +69,12 @@ export default function GroveResidencyPage() {
         highlight="Grove"
         slides={[
           { src: modernSpaciousLiving, title: "Modern Spacious Living" },
-          { src: elevatedPodiumGarden, title: "Elevated Podium Garden" },
-          { src: exclusiveResidentLounge, title: "Exclusive Resident Lounge" },
+          { src: elevatedTerraceGarden, title: "Elevated Terrace Garden" },
+          { src: elevatedDiningExperience, title: "Elevated Dining Experience" },
+          { src: welcomingResidentLobby, title: "Welcoming Resident Lobby" },
+          // Non-breaking space keeps "Prayer Hall" on one line in the caption.
+          { src: dedicatedPrayerHall, title: "Dedicated Prayer Hall" },
+          { src: kidsFunPlayArea, title: "Kids Fun & Play Area" },
         ]}
       />
       <SiteFooter />

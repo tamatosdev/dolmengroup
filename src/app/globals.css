@@ -1697,7 +1697,8 @@ a.about-button {
   border-left: 1px solid #dedede;
   border-top: 1px solid #dedede;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* One column per card, up to three (fewer cards fill the row instead of leaving a gap). */
+  grid-template-columns: repeat(var(--updates-count, 3), 1fr);
 }
 
 .latest-update-card {
@@ -4658,6 +4659,8 @@ h2#about-title {
   .site-footer .footer-top {
     align-items: stretch;
     flex-direction: column;
+    /* A wrapping column sizes to its content, not the screen, and overflowed narrow phones. */
+    flex-wrap: nowrap;
   }
 
   .site-footer .newsletter {
@@ -5129,14 +5132,17 @@ h2#about-title {
   z-index: 2;
 }
 
+/* Vertically centred column; sized so up to six thumbnails fit the image height. */
 .project-gallery-thumbs {
   display: flex;
   flex-direction: column;
   gap: clamp(4px, 0.6vw, 12px);
+  max-height: 94%;
   position: absolute;
   right: 1.75%;
-  top: 22.5%;
-  width: 11.6%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10%;
   z-index: 2;
 }
 
@@ -5169,14 +5175,32 @@ h2#about-title {
     aspect-ratio: 4 / 5;
   }
 
+  /* Thumbnails become a swipeable row along the bottom; the caption sits above it. */
   .project-gallery-caption {
-    max-width: 60%;
+    bottom: calc(24px + 22vw / 1.48);
+    max-width: 75%;
   }
 
   .project-gallery-thumbs {
+    bottom: 12px;
+    flex-direction: row;
+    left: 12px;
+    max-height: none;
+    overflow-x: auto;
     right: 12px;
-    top: 16px;
-    width: 30%;
+    scrollbar-width: none;
+    top: auto;
+    transform: none;
+    width: auto;
+  }
+
+  .project-gallery-thumbs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .project-gallery-thumb {
+    flex: 0 0 22vw;
+    width: 22vw;
   }
 }
 

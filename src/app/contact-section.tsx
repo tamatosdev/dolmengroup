@@ -72,7 +72,7 @@ export default function ContactSection() {
         <div className="contact-section-content">
           <h2 id="careers-title">Grow Your{" "}<br />Career At Dolmen</h2>
           <p>
-            Join a team that brings together diverse talent, ideas, and perspectives to create meaningful places, experiences, and opportunities that shape the future of our cities.
+            Join a team that brings together diverse talent, ideas, and perspectives to create meaningful places, experiences and opportunities that shape the future of our cities.
           </p>
           <a className="contact-section-button" href="#careers">
             Explore Careers

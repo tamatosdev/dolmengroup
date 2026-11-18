@@ -3,7 +3,6 @@ import arrowRight from "../../assets/arrow-right.svg";
 import brush from "../../assets/brush.svg";
 import dolmenPopup from "../../assets/dolmen-popup.png";
 import dolmenUnitedPakistan from "../../assets/Dolmen-united-pakistan.png";
-import dolmenFestival from "../../assets/Dolmen-festival.png";
 
 type Update = {
   image: typeof dolmenPopup;
@@ -13,7 +12,6 @@ type Update = {
 const updates: Update[] = [
   { image: dolmenPopup, title: "Dolmen Pop-up" },
   { image: dolmenUnitedPakistan, title: "Dolmen United Pakistan" },
-  { image: dolmenFestival, title: "Dolmen Festival" },
 ];
 
 const updateDescription = "Step into a world of shopping, entertainment, and unforgettable experiences at Dolmen Mall. Join us for our latest event and make the most of your visit.";
@@ -37,7 +35,10 @@ export default function LatestUpdates() {
         </span>
       </h2>
 
-      <div className="latest-updates-grid">
+      <div
+        className="latest-updates-grid"
+        style={{ "--updates-count": Math.min(updates.length, 3) } as React.CSSProperties}
+      >
         {updates.map((update) => (
           <article className="latest-update-card" key={update.title}>
             <Image className="latest-update-image" src={update.image} alt="" />
