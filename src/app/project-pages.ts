@@ -3,6 +3,7 @@ const projectPages: Record<string, string> = {
   "The Grove Residency": "/the-grove-residency/",
   "Grove Residency": "/the-grove-residency/",
   "Grove Residency Karachi": "/the-grove-residency/",
+  "Dolmen City Karachi": "/dolmen-city-karachi/",
   "Dolmen Mall Lahore": "/dolmen-mall-lahore/",
   "Dolmen Mall Clifton": "/dolmen-mall-clifton/",
   "Dolmen Mall Tariq Road": "/dolmen-mall-tariq-road/",
