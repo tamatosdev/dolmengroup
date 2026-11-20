@@ -5276,8 +5276,14 @@ h2#about-title {
 }
 
 @media (max-width: 640px) {
+  /* Wide enough that most of a landscape photo shows, with room left for the
+     caption and the thumbnail row. A single image needs no room for those. */
   .project-gallery-stage {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-gallery-stage.is-single {
+    aspect-ratio: 3 / 2;
   }
 
   /* Thumbnails become a swipeable row along the bottom; the caption sits above it. */

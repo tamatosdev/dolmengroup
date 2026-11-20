@@ -36,7 +36,7 @@ export default function ProjectGallery({ titleLead, highlight, titleTrail, slide
         {titleTrail ? ` ${titleTrail}` : null}
       </h2>
 
-      <div className="project-gallery-stage" data-reveal="scale">
+      <div className={`project-gallery-stage${slides.length === 1 ? " is-single" : ""}`} data-reveal="scale">
         {slides.map((slide, index) => (
           <Image
             className={`project-gallery-image${index === activeIndex ? " is-active" : ""}`}
