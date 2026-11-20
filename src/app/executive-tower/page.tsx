@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import heroImage from "../../../assets/Executive Tower page/hero section tower.png";
 import tallImage from "../../../assets/Executive Tower page/Prime Corporate Business Hub/image 1336 (7).png";
-import galleryImage from "../../../assets/Executive Tower page/Elevated Dining Experience.png";
 import wideImage from "../../../assets/Executive Tower page/Prime Corporate Business Hub/image 1335 (7).png";
+import gallery1 from "../../../assets/Executive Tower page/Elevated Dining Experience/Elevated Dining Experience.png";
+import gallery2 from "../../../assets/Executive Tower page/Elevated Dining Experience/slider.png";
+import gallery3 from "../../../assets/Executive Tower page/Elevated Dining Experience/slider 3.png";
+import gallery4 from "../../../assets/Executive Tower page/Elevated Dining Experience/slider 4.png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -60,9 +63,10 @@ export default function ExecutiveTowerPage() {
         titleLead="Modern Workspace"
         highlight="Solutions"
         slides={[
-          { src: galleryImage, title: "Elevated Dining Experience" },
-          { src: tallImage, title: "Waterfront Tower" },
-          { src: wideImage, title: "Corporate Address" },
+          { src: gallery1, title: "Elevated Dining Experience" },
+          { src: gallery2, title: "Family Entertainment" },
+          { src: gallery3, title: "Premium Retail Galleries" },
+          { src: gallery4, title: "Skylit Grand Atrium" },
           { src: heroImage, title: "Executive Tower Exterior" },
         ]}
       />

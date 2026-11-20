@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import heroImage from "../../../assets/Harbour Front page/hero section Harbour Front.png";
 import tallImage from "../../../assets/Harbour Front page/Prestigious Waterfront Corporate Offices/image 1336 (11).png";
-import galleryImage from "../../../assets/Harbour Front page/Executive Corporate Lounge.png";
 import wideImage from "../../../assets/Harbour Front page/Prestigious Waterfront Corporate Offices/image 1335 (11).png";
+import gallery1 from "../../../assets/Harbour Front page/Prestigious Commercial Address/Executive Corporate Lounge.png";
+import gallery2 from "../../../assets/Harbour Front page/Prestigious Commercial Address/Harbour front (3).png";
+import gallery3 from "../../../assets/Harbour Front page/Prestigious Commercial Address/Harbour front (4).png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -61,10 +63,9 @@ export default function HarbourFrontPage() {
         titleLead="Prestigious Commercial"
         highlight="Address"
         slides={[
-          { src: galleryImage, title: "Executive Corporate Lounge" },
-          { src: tallImage, title: "Waterfront Tower" },
-          { src: wideImage, title: "Clifton Coastline" },
-          { src: heroImage, title: "The Harbour Front Exterior" },
+          { src: gallery1, title: "Executive Corporate Lounge" },
+          { src: gallery2, title: "Waterfront Views" },
+          { src: gallery3, title: "Reception & Waiting Area" },
         ]}
       />
       <SiteFooter />
