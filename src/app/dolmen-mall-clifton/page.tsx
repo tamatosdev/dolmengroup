@@ -58,7 +58,7 @@ export default function DolmenMallCliftonPage() {
           {
             value: "175+",
             title: "Brands & Outlets",
-            text: "A curated mix of international and top local retail, dining entertainment offerings.",
+            text: "A curated mix of international and top local retail, dining and entertainment offerings.",
           },
         ]}
       />
