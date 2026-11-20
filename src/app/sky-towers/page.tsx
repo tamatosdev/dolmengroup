@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import heroImage from "../../../assets/Sky towers page/hero section Sky towers.png";
 import tallImage from "../../../assets/Sky towers page/Architectural Skyline Landmark/image 1336 (10).png";
-import galleryImage from "../../../assets/Sky towers page/Architectural Skyline Landmark.png";
 import wideImage from "../../../assets/Sky towers page/Architectural Skyline Landmark/image 1335 (10).png";
+import gallery1 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (1).png";
+import gallery2 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (2).png";
+import gallery3 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (3).png";
+import gallery4 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (4).png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -62,10 +65,10 @@ export default function SkyTowersPage() {
         titleLead="Dynamic Professional"
         highlight="Environment"
         slides={[
-          { src: galleryImage, title: "Architectural Skyline Landmark" },
-          { src: tallImage, title: "Twin Towers" },
-          { src: wideImage, title: "Corporate Lobby" },
-          { src: heroImage, title: "Sky Towers Exterior" },
+          { src: gallery1, title: "Architectural Skyline Landmark" },
+          { src: gallery2, title: "Grand Entrance Plaza" },
+          { src: gallery3, title: "Secure Lobby Access" },
+          { src: gallery4, title: "Modern Business Lounge" },
         ]}
       />
       <SiteFooter />

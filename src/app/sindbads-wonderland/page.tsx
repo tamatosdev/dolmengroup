@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import heroImage from "../../../assets/Sindbad/hero section Sindbad.png";
 import tallImage from "../../../assets/Sindbad/Ultimate Family Entertainment Zone/image 1336 (9).png";
-import galleryImage from "../../../assets/Sindbad/Indoor Amusement & Play Arena.png";
 import wideImage from "../../../assets/Sindbad/Ultimate Family Entertainment Zone/image 1335 (9).png";
+import gallery1 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (3).png";
+import gallery2 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (4).png";
+import gallery3 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (2).png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -57,10 +59,9 @@ export default function SindbadsWonderlandPage() {
         titleLead="Immersive Adventure"
         highlight="Experience"
         slides={[
-          { src: galleryImage, title: "Indoor Amusement & Play Arena" },
-          { src: tallImage, title: "Family Play Zone" },
-          { src: wideImage, title: "Arcade & Rides" },
-          { src: heroImage, title: "Sindbad’s Wonderland Entrance" },
+          { src: gallery1, title: "Indoor Amusement & Play Arena" },
+          { src: gallery2, title: "Soft Play Zone" },
+          { src: gallery3, title: "Sindbad’s Wonderland Entrance" },
         ]}
       />
       <SiteFooter />
