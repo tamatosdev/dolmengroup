@@ -24,6 +24,7 @@ export default function ExecutiveTowerPage() {
         titleLines={["Executive", "Towers"]}
         description="Executive Tower brings business and ambition together in a distinctive corporate setting overlooking Karachi’s iconic Clifton waterfront."
         image={heroImage}
+        mobileFocus={64}
       />
       <ProjectIntro
         titleLines={["Prime Corporate", "Business"]}

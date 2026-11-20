@@ -24,6 +24,7 @@ export default function DolmenCityKarachiPage() {
         titleLines={["Dolmen City", "Karachi"]}
         description={description}
         image={heroImage}
+        mobileFocus={20}
       />
       <ProjectSplitIntro
         titleLines={["Waterfront Retail &", "Business"]}

@@ -26,6 +26,7 @@ export default function DolmenMallHyderiPage() {
         titleLines={["Dolmen Mall", "Hyderi"]}
         description="Dolmen Mall Hyderi brings shopping, dining and family entertainment together in a welcoming destination close to home."
         image={heroImage}
+        mobileFocus={37}
       />
       <ProjectIntro
         titleLines={["Your Everyday", ""]}

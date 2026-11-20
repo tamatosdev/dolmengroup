@@ -26,6 +26,7 @@ export default function CorporateOfficeBlockPage() {
         titleLines={["Corporate Office", "Block"]}
         description="Corporate Office Block brings professional life and everyday convenience together in a connected workplace within Karachi’s Dolmen City."
         image={heroImage}
+        mobileFocus={18}
       />
       <ProjectIntro
         reverse
