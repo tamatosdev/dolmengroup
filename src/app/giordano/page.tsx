@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import heroImage from "../../../assets/Giordano/hero section Giordano.png";
 import tallImage from "../../../assets/Giordano/Timeless Global Fashion Standard/image 1336 (8).png";
-import galleryImage from "../../../assets/Giordano/Modern Office Lobby & Reception.png";
 import wideImage from "../../../assets/Giordano/Timeless Global Fashion Standard/image 1335 (8).png";
+import gallery1 from "../../../assets/Giordano/Modern Office Lobby & Reception/Giordano (2).png";
+import gallery2 from "../../../assets/Giordano/Modern Office Lobby & Reception/Giordano (3).png";
+import gallery3 from "../../../assets/Giordano/Modern Office Lobby & Reception/Giordano (4).png";
+import gallery4 from "../../../assets/Giordano/Modern Office Lobby & Reception/Giordano (5).png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -62,10 +65,10 @@ export default function GiordanoPage() {
         titleLead="The Giordano"
         highlight="Experience"
         slides={[
-          { src: galleryImage, title: "Modern Retail Experience" },
-          { src: tallImage, title: "Everyday Essentials" },
-          { src: wideImage, title: "Giordano Store" },
-          { src: heroImage, title: "Giordano Storefront" },
+          { src: gallery1, title: "Modern Retail Experience" },
+          { src: gallery2, title: "Giordano Junior" },
+          { src: gallery3, title: "Everyday Essentials" },
+          { src: gallery4, title: "Casual Collections" },
         ]}
       />
       <SiteFooter />

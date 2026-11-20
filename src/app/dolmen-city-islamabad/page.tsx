@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import heroImage from "../../../assets/Dolmen City Islamabad page/hero section.png";
 import tallImage from "../../../assets/Dolmen City Islamabad page/islamabad’s New Luxury Standard/image 1336 (12).png";
-import galleryImage from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse.png";
 import wideImage from "../../../assets/Dolmen City Islamabad page/islamabad’s New Luxury Standard/image 1335 (12).png";
+import gallery1 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Grand Atrium & Concourse.png";
+import gallery2 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (4).png";
+import gallery3 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (5).png";
+import gallery4 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (6).png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -61,10 +64,10 @@ export default function DolmenCityIslamabadPage() {
         titleLead="Inside Islamabad’s New"
         highlight="Landmark"
         slides={[
-          { src: galleryImage, title: "Grand Atrium & Concourse" },
-          { src: tallImage, title: "Residential Towers" },
-          { src: wideImage, title: "Master Planned Community" },
-          { src: heroImage, title: "Dolmen City Islamabad Aerial View" },
+          { src: gallery1, title: "Grand Atrium & Concourse" },
+          { src: gallery2, title: "Master Planned Community" },
+          { src: gallery3, title: "Lifestyle Boulevard" },
+          { src: gallery4, title: "Dolmen Mall Islamabad" },
         ]}
       />
       <SiteFooter />
