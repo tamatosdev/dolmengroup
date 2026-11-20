@@ -16,10 +16,12 @@ type ProjectGalleryProps = {
   /** Optional words after the highlight, e.g. "Connects Here" in "Karachi Connects Here". */
   titleTrail?: string;
   slides: GallerySlide[];
+  /** Hide the title overlay (and its dark shade) on the large image. */
+  hideCaption?: boolean;
 };
 
 /** Project inner page gallery: one large image with its title, every image as a thumbnail. */
-export default function ProjectGallery({ titleLead, highlight, titleTrail, slides }: ProjectGalleryProps) {
+export default function ProjectGallery({ titleLead, highlight, titleTrail, slides, hideCaption = false }: ProjectGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const activeSlide = slides[activeIndex];
 
@@ -46,11 +48,14 @@ export default function ProjectGallery({ titleLead, highlight, titleTrail, slide
             aria-hidden={index !== activeIndex}
           />
         ))}
-        <span className="project-gallery-shade" aria-hidden="true" />
-
-        <p className="project-gallery-caption" aria-live="polite">
-          {activeSlide.title}
-        </p>
+        {hideCaption ? null : (
+          <>
+            <span className="project-gallery-shade" aria-hidden="true" />
+            <p className="project-gallery-caption" aria-live="polite">
+              {activeSlide.title}
+            </p>
+          </>
+        )}
 
         {slides.length > 1 ? (
           <div className="project-gallery-thumbs">
