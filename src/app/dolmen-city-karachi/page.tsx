@@ -8,7 +8,7 @@ import SiteFooter from "../site-footer";
 import SiteHeader from "../site-header";
 
 const description =
-  "A landmark destination where waterfront living meets modern business and lifestyle. Experience Karachi’s finest blend of retail, leisure, and corporate excellence.";
+  "A landmark destination where waterfront living meets modern business and lifestyle. Experience Karachi’s finest blend of retail, leisure and corporate excellence.";
 
 export const metadata: Metadata = {
   title: "Dolmen City Karachi | Dolmen Group",
