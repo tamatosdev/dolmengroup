@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import elevatedDiningExperience from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience.png";
+import elevatedDiningExperience from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/Elevated Dining Experience.png";
+import familyEntertainment from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider.png";
+import retailGalleries from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider 3.png";
+import skylitAtrium from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider 4.png";
 import heroImage from "../../../assets/Dolmen Mall lahore page/hero section image.png";
 import atriumImage from "../../../assets/Dolmen Mall lahore page/Redefining Retail Experience/image 1335.png";
 import diningCourtImage from "../../../assets/Dolmen Mall lahore page/Redefining Retail Experience/image 1336.png";
@@ -74,8 +77,9 @@ export default function DolmenMallLahorePage() {
         highlight="Together"
         slides={[
           { src: elevatedDiningExperience, title: "Elevated Dining Experience" },
-          { src: atriumImage, title: "Skylit Grand Atrium" },
-          { src: diningCourtImage, title: "Signature Dining Court" },
+          { src: familyEntertainment, title: "Family Entertainment" },
+          { src: retailGalleries, title: "Premium Retail Galleries" },
+          { src: skylitAtrium, title: "Skylit Grand Atrium" },
           { src: heroImage, title: "Iconic Architecture" },
         ]}
       />
