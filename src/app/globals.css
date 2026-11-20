@@ -4896,6 +4896,7 @@ h2#about-title {
   .project-hero-title-row.is-measured {
     --hero-desc-gap: clamp(20px, 2.2vw, 44px);
     display: block;
+    padding-top: var(--hero-desc-room, 0px);
     position: relative;
   }
 

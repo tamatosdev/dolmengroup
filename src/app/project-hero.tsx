@@ -50,6 +50,12 @@ export default function ProjectHero({ category, titleLines, description, image }
       const descent = description.getBoundingClientRect().bottom - baselineOf(description);
       const bottom = row.getBoundingClientRect().bottom - baselineOf(lastLine) - descent;
       row.style.setProperty("--hero-desc-bottom", `${bottom}px`);
+
+      // A one-line title can be shorter than the description beside it: make room
+      // above so the description never rises into the category label.
+      const title = row.querySelector("h1");
+      const room = title ? description.offsetHeight + bottom - title.offsetHeight : 0;
+      row.style.setProperty("--hero-desc-room", `${Math.max(0, room)}px`);
     };
     measure();
     const observer = new ResizeObserver(measure);
