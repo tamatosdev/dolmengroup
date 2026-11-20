@@ -6,6 +6,7 @@ import gallery1 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining E
 import gallery2 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Dolmen Mall Clifton (2).png";
 import gallery3 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Dolmen Mall Clifton (3).png";
 import gallery4 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Dolmen Mall Clifton (4).png";
+import gallery5 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Dolmen Mall Clifton (6).png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -65,10 +66,11 @@ export default function DolmenMallCliftonPage() {
         titleLead="Shop, Dine and"
         highlight="Unwind"
         slides={[
-          { src: gallery1, title: "Iconic Night Entrance" },
-          { src: gallery2, title: "Grand Central Atrium" },
-          { src: gallery3, title: "Elevated Dining Experience" },
-          { src: gallery4, title: "Dolmen City Karachi" },
+          { src: gallery1, title: "Iconic Mall Architecture" },
+          { src: gallery2, title: "A World of Shopping" },
+          { src: gallery3, title: "Vibrant Dining Experience" },
+          { src: gallery4, title: "A Landmark Destination" },
+          { src: gallery5, title: "Iconic Exterior View" },
         ]}
       />
       <SiteFooter />
