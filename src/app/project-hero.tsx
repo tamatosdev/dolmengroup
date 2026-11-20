@@ -30,9 +30,26 @@ export default function ProjectHero({ category, titleLines, description, image }
     const lastLine = lastLineRef.current;
     if (!row || !lastLine) return;
 
+    // Y position of the text baseline at the end of an element (its last line).
+    const baselineOf = (element: HTMLElement) => {
+      const marker = document.createElement("span");
+      marker.style.cssText = "display:inline-block;width:0;height:0;vertical-align:baseline";
+      element.appendChild(marker);
+      const y = marker.getBoundingClientRect().top;
+      marker.remove();
+      return y;
+    };
+
     const measure = () => {
       row.style.setProperty("--hero-last-line", `${lastLine.offsetWidth}px`);
       row.classList.add("is-measured");
+
+      // Put the description's last baseline on the title's last baseline.
+      const description = row.querySelector("p");
+      if (!description) return;
+      const descent = description.getBoundingClientRect().bottom - baselineOf(description);
+      const bottom = row.getBoundingClientRect().bottom - baselineOf(lastLine) - descent;
+      row.style.setProperty("--hero-desc-bottom", `${bottom}px`);
     };
     measure();
     const observer = new ResizeObserver(measure);

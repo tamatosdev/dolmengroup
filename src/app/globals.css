@@ -4900,7 +4900,8 @@ h2#about-title {
   }
 
   .project-hero-title-row.is-measured p {
-    bottom: 0;
+    bottom: var(--hero-desc-bottom, 0px);
+    margin-bottom: 0;
     left: calc(var(--hero-last-line) + var(--hero-desc-gap));
     max-width: min(max(300px, 34vw), calc(100% - var(--hero-last-line) - var(--hero-desc-gap)));
     position: absolute;
