@@ -30,6 +30,7 @@ export default function DolmenMallCliftonPage() {
         titleLines={["Dolmen Mall", "Clifton"]}
         description="Dolmen Mall Clifton brings shopping, dining and entertainment together in a landmark destination on Karachi’s vibrant waterfront."
         image={heroImage}
+        mobileFocus={43}
       />
       <ProjectIntro
         reverse

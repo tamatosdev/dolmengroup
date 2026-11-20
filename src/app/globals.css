@@ -4842,6 +4842,18 @@ h2#about-title {
   z-index: 0;
 }
 
+/* Portrait screens (phones, upright tablets) show only a narrow slice of the wide
+   banner: aim it at each page's focus point instead of the centre. */
+@media (max-aspect-ratio: 1/1) {
+  .project-hero-image {
+    object-position: var(--hero-focus-x, 50%) 50%;
+  }
+
+  .contact-banner-image {
+    object-position: 34% 50%;
+  }
+}
+
 .project-hero-content {
   bottom: clamp(32px, 3.9vw, 72px);
   display: flex;
@@ -5276,8 +5288,14 @@ h2#about-title {
 }
 
 @media (max-width: 640px) {
+  /* Wide enough that most of a landscape photo shows, with room left for the
+     caption and the thumbnail row. A single image needs no room for those. */
   .project-gallery-stage {
-    aspect-ratio: 4 / 5;
+    aspect-ratio: 4 / 3;
+  }
+
+  .project-gallery-stage.is-single {
+    aspect-ratio: 3 / 2;
   }
 
   /* Thumbnails become a swipeable row along the bottom; the caption sits above it. */

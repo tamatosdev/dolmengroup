@@ -10,10 +10,13 @@ type ProjectHeroProps = {
   titleLines: string[];
   description: string;
   image: StaticImageData;
+  /** Horizontal focus (0–100) on portrait screens, where only a narrow slice of the
+      wide banner shows: keeps the signage or building in view. Defaults to 50 (centre). */
+  mobileFocus?: number;
 };
 
 /** Full-screen hero for project inner pages. */
-export default function ProjectHero({ category, titleLines, description, image }: ProjectHeroProps) {
+export default function ProjectHero({ category, titleLines, description, image, mobileFocus }: ProjectHeroProps) {
   const [isVisible, setIsVisible] = useState(false);
   const rowRef = useRef<HTMLDivElement>(null);
   const lastLineRef = useRef<HTMLSpanElement>(null);
@@ -74,6 +77,7 @@ export default function ProjectHero({ category, titleLines, description, image }
         priority
         sizes="100vw"
         aria-hidden="true"
+        style={mobileFocus === undefined ? undefined : ({ "--hero-focus-x": `${mobileFocus}%` } as React.CSSProperties)}
       />
       <div className={`project-hero-content${isVisible ? " is-visible" : ""}`}>
         <span className="project-hero-category">{category}</span>

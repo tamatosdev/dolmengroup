@@ -28,6 +28,7 @@ export default function HarbourFrontPage() {
         titleLines={["The Harbour", "Front"]}
         description="The Harbour Front is a modern, 19-story office tower developed by the Dolmen Group along the Clifton coastline in Karachi as part of the landmark Dolmen City Karachi."
         image={heroImage}
+        mobileFocus={57}
       />
       <ProjectIntro
         titleLines={["Prestigious Waterfront", "Corporate"]}

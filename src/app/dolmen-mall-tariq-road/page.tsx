@@ -26,6 +26,7 @@ export default function DolmenMallTariqRoadPage() {
         titleLines={["Dolmen Mall", "Tariq Road"]}
         description="Dolmen Mall Tariq Road brings shopping, dining and family entertainment together in a familiar destination at Karachi’s heart."
         image={heroImage}
+        mobileFocus={46}
       />
       <ProjectIntro
         reverse

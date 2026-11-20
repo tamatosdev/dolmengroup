@@ -29,6 +29,7 @@ export default function DolmenMallLahorePage() {
         titleLines={["Dolmen Mall", "Lahore"]}
         description="Dolmen Mall Lahore brings shopping, dining and entertainment together in a landmark destination designed for the city."
         image={heroImage}
+        mobileFocus={15}
       />
       <ProjectIntro
         reverse
