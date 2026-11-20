@@ -1144,6 +1144,13 @@ a.about-button {
   text-align: center;
 }
 
+/* Phones: the site's 16px gutter, so "Developments" fits on a 320px screen. */
+@media (max-width: 640px) {
+  .latest-developments-title {
+    padding: 56px 16px 32px;
+  }
+}
+
 .project-slides {
   display: grid;
   gap: 24px;
