@@ -79,7 +79,7 @@ export default function DolmenMallLahorePage() {
           { src: elevatedDiningExperience, title: "Elevated Dining Experience" },
           { src: familyEntertainment, title: "Family Entertainment" },
           { src: retailGalleries, title: "Premium Retail Galleries" },
-          { src: skylitAtrium, title: "Skylit Grand Atrium" },
+          { src: skylitAtrium, title: "Skylit Grand Ceiling" },
           { src: heroImage, title: "Iconic Architecture" },
         ]}
       />
