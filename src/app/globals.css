@@ -1144,6 +1144,13 @@ a.about-button {
   text-align: center;
 }
 
+/* Phones: the site's 16px gutter, so "Developments" fits on a 320px screen. */
+@media (max-width: 640px) {
+  .latest-developments-title {
+    padding: 56px 16px 32px;
+  }
+}
+
 .project-slides {
   display: grid;
   gap: 24px;
@@ -4887,6 +4894,26 @@ h2#about-title {
 
 .project-hero-title-row h1 span {
   display: block;
+  width: fit-content;
+}
+
+/* Desktop: once the last title line is measured, the description sits right
+   after it instead of after the widest line. */
+@media (min-width: 769px) {
+  .project-hero-title-row.is-measured {
+    --hero-desc-gap: clamp(20px, 2.2vw, 44px);
+    display: block;
+    padding-top: var(--hero-desc-room, 0px);
+    position: relative;
+  }
+
+  .project-hero-title-row.is-measured p {
+    bottom: var(--hero-desc-bottom, 0px);
+    margin-bottom: 0;
+    left: calc(var(--hero-last-line) + var(--hero-desc-gap));
+    max-width: min(max(300px, 34vw), calc(100% - var(--hero-last-line) - var(--hero-desc-gap)));
+    position: absolute;
+  }
 }
 
 .project-hero-title-row p {
