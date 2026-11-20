@@ -11,14 +11,16 @@ type ProjectIntroProps = {
   paragraphs: string[];
   /** Optional button under the copy, e.g. the project's own website (opens in a new tab). */
   cta?: { label: string; href: string };
-  /** Wide image under the copy (left) and tall image beside it (right). */
-  wideImage: { src: StaticImageData; alt: string };
-  tallImage: { src: StaticImageData; alt: string };
+  /** Wide image under the copy (left) and tall image beside it (right).
+      Leave both out for a centred, text-only intro. */
+  wideImage?: { src: StaticImageData; alt: string };
+  tallImage?: { src: StaticImageData; alt: string };
   /** Put the tall image on the left and the copy on the right (desktop only). */
   reverse?: boolean;
 };
 
-/** Project inner page intro: heading, copy and two images in a two-column layout. */
+/** Project inner page intro: heading, copy and two images in a two-column layout,
+    or centred heading and copy when there are no images. */
 export default function ProjectIntro({
   titleLines,
   highlight,
@@ -29,8 +31,13 @@ export default function ProjectIntro({
   tallImage,
   reverse = false,
 }: ProjectIntroProps) {
+  const textOnly = !wideImage && !tallImage;
+
   return (
-    <section className={`project-intro${reverse ? " is-reversed" : ""}`} aria-labelledby="project-intro-title">
+    <section
+      className={`project-intro${reverse ? " is-reversed" : ""}${textOnly ? " is-text-only" : ""}`}
+      aria-labelledby="project-intro-title"
+    >
       <div className="project-intro-main">
         <h2 className="project-intro-title" id="project-intro-title" data-reveal>
           {titleLines.map((line, index) => (
@@ -63,22 +70,26 @@ export default function ProjectIntro({
           ) : null}
         </div>
 
-        <div
-          className="project-intro-image project-intro-image-wide"
-          data-reveal
-          style={{ "--reveal-delay": "220ms" } as React.CSSProperties}
-        >
-          <Image src={wideImage.src} alt={wideImage.alt} fill sizes="(max-width: 768px) 100vw, 52vw" />
-        </div>
+        {wideImage ? (
+          <div
+            className="project-intro-image project-intro-image-wide"
+            data-reveal
+            style={{ "--reveal-delay": "220ms" } as React.CSSProperties}
+          >
+            <Image src={wideImage.src} alt={wideImage.alt} fill sizes="(max-width: 768px) 100vw, 52vw" />
+          </div>
+        ) : null}
       </div>
 
-      <div
-        className="project-intro-image project-intro-image-tall"
-        data-reveal
-        style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
-      >
-        <Image src={tallImage.src} alt={tallImage.alt} fill sizes="(max-width: 768px) 100vw, 40vw" />
-      </div>
+      {tallImage ? (
+        <div
+          className="project-intro-image project-intro-image-tall"
+          data-reveal
+          style={{ "--reveal-delay": "160ms" } as React.CSSProperties}
+        >
+          <Image src={tallImage.src} alt={tallImage.alt} fill sizes="(max-width: 768px) 100vw, 40vw" />
+        </div>
+      ) : null}
     </section>
   );
 }

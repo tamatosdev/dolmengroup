@@ -4994,6 +4994,22 @@ h2#about-title {
   min-height: 100%;
 }
 
+/* Text only (no images): centred heading and copy, close to the stats below. */
+.project-intro.is-text-only {
+  grid-template-columns: minmax(0, 1fr);
+  padding-bottom: clamp(32px, 3vw, 60px);
+  text-align: center;
+}
+
+.project-intro.is-text-only .project-intro-main {
+  align-items: center;
+}
+
+.project-intro.is-text-only .project-intro-copy {
+  margin-bottom: 0;
+  max-width: min(100%, 780px);
+}
+
 /* Reversed: tall image on the left, heading + copy + wide image on the right. */
 @media (min-width: 769px) {
   .project-intro.is-reversed {

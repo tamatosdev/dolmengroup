@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import heroImage from "../../../assets/Executive Tower page/hero section tower.png";
-import tallImage from "../../../assets/Executive Tower page/Prime Corporate Business Hub/image 1336 (7).png";
-import wideImage from "../../../assets/Executive Tower page/Prime Corporate Business Hub/image 1335 (7).png";
-import gallery1 from "../../../assets/Executive Tower page/Elevated Dining Experience/Elevated Dining Experience.png";
-import gallery2 from "../../../assets/Executive Tower page/Elevated Dining Experience/slider.png";
-import gallery3 from "../../../assets/Executive Tower page/Elevated Dining Experience/slider 3.png";
-import gallery4 from "../../../assets/Executive Tower page/Elevated Dining Experience/slider 4.png";
+import workspaceImage from "../../../assets/Executive Tower page/Modern Workspace Solutions.png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -36,8 +31,6 @@ export default function ExecutiveTowerPage() {
         paragraphs={[
           "An established address for distinguished business. Set against the waterfront, Executive Tower offers a refined corporate environment where businesses benefit from connectivity, convenience and a prominent presence.",
         ]}
-        wideImage={{ src: wideImage, alt: "Executive Tower" }}
-        tallImage={{ src: tallImage, alt: "Executive Tower" }}
       />
       <ProjectStats
         label="Executive Tower at a glance"
@@ -62,13 +55,8 @@ export default function ExecutiveTowerPage() {
       <ProjectGallery
         titleLead="Modern Workspace"
         highlight="Solutions"
-        slides={[
-          { src: gallery1, title: "Elevated Dining Experience" },
-          { src: gallery2, title: "Family Entertainment" },
-          { src: gallery3, title: "Premium Retail Galleries" },
-          { src: gallery4, title: "Skylit Grand Atrium" },
-          { src: heroImage, title: "Executive Tower Exterior" },
-        ]}
+        slides={[{ src: workspaceImage, title: "Modern Workspace Solutions" }]}
+        hideCaption
       />
       <SiteFooter />
       <ScrollReveal />
