@@ -47,7 +47,7 @@ export default function DolmenMallLahorePage() {
           {
             value: "2M+",
             title: "Sq. Ft. Total Built-up Area",
-            text: "A landmark retail destination designed to bring shopping, leisure, lifestyle together.",
+            text: "A landmark retail destination designed to bring shopping, leisure and lifestyle together.",
           },
           {
             value: "800K",
@@ -62,7 +62,7 @@ export default function DolmenMallLahorePage() {
           {
             value: "290+",
             title: "Retail, Dining & Entertainment Outlets",
-            text: "A diverse mix of shopping, dining, entertainment experiences under one roof.",
+            text: "A diverse mix of shopping, dining and entertainment experiences under one roof.",
           },
         ]}
       />
