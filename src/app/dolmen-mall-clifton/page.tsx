@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import heroImage from "../../../assets/Dolmen Mall Clifton page/hero section.png";
 import tallImage from "../../../assets/Dolmen Mall Clifton page/Pakistan’s Pioneering Shopping Destination /image 1336 (4).png";
 import wideImage from "../../../assets/Dolmen Mall Clifton page/Pakistan’s Pioneering Shopping Destination /image 1335 (4).png";
-import gallery1 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Elevated Dining Experience.png";
-import gallery2 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/slider.png";
-import gallery3 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/slider 3.png";
-import gallery4 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/slider 4.png";
-import gallery5 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/hero section.png";
+import gallery1 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Iconic Mall Architecture.png";
+import gallery2 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/A World of Shopping.png";
+import gallery3 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Vibrant Dining Experience.png";
+import gallery4 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/A Landmark Destination.png";
+import gallery5 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Iconic Exterior View.png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -58,7 +58,7 @@ export default function DolmenMallCliftonPage() {
           {
             value: "175+",
             title: "Brands & Outlets",
-            text: "A curated mix of international and top local retail, dining entertainment offerings.",
+            text: "A curated mix of international and top local retail, dining and entertainment offerings.",
           },
         ]}
       />
@@ -66,11 +66,12 @@ export default function DolmenMallCliftonPage() {
         titleLead="Shop, Dine and"
         highlight="Unwind"
         slides={[
-          { src: gallery1, title: "Elevated Dining Experience" },
-          { src: gallery2, title: "Family Entertainment" },
-          { src: gallery3, title: "Premium Retail Galleries" },
-          { src: gallery4, title: "Skylit Grand Atrium" },
-          { src: gallery5, title: "Dolmen Mall Clifton Exterior" },
+          // Slide titles are the image file names.
+          { src: gallery1, title: "Iconic Mall Architecture" },
+          { src: gallery2, title: "A World of Shopping" },
+          { src: gallery3, title: "Vibrant Dining Experience" },
+          { src: gallery4, title: "A Landmark Destination" },
+          { src: gallery5, title: "Iconic Exterior View" },
         ]}
       />
       <SiteFooter />
