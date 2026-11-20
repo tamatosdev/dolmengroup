@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import heroImage from "../../../assets/Corporate Office Block/hero section.png";
 import tallImage from "../../../assets/Corporate Office Block/Elevating Karachi’s Corporate Standard/image 1336 (2).png";
-import galleryImage from "../../../assets/Corporate Office Block/Elevated Dining Experience.png";
 import wideImage from "../../../assets/Corporate Office Block/Elevating Karachi’s Corporate Standard/image 1335 (2).png";
+import gallery1 from "../../../assets/Corporate Office Block/Prestigious Commercial Address/slider 2.png";
+import gallery2 from "../../../assets/Corporate Office Block/Prestigious Commercial Address/slider.png";
+import gallery3 from "../../../assets/Corporate Office Block/Prestigious Commercial Address/slider 3.png";
+import gallery4 from "../../../assets/Corporate Office Block/Prestigious Commercial Address/slider 4.png";
+import gallery5 from "../../../assets/Corporate Office Block/Prestigious Commercial Address/Dolmen Mall Lahore (5).png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -62,10 +66,11 @@ export default function CorporateOfficeBlockPage() {
         titleLead="Where Work Meets"
         highlight="Lifestyle"
         slides={[
-          { src: galleryImage, title: "Elevated Dining Experience" },
-          { src: tallImage, title: "Corporate Lobby" },
-          { src: wideImage, title: "Office Block Exterior" },
-          { src: heroImage, title: "Corporate Office Block Lobby" },
+          { src: gallery1, title: "Elevated Dining Experience" },
+          { src: gallery2, title: "Family Entertainment" },
+          { src: gallery3, title: "Premium Retail Galleries" },
+          { src: gallery4, title: "Skylit Grand Atrium" },
+          { src: gallery5, title: "Iconic Architecture" },
         ]}
       />
       <SiteFooter />
