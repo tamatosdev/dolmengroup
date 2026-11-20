@@ -4994,6 +4994,27 @@ h2#about-title {
   min-height: 100%;
 }
 
+/* Reversed: tall image on the left, heading + copy + wide image on the right. */
+@media (min-width: 769px) {
+  .project-intro.is-reversed {
+    grid-template-columns: minmax(0, 0.76fr) minmax(0, 1fr);
+  }
+
+  .project-intro.is-reversed .project-intro-image-tall {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .project-intro.is-reversed .project-intro-main {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .project-intro.is-reversed .project-intro-copy {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 768px) {
   .project-intro {
     grid-template-columns: 1fr;

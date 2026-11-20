@@ -7,6 +7,7 @@ import arrowDown from "../../assets/arrow-down.svg";
 import { acquireMegaLock, releaseMegaLock } from "./mega-menu-lock";
 import { useIsClient } from "./use-is-client";
 import { useMegaMenuDismiss } from "./use-mega-menu-dismiss";
+import { projectPage } from "./project-pages";
 
 export type MegaCard = {
   image: StaticImageData;
@@ -199,7 +200,7 @@ export default function CardsMegaMenu({
             {cards.map((card) => (
               <a
                 className="our-group-mega-card"
-                href={card.href ?? `#${card.title.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`}
+                href={card.href ?? projectPage(card.title) ?? `#${card.title.toLowerCase().replaceAll(" ", "-").replaceAll("'", "")}`}
                 key={card.title}
                 onClick={() => beginClose()}
               >

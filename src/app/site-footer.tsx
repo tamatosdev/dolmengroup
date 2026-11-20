@@ -118,25 +118,25 @@ export default function SiteFooter() {
 
         <div className="footer-link-group">
           <h2>Malls</h2>
-          <a href="#dolmen-mall-clifton">Dolmen Mall Clifton</a>
-          <a href="#dolmen-mall-lahore">Dolmen Mall Lahore</a>
-          <a href="#dolmen-mall-tariq-road">Dolmen Mall Tariq Road</a>
-          <a href="#dolmen-mall-hyderi">Dolmen Mall Hyderi</a>
+          <Link href="/dolmen-mall-clifton/">Dolmen Mall Clifton</Link>
+          <Link href="/dolmen-mall-lahore/">Dolmen Mall Lahore</Link>
+          <Link href="/dolmen-mall-tariq-road/">Dolmen Mall Tariq Road</Link>
+          <Link href="/dolmen-mall-hyderi/">Dolmen Mall Hyderi</Link>
         </div>
 
         <div className="footer-link-group">
           <h2>Offices</h2>
-          <a href="#the-harbour-front">The Harbour Front</a>
-          <a href="#sky-towers">Sky Towers</a>
-          <a href="#corporate-office-block">Corporate Office Block</a>
-          <a href="#executive-tower">Executive Tower</a>
+          <Link href="/the-harbour-front/">The Harbour Front</Link>
+          <Link href="/sky-towers/">Sky Towers</Link>
+          <Link href="/corporate-office-block/">Corporate Office Block</Link>
+          <Link href="/executive-tower/">Executive Tower</Link>
         </div>
 
         <div className="footer-link-group">
           <h2>Residences</h2>
           <Link href="/the-grove-residency/">The Grove Residency</Link>
           {SHOW_DOLMEN_CITY_ISLAMABAD ? (
-            <a href="#dolmen-city-islamabad">Dolmen City Islamabad</a>
+            <Link href="/dolmen-city-islamabad/">Dolmen City Islamabad</Link>
           ) : null}
         </div>
 
@@ -144,13 +144,13 @@ export default function SiteFooter() {
         <div className="footer-nav-stack">
           <div className="footer-link-group">
             <h2>Entertainment</h2>
-            <a href="#sindbads-wonderland">Sindbad&apos;s Wonderland</a>
+            <Link href="/sindbads-wonderland/">Sindbad&apos;s Wonderland</Link>
           </div>
 
           <div className="footer-link-group">
             <h2>Retail</h2>
-            <a href="#giordano">Giordano</a>
-            <a href="#bala-bala">Bala Bala</a>
+            <Link href="/giordano/">Giordano</Link>
+            <Link href="/bala-bala/">Bala Bala</Link>
           </div>
         </div>
       </nav>
