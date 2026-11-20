@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import heroImage from "../../../assets/Giordano/hero section Giordano.png";
-import tallImage from "../../../assets/Giordano/Timeless Global Fashion Standard/image 1336 (8).png";
-import wideImage from "../../../assets/Giordano/Timeless Global Fashion Standard/image 1335 (8).png";
-import gallery1 from "../../../assets/Giordano/Modern Office Lobby & Reception/Giordano (2).png";
-import gallery2 from "../../../assets/Giordano/Modern Office Lobby & Reception/Giordano (3).png";
-import gallery3 from "../../../assets/Giordano/Modern Office Lobby & Reception/Giordano (4).png";
-import gallery4 from "../../../assets/Giordano/Modern Office Lobby & Reception/Giordano (5).png";
+import experienceImage from "../../../assets/Giordano/The Giordano Experience.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -31,15 +26,12 @@ export default function GiordanoPage() {
         image={heroImage}
       />
       <ProjectIntro
-        reverse
         titleLines={["Timeless Global", "Fashion"]}
         highlight="Standard"
         paragraphs={[
           "Giordano brings a world of premium international fashion to Pakistan, combining timeless style with exceptional quality. Renowned for its superior craftsmanship, contemporary designs and effortless everyday elegance. Offering versatile collections that reflect comfort, sophistication and modern lifestyles.",
           "Through Dolmen, Giordano continues to bring its globally recognized fashion experience to customers across Pakistan.",
         ]}
-        wideImage={{ src: wideImage, alt: "Giordano" }}
-        tallImage={{ src: tallImage, alt: "Giordano" }}
       />
       <ProjectStats
         label="Giordano at a glance"
@@ -64,12 +56,8 @@ export default function GiordanoPage() {
       <ProjectGallery
         titleLead="The Giordano"
         highlight="Experience"
-        slides={[
-          { src: gallery1, title: "Modern Retail Experience" },
-          { src: gallery2, title: "Giordano Junior" },
-          { src: gallery3, title: "Everyday Essentials" },
-          { src: gallery4, title: "Casual Collections" },
-        ]}
+        slides={[{ src: experienceImage, title: "The Giordano Experience" }]}
+        hideCaption
       />
       <SiteFooter />
       <ScrollReveal />
