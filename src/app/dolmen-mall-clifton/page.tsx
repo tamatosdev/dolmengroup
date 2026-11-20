@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import heroImage from "../../../assets/Dolmen Mall Clifton page/hero section.png";
 import tallImage from "../../../assets/Dolmen Mall Clifton page/Pakistan’s Pioneering Shopping Destination /image 1336 (4).png";
 import wideImage from "../../../assets/Dolmen Mall Clifton page/Pakistan’s Pioneering Shopping Destination /image 1335 (4).png";
-import gallery1 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Dolmen Mall Clifton (1).png";
-import gallery2 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Dolmen Mall Clifton (2).png";
-import gallery3 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Dolmen Mall Clifton (3).png";
-import gallery4 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Dolmen Mall Clifton (4).png";
-import gallery5 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Dolmen Mall Clifton (6).png";
+import gallery1 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Iconic Mall Architecture.png";
+import gallery2 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/A World of Shopping.png";
+import gallery3 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Vibrant Dining Experience.png";
+import gallery4 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/A Landmark Destination.png";
+import gallery5 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Iconic Exterior View.png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -66,6 +66,7 @@ export default function DolmenMallCliftonPage() {
         titleLead="Shop, Dine and"
         highlight="Unwind"
         slides={[
+          // Slide titles are the image file names.
           { src: gallery1, title: "Iconic Mall Architecture" },
           { src: gallery2, title: "A World of Shopping" },
           { src: gallery3, title: "Vibrant Dining Experience" },
