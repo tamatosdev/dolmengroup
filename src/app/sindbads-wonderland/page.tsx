@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import heroImage from "../../../assets/Sindbad/hero section Sindbad.png";
-import tallImage from "../../../assets/Sindbad/Ultimate Family Entertainment Zone/image 1336 (9).png";
-import wideImage from "../../../assets/Sindbad/Ultimate Family Entertainment Zone/image 1335 (9).png";
-import gallery1 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (3).png";
-import gallery2 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (4).png";
-import gallery3 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (2).png";
+import heroImage from "../../../assets/Sindbad/hero section Sindbad.jpg";
+import tallImage from "../../../assets/Sindbad/Ultimate Family Entertainment Zone/image 1336 (9).jpg";
+import wideImage from "../../../assets/Sindbad/Ultimate Family Entertainment Zone/image 1335 (9).jpg";
+import gallery1 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (3).jpg";
+import gallery2 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (4).jpg";
+import gallery3 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (2).jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";

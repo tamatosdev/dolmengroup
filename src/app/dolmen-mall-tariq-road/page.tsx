@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import heroImage from "../../../assets/Dolmen Mall Tariq Road/hero section tariq mall.png";
-import tallImage from "../../../assets/Dolmen Mall Tariq Road/Reimagining Traditional Retail Elegance /image 1336 (6).png";
-import wideImage from "../../../assets/Dolmen Mall Tariq Road/Reimagining Traditional Retail Elegance /image 1335 (6).png";
-import galleryImage from "../../../assets/Dolmen Mall Tariq Road/Karachi Connects Here .png";
+import heroImage from "../../../assets/Dolmen Mall Tariq Road/hero section tariq mall.jpg";
+import tallImage from "../../../assets/Dolmen Mall Tariq Road/Reimagining Traditional Retail Elegance /image 1336 (6).jpg";
+import wideImage from "../../../assets/Dolmen Mall Tariq Road/Reimagining Traditional Retail Elegance /image 1335 (6).jpg";
+import galleryImage from "../../../assets/Dolmen Mall Tariq Road/Karachi Connects Here .jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";

@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import elevatedDiningExperience from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/Elevated Dining Experience.png";
-import familyEntertainment from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider.png";
-import retailGalleries from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider 3.png";
-import skylitAtrium from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider 4.png";
-import heroImage from "../../../assets/Dolmen Mall lahore page/hero section image.png";
-import atriumImage from "../../../assets/Dolmen Mall lahore page/Redefining Retail Experience/image 1335.png";
+import elevatedDiningExperience from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/Elevated Dining Experience.jpg";
+import familyEntertainment from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider.jpg";
+import retailGalleries from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider 3.jpg";
+import skylitAtrium from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider 4.jpg";
+import heroImage from "../../../assets/Dolmen Mall lahore page/hero section image.jpg";
+import atriumImage from "../../../assets/Dolmen Mall lahore page/Redefining Retail Experience/image 1335.jpg";
 import diningCourtImage from "../../../assets/Dolmen Mall lahore page/Redefining Retail Experience/image 1336.png";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";

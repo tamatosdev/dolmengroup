@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import heroImage from "../../../assets/Executive Tower page/hero section tower.png";
-import workspaceImage from "../../../assets/Executive Tower page/Modern Workspace Solutions.png";
+import heroImage from "../../../assets/Executive Tower page/hero section tower.jpg";
+import workspaceImage from "../../../assets/Executive Tower page/Modern Workspace Solutions.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";

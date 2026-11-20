@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
-import thumbnail from "../../assets/Dolmanmall-video-thumbnail.png";
+import thumbnail from "../../assets/Dolmanmall-video-thumbnail.jpg";
 
 /** Preview loop length while idle / static. */
 const LOOP_END_SECONDS = 12;

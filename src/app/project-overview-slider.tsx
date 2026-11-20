@@ -6,13 +6,13 @@ import { useEffect, useRef, useState } from "react";
 import arrowRight from "../../assets/arrow-right.svg";
 import sliderArrowNext from "../../assets/slider-arrow-next.png";
 import sliderArrowPrevious from "../../assets/slider-arrow-prev.svg";
-import dolmenCityBackground from "../../assets/Project Overview/Dolmen City bg.png";
+import dolmenCityBackground from "../../assets/Project Overview/Dolmen City bg.jpg";
 import dolmenCityThumbnail from "../../assets/Project Overview/Dolmen City thumbnail.png";
-import skyTowersBackground from "../../assets/Project Overview/Sky Towers bg.png";
+import skyTowersBackground from "../../assets/Project Overview/Sky Towers bg.jpg";
 import skyTowersThumbnail from "../../assets/Project Overview/Sky Towers thumbnail.png";
-import groveResidencyBackground from "../../assets/Project Overview/Grove Residency bg.png";
+import groveResidencyBackground from "../../assets/Project Overview/Grove Residency bg.jpg";
 import groveResidencyThumbnail from "../../assets/Project Overview/Grove Residency thumbnail.png";
-import dolmenMallLahoreBackground from "../../assets/Project Overview/Dolmen Mall Lahore bg.png";
+import dolmenMallLahoreBackground from "../../assets/Project Overview/Dolmen Mall Lahore bg.jpg";
 import dolmenMallLahoreThumbnail from "../../assets/Project Overview/Dolmen Mall Lahore thumbnail.png";
 import { SHOW_EXPLORE_BUTTONS } from "./project-visibility";
 

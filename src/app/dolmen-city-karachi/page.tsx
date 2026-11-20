@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import heroImage from "../../../assets/Dolmen City Karachi/hero section.png";
-import destinationImage from "../../../assets/Dolmen City Karachi/Waterfront Retail & Business Destination.png";
+import heroImage from "../../../assets/Dolmen City Karachi/hero section.jpg";
+import destinationImage from "../../../assets/Dolmen City Karachi/Waterfront Retail & Business Destination.jpg";
 import ProjectHero from "../project-hero";
 import ProjectSplitIntro from "../project-split-intro";
 import ScrollReveal from "../scroll-reveal";

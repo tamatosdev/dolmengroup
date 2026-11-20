@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import heroImage from "../../../assets/Dolmen Mall Hyderi page/hero section hydery.png";
-import tallImage from "../../../assets/Dolmen Mall Hyderi page/Your Everyday Neighborhood Mall /image 1336 (5).png";
-import wideImage from "../../../assets/Dolmen Mall Hyderi page/Your Everyday Neighborhood Mall /image 1335 (5).png";
-import galleryImage from "../../../assets/Dolmen Mall Hyderi page/Elevated Dining Experience/image 1341.png";
+import heroImage from "../../../assets/Dolmen Mall Hyderi page/hero section hydery.jpg";
+import tallImage from "../../../assets/Dolmen Mall Hyderi page/Your Everyday Neighborhood Mall /image 1336 (5).jpg";
+import wideImage from "../../../assets/Dolmen Mall Hyderi page/Your Everyday Neighborhood Mall /image 1335 (5).jpg";
+import galleryImage from "../../../assets/Dolmen Mall Hyderi page/Elevated Dining Experience/image 1341.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";

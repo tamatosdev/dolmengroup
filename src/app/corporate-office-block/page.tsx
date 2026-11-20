@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import heroImage from "../../../assets/Corporate Office Block/hero section.png";
-import tallImage from "../../../assets/Corporate Office Block/Elevating Karachi’s Corporate Standard/image 1336 (2).png";
-import wideImage from "../../../assets/Corporate Office Block/Elevating Karachi’s Corporate Standard/image 1335 (2).png";
-import galleryImage from "../../../assets/Corporate Office Block/Where Work Meets Lifestyle .png";
+import heroImage from "../../../assets/Corporate Office Block/hero section.jpg";
+import tallImage from "../../../assets/Corporate Office Block/Elevating Karachi’s Corporate Standard/image 1336 (2).jpg";
+import wideImage from "../../../assets/Corporate Office Block/Elevating Karachi’s Corporate Standard/image 1335 (2).jpg";
+import galleryImage from "../../../assets/Corporate Office Block/Where Work Meets Lifestyle .jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";

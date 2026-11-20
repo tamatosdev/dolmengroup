@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import heroImage from "../../../assets/Dolmen City Islamabad page/hero section.png";
-import tallImage from "../../../assets/Dolmen City Islamabad page/islamabad’s New Luxury Standard/image 1336 (12).png";
-import wideImage from "../../../assets/Dolmen City Islamabad page/islamabad’s New Luxury Standard/image 1335 (12).png";
-import gallery1 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Grand Atrium & Concourse.png";
-import gallery2 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (4).png";
-import gallery3 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (5).png";
-import gallery4 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (6).png";
+import heroImage from "../../../assets/Dolmen City Islamabad page/hero section.jpg";
+import tallImage from "../../../assets/Dolmen City Islamabad page/islamabad’s New Luxury Standard/image 1336 (12).jpg";
+import wideImage from "../../../assets/Dolmen City Islamabad page/islamabad’s New Luxury Standard/image 1335 (12).jpg";
+import gallery1 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Grand Atrium & Concourse.jpg";
+import gallery2 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (4).jpg";
+import gallery3 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (5).jpg";
+import gallery4 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (6).jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";

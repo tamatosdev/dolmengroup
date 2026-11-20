@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import heroImage from "../../../assets/Bala bala page/hero section.png";
-import tallImage from "../../../assets/Bala bala page/Big Style for Little Adventures/image 1336 (1).png";
+import heroImage from "../../../assets/Bala bala page/hero section.jpg";
+import tallImage from "../../../assets/Bala bala page/Big Style for Little Adventures/image 1336 (1).jpg";
 import galleryImage from "../../../assets/Bala bala page/A New Home for Kids’ Fashion scetion.png";
 import lahoreBranchImage from "../../../assets/Bala bala page/Bala Bala Lahore Branch.jpg";
-import wideImage from "../../../assets/Bala bala page/Big Style for Little Adventures/image 1335 (1).png";
+import wideImage from "../../../assets/Bala bala page/Big Style for Little Adventures/image 1335 (1).jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import heroImage from "../../../assets/Sky towers page/hero section Sky towers.png";
-import tallImage from "../../../assets/Sky towers page/Architectural Skyline Landmark/image 1336 (10).png";
-import wideImage from "../../../assets/Sky towers page/Architectural Skyline Landmark/image 1335 (10).png";
+import heroImage from "../../../assets/Sky towers page/hero section Sky towers.jpg";
+import tallImage from "../../../assets/Sky towers page/Architectural Skyline Landmark/image 1336 (10).jpg";
+import wideImage from "../../../assets/Sky towers page/Architectural Skyline Landmark/image 1335 (10).jpg";
 import gallery1 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (1).png";
-import gallery2 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (2).png";
-import gallery3 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (3).png";
-import gallery4 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (4).png";
+import gallery2 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (2).jpg";
+import gallery3 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (3).jpg";
+import gallery4 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (4).jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";

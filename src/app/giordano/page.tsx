@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import heroImage from "../../../assets/Giordano/hero section Giordano.png";
+import heroImage from "../../../assets/Giordano/hero section Giordano.jpg";
 import experienceImage from "../../../assets/Giordano/The Giordano Experience.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
