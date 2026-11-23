@@ -197,7 +197,6 @@ export default function ProjectMegaMenu() {
                 LINKEDIN
               </a>
             </div>
-            <span className="business-mega-copyright">© 2026 DOLMEN GROUP</span>
           </div>
         </div>,
         document.body,

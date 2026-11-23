@@ -1,5 +1,6 @@
 "use client";
 
+import { useLenis } from "lenis/react";
 import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
 import thumbnail from "../../assets/Dolmanmall-video-thumbnail.jpg";
 
@@ -15,6 +16,7 @@ function PlayIcon() {
 }
 
 export default function DolmenHero() {
+  const lenis = useLenis();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const isExpandedRef = useRef(false);
@@ -249,7 +251,21 @@ export default function DolmenHero() {
         <a
           className="dolmen-hero-scroll"
           href="#about"
-          onClick={(event) => event.stopPropagation()}
+          onClick={(event) => {
+            event.stopPropagation();
+            // Glide to About with the site's smooth scroll; the plain #about link is the fallback.
+            const about = document.getElementById("about");
+            if (lenis && about) {
+              event.preventDefault();
+              // About slides up into place as it reveals (translateY), so measure its layout
+              // position (offsetTop ignores transforms) rather than its current box.
+              let top = 0;
+              for (let node: HTMLElement | null = about; node; node = node.offsetParent as HTMLElement | null) {
+                top += node.offsetTop;
+              }
+              lenis.scrollTo(top, { duration: 1.4 });
+            }
+          }}
         >
           Scroll
         </a>

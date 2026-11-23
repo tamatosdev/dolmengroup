@@ -903,7 +903,7 @@ body.site-loaded .dolmen-hero-stage {
 .dolmen-hero-watch {
   align-items: center;
   backdrop-filter: blur(50px);
-  background: #f8f2ea78;
+  background: #f8f2ea4d;
   border: 0;
   border-radius: 999px;
   color: #ffffff;
@@ -921,7 +921,7 @@ body.site-loaded .dolmen-hero-stage {
 
 .dolmen-hero-watch:hover,
 .dolmen-hero-watch:focus-visible {
-  background: #f8f2ea4d;
+  background: #f8f2ea33;
 }
 
 .dolmen-hero-watch:focus-visible {
@@ -978,7 +978,7 @@ body.site-loaded .dolmen-hero-stage {
 
 .dolmen-hero-scroll {
   backdrop-filter: blur(50px);
-  background: #f8f2ea78;
+  background: #f8f2ea4d;
   border-radius: 5px;
   bottom: 54px;
   color: #ffffff;
@@ -1007,7 +1007,7 @@ body.site-loaded .dolmen-hero-stage {
 
 .dolmen-hero-scroll:hover,
 .dolmen-hero-scroll:focus-visible {
-  background: #f8f2ea4d;
+  background: #f8f2ea33;
 }
 
 .about-section {
@@ -5773,8 +5773,8 @@ h2#about-title {
 }
 
 .career-discover-icon svg {
-  height: clamp(30px, 2.1vw, 40px);
-  width: clamp(30px, 2.1vw, 40px);
+  height: clamp(42px, 3vw, 58px);
+  width: clamp(42px, 3vw, 58px);
 }
 
 .career-discover-area h3 {
