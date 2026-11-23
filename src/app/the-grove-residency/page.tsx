@@ -8,6 +8,7 @@ import groveBedroom from "../../../assets/groove-page/grove-1.jpg";
 import groveDining from "../../../assets/groove-page/grove-2.jpg";
 import modernSpaciousLiving from "../../../assets/groove-page/Modern Spacious Living.jpg";
 import groveResidencyImage from "../../../assets/grove-project-image.jpg";
+import heroMobileImage from "../../../assets/groove-page/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -31,6 +32,7 @@ export default function GroveResidencyPage() {
         titleLines={["The Grove", "Residency"]}
         description="Grove Residency brings contemporary living to life through thoughtfully designed spaces across three distinctive residential towers."
         image={groveResidencyImage}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         titleLines={["Elevated Living at", "The Grove"]}

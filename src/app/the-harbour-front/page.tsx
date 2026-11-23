@@ -5,6 +5,7 @@ import wideImage from "../../../assets/Harbour Front page/Prestigious Waterfront
 import gallery1 from "../../../assets/Harbour Front page/Prestigious Commercial Address/Executive Corporate Lounge.jpg";
 import gallery2 from "../../../assets/Harbour Front page/Prestigious Commercial Address/Harbour front (3).jpg";
 import gallery3 from "../../../assets/Harbour Front page/Prestigious Commercial Address/Harbour front (4).jpg";
+import heroMobileImage from "../../../assets/Harbour Front page/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -28,7 +29,7 @@ export default function HarbourFrontPage() {
         titleLines={["The Harbour", "Front"]}
         description="The Harbour Front is a modern, 19-story office tower developed by the Dolmen Group along the Clifton coastline in Karachi as part of the landmark Dolmen City Karachi."
         image={heroImage}
-        mobileFocus={57}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         titleLines={["Prestigious Waterfront", "Corporate"]}

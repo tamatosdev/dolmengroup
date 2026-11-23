@@ -7,6 +7,7 @@ import heroImage from "../../../assets/Dolmen Mall lahore page/hero section upda
 import architectureImage from "../../../assets/Dolmen Mall lahore page/hero section image.jpg";
 import atriumImage from "../../../assets/Dolmen Mall lahore page/Redefining Retail Experience/image 1335.jpg";
 import diningCourtImage from "../../../assets/Dolmen Mall lahore page/Redefining Retail Experience/image 1336.png";
+import heroMobileImage from "../../../assets/Dolmen Mall lahore page/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -30,7 +31,7 @@ export default function DolmenMallLahorePage() {
         titleLines={["Dolmen Mall", "Lahore"]}
         description="Dolmen Mall Lahore brings shopping, dining and entertainment together in a landmark destination designed for the city."
         image={heroImage}
-        mobileFocus={38}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         reverse

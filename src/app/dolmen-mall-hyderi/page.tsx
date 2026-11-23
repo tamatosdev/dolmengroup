@@ -3,6 +3,7 @@ import heroImage from "../../../assets/Dolmen Mall Hyderi page/hero section hyde
 import tallImage from "../../../assets/Dolmen Mall Hyderi page/Your Everyday Neighborhood Mall /image 1336 (5).jpg";
 import wideImage from "../../../assets/Dolmen Mall Hyderi page/Your Everyday Neighborhood Mall /image 1335 (5).jpg";
 import galleryImage from "../../../assets/Dolmen Mall Hyderi page/Elevated Dining Experience/image 1341.jpg";
+import heroMobileImage from "../../../assets/Dolmen Mall Hyderi page/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -26,7 +27,7 @@ export default function DolmenMallHyderiPage() {
         titleLines={["Dolmen Mall", "Hyderi"]}
         description="Dolmen Mall Hyderi brings shopping, dining and family entertainment together in a welcoming destination close to home."
         image={heroImage}
-        mobileFocus={37}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         titleLines={["Your Everyday", ""]}

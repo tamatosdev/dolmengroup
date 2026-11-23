@@ -4843,12 +4843,9 @@ h2#about-title {
 }
 
 /* Portrait screens (phones, upright tablets) show only a narrow slice of the wide
-   banner: aim it at each page's focus point instead of the centre. */
+   contact banner (it has no mobile version): aim it at the Dolmen Mall sign.
+   Project pages swap in a tall mobile banner instead (ProjectHero mobileImage). */
 @media (max-aspect-ratio: 1/1) {
-  .project-hero-image {
-    object-position: var(--hero-focus-x, 50%) 50%;
-  }
-
   .contact-banner-image {
     object-position: 34% 50%;
   }

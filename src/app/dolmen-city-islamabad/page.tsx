@@ -6,6 +6,7 @@ import gallery1 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & 
 import gallery2 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (4).jpg";
 import gallery3 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (5).jpg";
 import gallery4 from "../../../assets/Dolmen City Islamabad page/Grand Atrium & Concourse/Dolmen City Islamabad (6).jpg";
+import heroMobileImage from "../../../assets/Dolmen City Islamabad page/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -29,6 +30,7 @@ export default function DolmenCityIslamabadPage() {
         titleLines={["Dolmen City", "Islamabad"]}
         description="Dolmen City Islamabad will bring shopping, working, living together in a connected destination envisioned for the capital."
         image={heroImage}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         titleLines={["Islamabad’s New", "Luxury"]}

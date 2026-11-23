@@ -4,6 +4,7 @@ import tallImage from "../../../assets/Bala bala page/Big Style for Little Adven
 import galleryImage from "../../../assets/Bala bala page/A New Home for Kids’ Fashion scetion.png";
 import lahoreBranchImage from "../../../assets/Bala bala page/Bala Bala Lahore Branch.jpg";
 import wideImage from "../../../assets/Bala bala page/Big Style for Little Adventures/image 1335 (1).jpg";
+import heroMobileImage from "../../../assets/Bala bala page/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -27,6 +28,7 @@ export default function BalaBalaPage() {
         titleLines={["Bala Bala"]}
         description="Balabala brings playful style and everyday comfort together in colourful collections designed for growing personalities and little adventures."
         image={heroImage}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         reverse

@@ -1,6 +1,6 @@
 "use client";
 
-import Image, { type StaticImageData } from "next/image";
+import { getImageProps, type StaticImageData } from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 type ProjectHeroProps = {
@@ -9,14 +9,22 @@ type ProjectHeroProps = {
   /** Title lines; each entry renders on its own line on desktop. */
   titleLines: string[];
   description: string;
+  /** Wide banner for landscape screens (desktop, laptop, landscape tablet). */
   image: StaticImageData;
-  /** Horizontal focus (0–100) on portrait screens, where only a narrow slice of the
-      wide banner shows: keeps the signage or building in view. Defaults to 50 (centre). */
-  mobileFocus?: number;
+  /** Tall banner (1080 × 2400) for portrait screens (phones, upright tablets). */
+  mobileImage?: StaticImageData;
 };
 
+/** Portrait screens get the tall mobile banner. */
+const MOBILE_MEDIA = "(max-aspect-ratio: 1/1)";
+
 /** Full-screen hero for project inner pages. */
-export default function ProjectHero({ category, titleLines, description, image, mobileFocus }: ProjectHeroProps) {
+export default function ProjectHero({ category, titleLines, description, image, mobileImage }: ProjectHeroProps) {
+  // Art direction: one <picture>, so each screen downloads only the banner it shows.
+  const common = { alt: "", fill: true, sizes: "100vw", loading: "eager", fetchPriority: "high" } as const;
+  const { props: desktopProps } = getImageProps({ ...common, src: image });
+  const mobileProps = mobileImage ? getImageProps({ ...common, src: mobileImage }).props : null;
+
   const [isVisible, setIsVisible] = useState(false);
   const rowRef = useRef<HTMLDivElement>(null);
   const lastLineRef = useRef<HTMLSpanElement>(null);
@@ -69,16 +77,13 @@ export default function ProjectHero({ category, titleLines, description, image, 
 
   return (
     <section className={`project-hero${isVisible ? " is-visible" : ""}`} aria-labelledby="project-hero-title">
-      <Image
-        className="project-hero-image"
-        src={image}
-        alt=""
-        fill
-        priority
-        sizes="100vw"
-        aria-hidden="true"
-        style={mobileFocus === undefined ? undefined : ({ "--hero-focus-x": `${mobileFocus}%` } as React.CSSProperties)}
-      />
+      <picture>
+        {mobileProps ? (
+          // srcset splits on spaces, and the asset file names contain them: encode the URL.
+          <source media={MOBILE_MEDIA} srcSet={mobileProps.srcSet ?? encodeURI(mobileProps.src)} />
+        ) : null}
+        <img {...desktopProps} alt="" className="project-hero-image" aria-hidden="true" />
+      </picture>
       <div className={`project-hero-content${isVisible ? " is-visible" : ""}`}>
         <span className="project-hero-category">{category}</span>
         <div className="project-hero-title-row" ref={rowRef}>
