@@ -13,7 +13,7 @@ const leadingLinks = [
 ];
 
 const simpleLinks = [
-  { label: "CAREERS", href: "#careers" },
+  { label: "CAREERS", href: "/career/" },
   { label: "CONTACT", href: "/contact/" },
 ];
 

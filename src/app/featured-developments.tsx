@@ -21,20 +21,21 @@ import { SHOW_DOLMEN_CITY_ISLAMABAD } from "./project-visibility";
 type Development = {
   image: typeof dolmenMallClifton;
   title: string;
+  caption: string;
 };
 
 const developments: Development[] = [
-  { image: groveResidency, title: "Grove Residency" },
-  { image: dolmenMallLahore, title: "Dolmen Mall Lahore" },
-  { image: skyTower, title: "Sky Towers" },
-  { image: corporateOfficeBlock, title: "Corporate Office Block" },
-  { image: dolmenMallClifton, title: "Dolmen Mall Clifton" },
-  { image: dolmenMallHyderi, title: "Dolmen Mall Hyderi" },
-  { image: harbourFront, title: "The Harbour Front" },
-  { image: executiveTower, title: "Executive Tower" },
-  { image: dolmenMallTariqRoad, title: "Dolmen Mall Tariq Road" },
+  { image: groveResidency, title: "Grove Residency", caption: "A PLACE CALLED HOME" },
+  { image: dolmenMallLahore, title: "Dolmen Mall Lahore", caption: "DESTINATION OF CHOICE" },
+  { image: skyTower, title: "Sky Towers", caption: "ELEVATED BUSINESS, REDEFINED" },
+  { image: corporateOfficeBlock, title: "Corporate Office Block", caption: "PRESTIGE IN EVERY DETAIL" },
+  { image: dolmenMallClifton, title: "Dolmen Mall Clifton", caption: "REVOLUTIONIZING SHOPPING EXPERIENCE" },
+  { image: dolmenMallHyderi, title: "Dolmen Mall Hyderi", caption: "YOUR NEIGHBORHOOD MALL" },
+  { image: harbourFront, title: "The Harbour Front", caption: "WHERE BUSINESS MEETS THE SEA" },
+  { image: executiveTower, title: "Executive Tower", caption: "THE ADDRESS OF DISTINCTION" },
+  { image: dolmenMallTariqRoad, title: "Dolmen Mall Tariq Road", caption: "AT THE HEART OF KARACHI" },
   ...(SHOW_DOLMEN_CITY_ISLAMABAD
-    ? [{ image: dolmenCityIslamabad, title: "Dolmen City Islamabad" } satisfies Development]
+    ? [{ image: dolmenCityIslamabad, title: "Dolmen City Islamabad", caption: "RESORT STYLE LIVING" } satisfies Development]
     : []),
 ];
 
@@ -98,7 +99,6 @@ export default function FeaturedDevelopments() {
     dragStartX.current = event.clientX;
     setIsDragging(true);
     setDragOffset(0);
-    event.currentTarget.setPointerCapture(event.pointerId);
   };
 
   const onPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -108,8 +108,10 @@ export default function FeaturedDevelopments() {
 
     const delta = event.clientX - dragStartX.current;
 
-    if (Math.abs(delta) > 6) {
+    if (Math.abs(delta) > 6 && !didDrag.current) {
       didDrag.current = true;
+      // Capture only once it is a real drag, so a plain click still reaches the card link.
+      event.currentTarget.setPointerCapture(event.pointerId);
     }
 
     const resistance =
@@ -192,7 +194,12 @@ export default function FeaturedDevelopments() {
           }}
         >
           {developments.map((development) => (
-            <article className="development-card" key={development.title}>
+            <Link
+              className="development-card"
+              href={projectHref(development.title)}
+              key={development.title}
+              draggable={false}
+            >
               <div className="development-card-media">
                 <Image
                   className="development-card-image"
@@ -205,12 +212,13 @@ export default function FeaturedDevelopments() {
               </div>
               <div className="development-card-content">
                 <h3>{development.title}</h3>
-                <Link href={projectHref(development.title)}>
+                <span className="development-card-caption">{development.caption}</span>
+                <span className="development-card-explore">
                   Explore
                   <Image src={arrowRight} alt="" aria-hidden="true" />
-                </Link>
+                </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>

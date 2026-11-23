@@ -225,7 +225,7 @@ export default function CardsMegaMenu({
                 LINKEDIN
               </a>
             </div>
-            {shouldShowCopyright ? <span>© 2026 DOLMEN GROUP</span> : null}
+            <span className={`business-mega-copyright${shouldShowCopyright ? "" : " is-desktop-hidden"}`}>© 2026 DOLMEN GROUP</span>
           </div>
         </div>,
         document.body,

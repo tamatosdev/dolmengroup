@@ -69,3 +69,31 @@ async function postMail(body: string): Promise<MailResult> {
     message: data.message || "Sent successfully.",
   };
 }
+
+/**
+ * Career application: sent as multipart form data so the CV file travels with it.
+ * The form data must include type=career.
+ */
+export async function submitCareer(formData: FormData): Promise<MailResult> {
+  let response: Response;
+
+  try {
+    response = await fetch(MAIL_ENDPOINT, { method: "POST", body: formData });
+  } catch {
+    return { ok: false, error: "Could not reach the server. Please try again." };
+  }
+
+  let data: MailResult | null = null;
+
+  try {
+    data = (await response.json()) as MailResult;
+  } catch {
+    data = null;
+  }
+
+  if (!response.ok || !data?.ok) {
+    return { ok: false, error: data?.error || "Something went wrong. Please try again." };
+  }
+
+  return { ok: true, message: data.message || "Application sent successfully." };
+}

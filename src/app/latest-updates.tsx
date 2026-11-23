@@ -19,9 +19,9 @@ const updates: Update[] = [
     image: groveResidency,
     category: "Residency",
     year: "2026",
-    title: "The Grove Residency",
+    title: "The Grove Residency - Move ins Started",
     description:
-      "Discover refined waterfront residences designed for modern living, privacy, and everyday comfort. Explore architectural spaces crafted to elevate your lifestyle.",
+      "A new chapter begins at The Grove Residency as residents start moving into their homes. A proud milestone as our vision of elevated living becomes a reality.",
     href: "https://groveresidency.com/",
   },
   {
@@ -30,7 +30,7 @@ const updates: Update[] = [
     year: "2026",
     title: "Dolmen Auto Show",
     description:
-      "Experience iconic rides, automotive showcases, and high-energy crowd moments at Dolmen Mall. Explore the latest lineups and plan your visit today.",
+      "Experience the world of automobiles at the Dolmen Auto Show, bringing leading car brands together under one roof. Explore the latest models, discover new innovations and get behind the wheel with exclusive...",
     href: "https://dolmenmalls.com/",
   },
 ];
