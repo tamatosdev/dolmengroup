@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import arrowRight from "../../assets/arrow-right.svg";
 import corporateOfficeBlock from "../../assets/Featured Project/Corporate Office Block.jpg";
 import dolmenCityIslamabad from "../../assets/Development Project/Dolmen City Islamabad.jpg";
@@ -46,14 +46,47 @@ export default function FeaturedDevelopments() {
   const [isDragging, setIsDragging] = useState(false);
   const dragStartX = useRef(0);
   const didDrag = useRef(false);
-  const maxIndex = developments.length - 1;
+  const viewportRef = useRef<HTMLDivElement>(null);
+  // Measured from the real layout: the distance from one card to the next, and how far
+  // the track can move before the last card's right edge meets the viewport's right
+  // edge. The last step is shorter, so the slider stops exactly there (no empty space).
+  const [layout, setLayout] = useState<{ step: number; maxShift: number; view: number } | null>(null);
+  const maxIndex = layout && layout.step > 0 ? Math.ceil(layout.maxShift / layout.step - 0.01) : developments.length - 1;
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const track = viewport?.firstElementChild as HTMLElement | null;
+    if (!viewport || !track) return;
+    const measure = () => {
+      const cards = track.children;
+      if (cards.length < 2) return;
+      const first = cards[0] as HTMLElement;
+      const second = cards[1] as HTMLElement;
+      const last = cards[cards.length - 1] as HTMLElement;
+      // The visible area is the viewport minus its side padding, so the last card stops
+      // as far from the right edge as the first card starts from the left.
+      const style = getComputedStyle(viewport);
+      const view = viewport.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      const step = second.offsetLeft - first.offsetLeft;
+      const maxShift = Math.max(0, last.offsetLeft + last.offsetWidth - first.offsetLeft - view);
+      setLayout({ step, maxShift, view });
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(viewport);
+    observer.observe(track);
+    return () => observer.disconnect();
+  }, []);
+
+  // A resize can lower maxIndex; clamp while rendering instead of correcting state.
+  const index = Math.min(activeIndex, maxIndex);
 
   const move = (direction: number) => {
-    setActiveIndex((currentIndex) => Math.min(maxIndex, Math.max(0, currentIndex + direction)));
+    setActiveIndex(Math.min(maxIndex, Math.max(0, index + direction)));
   };
 
-  const goTo = (index: number) => {
-    setActiveIndex(Math.min(maxIndex, Math.max(0, index)));
+  const goTo = (target: number) => {
+    setActiveIndex(Math.min(maxIndex, Math.max(0, target)));
   };
 
   const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -80,7 +113,7 @@ export default function FeaturedDevelopments() {
     }
 
     const resistance =
-      (activeIndex === 0 && delta > 0) || (activeIndex === maxIndex && delta < 0) ? 0.35 : 1;
+      (index === 0 && delta > 0) || (index === maxIndex && delta < 0) ? 0.35 : 1;
 
     setDragOffset(delta * resistance);
   };
@@ -114,7 +147,7 @@ export default function FeaturedDevelopments() {
             className="featured-developments-arrow is-previous"
             type="button"
             onClick={() => move(-1)}
-            disabled={activeIndex === 0}
+            disabled={index === 0}
             aria-label="Previous development"
           >
             <Image src={arrowRight} alt="" aria-hidden="true" />
@@ -123,7 +156,7 @@ export default function FeaturedDevelopments() {
             className="featured-developments-arrow"
             type="button"
             onClick={() => move(1)}
-            disabled={activeIndex === maxIndex}
+            disabled={index === maxIndex}
             aria-label="Next development"
           >
             <Image src={arrowRight} alt="" aria-hidden="true" />
@@ -132,6 +165,7 @@ export default function FeaturedDevelopments() {
       </div>
 
       <div
+        ref={viewportRef}
         className={`featured-developments-viewport${isDragging ? " is-dragging" : ""}`}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -141,8 +175,12 @@ export default function FeaturedDevelopments() {
         <div
           className="featured-developments-track"
           style={{
-            "--development-index": activeIndex,
+            "--development-index": index,
             "--drag-offset": `${dragOffset}px`,
+            // Once measured, move in exact pixels and never past the last card.
+            transform: layout
+              ? `translateX(${-Math.min(index * layout.step, layout.maxShift) + dragOffset}px)`
+              : undefined,
             transition: isDragging ? "none" : undefined,
           } as CSSProperties}
           onClickCapture={(event) => {
@@ -181,17 +219,20 @@ export default function FeaturedDevelopments() {
         <button
           className="featured-developments-progress-track"
           type="button"
-          aria-label={`Slide ${activeIndex + 1} of ${developments.length}`}
+          aria-label={`Slide ${Math.floor(index) + 1} of ${Math.ceil(maxIndex) + 1}`}
           onClick={(event) => {
             const rect = event.currentTarget.getBoundingClientRect();
             const ratio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
-            goTo(Math.min(maxIndex, Math.floor(ratio * developments.length)));
+            goTo(Math.round(ratio * maxIndex));
           }}
         >
           <span
             className="featured-developments-progress-fill"
             style={{
-              width: `${((activeIndex + 1) / developments.length) * 100}%`,
+              // Share of the whole row that has been seen so far.
+              width: layout
+                ? `${Math.min(100, ((Math.min(index * layout.step, layout.maxShift) + layout.view) / (layout.maxShift + layout.view)) * 100)}%`
+                : `${((index + 1) / developments.length) * 100}%`,
             }}
           />
         </button>
