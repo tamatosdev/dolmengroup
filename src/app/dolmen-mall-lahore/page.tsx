@@ -3,7 +3,8 @@ import elevatedDiningExperience from "../../../assets/Dolmen Mall lahore page/El
 import familyEntertainment from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider.jpg";
 import retailGalleries from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider 3.jpg";
 import skylitAtrium from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider 4.jpg";
-import heroImage from "../../../assets/Dolmen Mall lahore page/hero section image.jpg";
+import heroImage from "../../../assets/Dolmen Mall lahore page/hero section updated.jpg";
+import architectureImage from "../../../assets/Dolmen Mall lahore page/hero section image.jpg";
 import atriumImage from "../../../assets/Dolmen Mall lahore page/Redefining Retail Experience/image 1335.jpg";
 import diningCourtImage from "../../../assets/Dolmen Mall lahore page/Redefining Retail Experience/image 1336.png";
 import ProjectGallery from "../project-gallery";
@@ -29,7 +30,7 @@ export default function DolmenMallLahorePage() {
         titleLines={["Dolmen Mall", "Lahore"]}
         description="Dolmen Mall Lahore brings shopping, dining and entertainment together in a landmark destination designed for the city."
         image={heroImage}
-        mobileFocus={15}
+        mobileFocus={38}
       />
       <ProjectIntro
         reverse
@@ -81,7 +82,7 @@ export default function DolmenMallLahorePage() {
           { src: familyEntertainment, title: "Family Entertainment" },
           { src: retailGalleries, title: "Premium Retail Galleries" },
           { src: skylitAtrium, title: "Skylit Grand Ceiling" },
-          { src: heroImage, title: "Iconic Architecture" },
+          { src: architectureImage, title: "Iconic Architecture" },
         ]}
       />
       <SiteFooter />
