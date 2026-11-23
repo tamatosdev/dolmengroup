@@ -1,20 +1,39 @@
 import Image from "next/image";
 import arrowRight from "../../assets/arrow-right.svg";
 import brush from "../../assets/brush.svg";
-import dolmenPopup from "../../assets/dolmen-popup.png";
-import dolmenUnitedPakistan from "../../assets/Dolmen-united-pakistan.png";
+import dolmenAutoShow from "../../assets/Dolmen Auto Show.jpg";
+import groveResidency from "../../assets/The Grove Residency.jpg";
 
 type Update = {
-  image: typeof dolmenPopup;
+  image: typeof groveResidency;
+  category: string;
+  year: string;
   title: string;
+  description: string;
+  /** External site the "Learn More" button opens (in a new tab). */
+  href: string;
 };
 
 const updates: Update[] = [
-  { image: dolmenPopup, title: "Dolmen Pop-up" },
-  { image: dolmenUnitedPakistan, title: "Dolmen United Pakistan" },
+  {
+    image: groveResidency,
+    category: "Residency",
+    year: "2026",
+    title: "The Grove Residency",
+    description:
+      "Discover refined waterfront residences designed for modern living, privacy, and everyday comfort. Explore architectural spaces crafted to elevate your lifestyle.",
+    href: "https://groveresidency.com/",
+  },
+  {
+    image: dolmenAutoShow,
+    category: "Mall",
+    year: "2026",
+    title: "Dolmen Auto Show",
+    description:
+      "Experience iconic rides, automotive showcases, and high-energy crowd moments at Dolmen Mall. Explore the latest lineups and plan your visit today.",
+    href: "https://dolmenmalls.com/",
+  },
 ];
-
-const updateDescription = "Step into a world of shopping, entertainment, and unforgettable experiences at Dolmen Mall. Join us for our latest event and make the most of your visit.";
 
 export default function LatestUpdates() {
   return (
@@ -41,16 +60,17 @@ export default function LatestUpdates() {
       >
         {updates.map((update) => (
           <article className="latest-update-card" key={update.title}>
-            <Image className="latest-update-image" src={update.image} alt="" />
+            <Image className="latest-update-image" src={update.image} alt={update.title} />
             <div className="latest-update-meta">
-              <span>Mall</span>
-              <span>2026</span>
+              <span>{update.category}</span>
+              <span>{update.year}</span>
             </div>
             <h3>{update.title}</h3>
-            <p>{updateDescription}</p>
-            <a href={`#${update.title.toLowerCase().replaceAll(" ", "-")}`}>
+            <p>{update.description}</p>
+            <a href={update.href} target="_blank" rel="noopener noreferrer">
               Learn More
               <Image src={arrowRight} alt="" aria-hidden="true" />
+              <span className="sr-only"> about {update.title} (opens in a new tab)</span>
             </a>
           </article>
         ))}

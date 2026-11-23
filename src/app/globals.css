@@ -1727,7 +1727,8 @@ a.about-button {
 .latest-update-meta {
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
+  justify-content: flex-start;
   margin-block: 36px;
 }
 
