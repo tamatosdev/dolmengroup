@@ -27,7 +27,6 @@ export default function BalaBalaPage() {
         titleLines={["Bala Bala"]}
         description="Balabala brings playful style and everyday comfort together in colourful collections designed for growing personalities and little adventures."
         image={heroImage}
-        mobileFocus={39}
       />
       <ProjectIntro
         reverse

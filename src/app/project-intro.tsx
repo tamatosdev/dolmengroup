@@ -19,6 +19,14 @@ type ProjectIntroProps = {
   reverse?: boolean;
 };
 
+/** Characters in the longest heading line, so phones can size the heading to keep every line whole. */
+export function longestTitleLine(titleLines: string[], highlight: string, titleAfter?: string) {
+  const lines = titleLines.map((line, index) =>
+    index === titleLines.length - 1 ? [line, highlight, titleAfter].filter(Boolean).join(" ") : line,
+  );
+  return Math.max(...lines.map((line) => line.length));
+}
+
 /** Project inner page intro: heading, copy and two images in a two-column layout,
     or centred heading and copy when there are no images. */
 export default function ProjectIntro({
@@ -39,7 +47,12 @@ export default function ProjectIntro({
       aria-labelledby="project-intro-title"
     >
       <div className="project-intro-main">
-        <h2 className="project-intro-title" id="project-intro-title" data-reveal>
+        <h2
+          className="project-intro-title"
+          id="project-intro-title"
+          data-reveal
+          style={{ "--intro-title-chars": longestTitleLine(titleLines, highlight, titleAfter) } as React.CSSProperties}
+        >
           {titleLines.map((line, index) => (
             <span className="project-intro-line" key={`${index}-${line}`}>
               {line}

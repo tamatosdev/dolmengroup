@@ -1,5 +1,6 @@
 import Image, { type StaticImageData } from "next/image";
 import brush from "../../assets/brush.svg";
+import { longestTitleLine } from "./project-intro";
 
 type ProjectSplitIntroProps = {
   /** Heading lines; `highlight` is appended to the last one with the brush underline. */
@@ -15,7 +16,12 @@ export default function ProjectSplitIntro({ titleLines, highlight, paragraphs, i
   return (
     <section className="project-split" aria-labelledby="project-split-title">
       <div className="project-split-head">
-        <h2 className="project-intro-title" id="project-split-title" data-reveal>
+        <h2
+          className="project-intro-title"
+          id="project-split-title"
+          data-reveal
+          style={{ "--intro-title-chars": longestTitleLine(titleLines, highlight) } as React.CSSProperties}
+        >
           {titleLines.map((line, index) => (
             <span className="project-intro-line" key={`${index}-${line}`}>
               {line}

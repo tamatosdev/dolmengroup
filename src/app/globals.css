@@ -5433,3 +5433,40 @@ h2#about-title {
     transition: none;
   }
 }
+
+/* Project inner pages on phones:
+   - the same 64px between the hero and the intro heading, the stats and the
+     gallery heading, and the gallery (or split image) and the footer;
+   - intro headings keep their lines whole (as in the design), the font shrinking
+     to fit the longest line;
+   - text-only intros (Giordano, Executive Tower) read left-aligned. */
+@media (max-width: 640px) {
+  .project-stats {
+    padding-bottom: 0;
+  }
+
+  .project-gallery {
+    padding-bottom: 64px;
+    padding-top: 64px;
+  }
+
+  .project-split {
+    padding-bottom: 64px;
+  }
+
+  .project-intro-title {
+    font-size: min(36px, calc((100vw - 48px) / (var(--intro-title-chars, 18) * 0.52)));
+  }
+
+  .project-intro-line {
+    white-space: nowrap;
+  }
+
+  .project-intro.is-text-only {
+    text-align: left;
+  }
+
+  .project-intro.is-text-only .project-intro-main {
+    align-items: flex-start;
+  }
+}

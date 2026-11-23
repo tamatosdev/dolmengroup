@@ -33,7 +33,7 @@ export default function DolmenMallLahorePage() {
       />
       <ProjectIntro
         reverse
-        titleLines={["Redefining Retail"]}
+        titleLines={["Redefining Retail", ""]}
         highlight="Experience"
         paragraphs={[
           "Dolmen Mall Lahore is Pakistan’s premier shopping and entertainment destination. Spanning an impressive 2.1 million square feet, this world-class lifestyle hub flawlessly blends modern architecture with top-tier amenities.",
