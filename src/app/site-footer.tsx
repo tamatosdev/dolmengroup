@@ -112,7 +112,7 @@ export default function SiteFooter() {
           <Link href="/#about">About</Link>
           <a href="#reit">REIT</a>
           <Link href="/#updates">Updates</Link>
-          <Link href="/#careers">Careers</Link>
+          <Link href="/career/">Careers</Link>
           <Link href="/contact/">Contact</Link>
         </div>
 

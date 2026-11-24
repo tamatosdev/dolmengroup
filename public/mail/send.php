@@ -56,7 +56,38 @@ function smtp_command($socket, string $command, array $codes): void {
   smtp_expect($socket, $codes);
 }
 
-function send_smtp_mail(array $config, string $subject, string $body, string $replyTo = ''): void {
+/**
+ * Content headers + body for a plain-text message, or multipart/mixed with
+ * one attachment (['name' => ..., 'type' => ..., 'data' => raw bytes]).
+ */
+function build_mime(string $body, ?array $attachment): array {
+  if ($attachment === null) {
+    return [
+      ['MIME-Version: 1.0', 'Content-Type: text/plain; charset=UTF-8', 'Content-Transfer-Encoding: 8bit'],
+      $body,
+    ];
+  }
+
+  $boundary = 'dolmen-' . bin2hex(random_bytes(12));
+  $fileName = str_replace(['"', "\r", "\n"], '', $attachment['name']);
+  $parts = "--{$boundary}\r\n"
+    . "Content-Type: text/plain; charset=UTF-8\r\n"
+    . "Content-Transfer-Encoding: 8bit\r\n\r\n"
+    . $body . "\r\n"
+    . "--{$boundary}\r\n"
+    . 'Content-Type: ' . $attachment['type'] . '; name="' . $fileName . "\"\r\n"
+    . "Content-Transfer-Encoding: base64\r\n"
+    . 'Content-Disposition: attachment; filename="' . $fileName . "\"\r\n\r\n"
+    . chunk_split(base64_encode($attachment['data']), 76, "\r\n")
+    . "--{$boundary}--";
+
+  return [
+    ['MIME-Version: 1.0', 'Content-Type: multipart/mixed; boundary="' . $boundary . '"'],
+    $parts,
+  ];
+}
+
+function send_smtp_mail(array $config, string $subject, string $body, string $replyTo = '', ?array $attachment = null): void {
   $host = $config['smtp_host'];
   $port = (int) $config['smtp_port'];
   $secure = $config['smtp_secure'];
@@ -103,17 +134,17 @@ function send_smtp_mail(array $config, string $subject, string $body, string $re
     'Date: ' . date('r'),
     'From: ' . sprintf('"%s" <%s>', $fromName, $fromEmail),
     'To: ' . sprintf('"%s" <%s>', $toName, $toEmail),
-    'Subject: ' . clean_line($subject),
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=UTF-8',
-    'Content-Transfer-Encoding: 8bit',
+    'Subject: =?UTF-8?B?' . base64_encode(clean_line($subject)) . '?=',
   ];
 
   if ($replyTo !== '') {
     $headers[] = 'Reply-To: ' . clean_line($replyTo);
   }
 
-  $message = implode("\r\n", $headers) . "\r\n\r\n" . str_replace("\n.", "\n..", $body) . "\r\n.";
+  [$mimeHeaders, $mimeBody] = build_mime($body, $attachment);
+  $headers = array_merge($headers, $mimeHeaders);
+
+  $message = implode("\r\n", $headers) . "\r\n\r\n" . str_replace("\n.", "\n..", $mimeBody) . "\r\n.";
   fwrite($socket, $message . "\r\n");
   smtp_expect($socket, [250]);
   smtp_command($socket, 'QUIT', [221]);
@@ -125,21 +156,21 @@ function send_smtp_mail(array $config, string $subject, string $body, string $re
  * password: the domain's SPF record ("a") authorises this server to send
  * as @dolmengroup.com.
  */
-function send_server_mail(array $config, string $subject, string $body, string $replyTo = ''): void {
+function send_server_mail(array $config, string $subject, string $body, string $replyTo = '', ?array $attachment = null): void {
   $fromEmail = clean_line($config['from_email']);
   $fromName = clean_line($config['from_name']);
   $toEmail = clean_line($config['to_email']);
 
   $headers = [
     'From: ' . sprintf('"%s" <%s>', $fromName, $fromEmail),
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=UTF-8',
-    'Content-Transfer-Encoding: 8bit',
   ];
 
   if ($replyTo !== '') {
     $headers[] = 'Reply-To: ' . clean_line($replyTo);
   }
+
+  [$mimeHeaders, $body] = build_mime($body, $attachment);
+  $headers = array_merge($headers, $mimeHeaders);
 
   $encodedSubject = '=?UTF-8?B?' . base64_encode(clean_line($subject)) . '?=';
   $sent = mail($toEmail, $encodedSubject, $body, implode("\r\n", $headers), '-f' . $fromEmail);
@@ -149,13 +180,13 @@ function send_server_mail(array $config, string $subject, string $body, string $
   }
 }
 
-function send_mail(array $config, string $subject, string $body, string $replyTo = ''): void {
+function send_mail(array $config, string $subject, string $body, string $replyTo = '', ?array $attachment = null): void {
   if (empty($config['smtp_pass'])) {
-    send_server_mail($config, $subject, $body, $replyTo);
+    send_server_mail($config, $subject, $body, $replyTo, $attachment);
     return;
   }
 
-  send_smtp_mail($config, $subject, $body, $replyTo);
+  send_smtp_mail($config, $subject, $body, $replyTo, $attachment);
 }
 
 const DUPLICATE_WINDOW_SECONDS = 120;
@@ -214,6 +245,88 @@ try {
     send_mail($config, $subject, $body);
 
     echo json_encode(['ok' => true, 'message' => 'Subscribed successfully.']);
+    exit;
+  }
+
+  if ($type === 'career') {
+    $name = isset($data['name']) ? trim((string) $data['name']) : '';
+    $phone = isset($data['phone']) ? trim((string) $data['phone']) : '';
+    $email = isset($data['email']) ? trim((string) $data['email']) : '';
+    $location = isset($data['location']) ? clean_line((string) $data['location']) : '';
+    $category = isset($data['category']) ? clean_line((string) $data['category']) : '';
+    $coverLetter = isset($data['coverLetter']) ? trim((string) $data['coverLetter']) : '';
+
+    if ($name === '' || $phone === '' || $email === '') {
+      respond_error('Please fill in all required fields.');
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      respond_error('Please enter a valid email address.');
+    }
+
+    if (empty($data['consent'])) {
+      respond_error('Please agree to the Privacy Policy and Recruitment Terms.');
+    }
+
+    $coverLetter = function_exists('mb_substr') ? mb_substr($coverLetter, 0, 1000) : substr($coverLetter, 0, 4000);
+
+    $file = $_FILES['resume'] ?? null;
+    if (!is_array($file) || ($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+      respond_error('Please upload your CV.');
+    }
+    if ($file['error'] === UPLOAD_ERR_INI_SIZE || $file['error'] === UPLOAD_ERR_FORM_SIZE || (int) $file['size'] > 5 * 1024 * 1024) {
+      respond_error('Your CV must be 5 MB or smaller.');
+    }
+    if ($file['error'] !== UPLOAD_ERR_OK || !is_uploaded_file($file['tmp_name'])) {
+      respond_error('Your CV could not be uploaded. Please try again.');
+    }
+
+    $allowedTypes = [
+      'pdf' => 'application/pdf',
+      'doc' => 'application/msword',
+      'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    ];
+    $extension = strtolower(pathinfo((string) $file['name'], PATHINFO_EXTENSION));
+    if (!isset($allowedTypes[$extension])) {
+      respond_error('Please upload your CV as a PDF, DOC or DOCX file.');
+    }
+
+    $fileData = file_get_contents($file['tmp_name']);
+    if ($fileData === false || $fileData === '') {
+      respond_error('Your CV could not be read. Please try again.');
+    }
+
+    $lockPath = claim_submission(['career', $name, $phone, $email, $location, $category, sha1($fileData)]);
+    if ($lockPath === null) {
+      echo json_encode(['ok' => true, 'message' => 'Application sent successfully.']);
+      exit;
+    }
+
+    $safeName = trim((string) preg_replace('/[^A-Za-z0-9 ._-]/', '', pathinfo((string) $file['name'], PATHINFO_FILENAME)));
+    if ($safeName === '') {
+      $safeName = 'CV';
+    }
+
+    $subject = 'Career application' . ($category !== '' ? " — {$category}" : '') . ($location !== '' ? " ({$location})" : '');
+    $body = "New career application from the Dolmen website\n\n"
+      . "Reply to the applicant at: {$email}\n\n"
+      . "Name: {$name}\n"
+      . "Phone: {$phone}\n"
+      . "Email: {$email}\n"
+      . "Location: {$location}\n"
+      . "Position: {$category}\n\n"
+      . "Cover letter:\n" . ($coverLetter !== '' ? $coverLetter : '(none)') . "\n\n"
+      . "CV: attached\n"
+      . "Consent: Agreed to the Privacy Policy and Recruitment Terms\n"
+      . 'Submitted: ' . date('Y-m-d H:i:s');
+
+    send_mail($config, $subject, $body, '', [
+      'name' => $safeName . '.' . $extension,
+      'type' => $allowedTypes[$extension],
+      'data' => $fileData,
+    ]);
+
+    echo json_encode(['ok' => true, 'message' => 'Application sent successfully.']);
     exit;
   }
 

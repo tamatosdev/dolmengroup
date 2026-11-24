@@ -7,6 +7,7 @@ import gallery2 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining E
 import gallery3 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Vibrant Dining Experience.jpg";
 import gallery4 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/A Landmark Destination.jpg";
 import gallery5 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Iconic Exterior View.jpg";
+import heroMobileImage from "../../../assets/Dolmen Mall Clifton page/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -30,7 +31,7 @@ export default function DolmenMallCliftonPage() {
         titleLines={["Dolmen Mall", "Clifton"]}
         description="Dolmen Mall Clifton brings shopping, dining and entertainment together in a landmark destination on Karachi’s vibrant waterfront."
         image={heroImage}
-        mobileFocus={43}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         reverse

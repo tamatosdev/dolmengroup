@@ -22,7 +22,6 @@ type CardsMegaMenuProps = {
   title: string;
   panelId: string;
   cards: MegaCard[];
-  showCopyright?: boolean;
 };
 
 type PanelPosition = {
@@ -37,9 +36,7 @@ export default function CardsMegaMenu({
   title,
   panelId,
   cards,
-  showCopyright,
 }: CardsMegaMenuProps) {
-  const shouldShowCopyright = showCopyright ?? cards.length > 1;
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [panelPosition, setPanelPosition] = useState<PanelPosition | null>(null);
@@ -225,7 +222,6 @@ export default function CardsMegaMenu({
                 LINKEDIN
               </a>
             </div>
-            {shouldShowCopyright ? <span>© 2026 DOLMEN GROUP</span> : null}
           </div>
         </div>,
         document.body,

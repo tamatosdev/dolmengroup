@@ -3,9 +3,11 @@ import elevatedDiningExperience from "../../../assets/Dolmen Mall lahore page/El
 import familyEntertainment from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider.jpg";
 import retailGalleries from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider 3.jpg";
 import skylitAtrium from "../../../assets/Dolmen Mall lahore page/Elevated Dining Experience/slider 4.jpg";
-import heroImage from "../../../assets/Dolmen Mall lahore page/hero section image.jpg";
+import heroImage from "../../../assets/Dolmen Mall lahore page/hero section updated.jpg";
+import architectureImage from "../../../assets/Dolmen Mall lahore page/hero section image.jpg";
 import atriumImage from "../../../assets/Dolmen Mall lahore page/Redefining Retail Experience/image 1335.jpg";
 import diningCourtImage from "../../../assets/Dolmen Mall lahore page/Redefining Retail Experience/image 1336.png";
+import heroMobileImage from "../../../assets/Dolmen Mall lahore page/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -29,11 +31,11 @@ export default function DolmenMallLahorePage() {
         titleLines={["Dolmen Mall", "Lahore"]}
         description="Dolmen Mall Lahore brings shopping, dining and entertainment together in a landmark destination designed for the city."
         image={heroImage}
-        mobileFocus={15}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         reverse
-        titleLines={["Redefining Retail"]}
+        titleLines={["Redefining Retail", ""]}
         highlight="Experience"
         paragraphs={[
           "Dolmen Mall Lahore is Pakistan’s premier shopping and entertainment destination. Spanning an impressive 2.1 million square feet, this world-class lifestyle hub flawlessly blends modern architecture with top-tier amenities.",
@@ -81,7 +83,7 @@ export default function DolmenMallLahorePage() {
           { src: familyEntertainment, title: "Family Entertainment" },
           { src: retailGalleries, title: "Premium Retail Galleries" },
           { src: skylitAtrium, title: "Skylit Grand Ceiling" },
-          { src: heroImage, title: "Iconic Architecture" },
+          { src: architectureImage, title: "Iconic Architecture" },
         ]}
       />
       <SiteFooter />

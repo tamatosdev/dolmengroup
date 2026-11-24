@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import arrowRight from "../../assets/arrow-right.svg";
 import corporateOfficeBlock from "../../assets/Featured Project/Corporate Office Block.jpg";
 import dolmenCityIslamabad from "../../assets/Development Project/Dolmen City Islamabad.jpg";
@@ -21,20 +21,21 @@ import { SHOW_DOLMEN_CITY_ISLAMABAD } from "./project-visibility";
 type Development = {
   image: typeof dolmenMallClifton;
   title: string;
+  caption: string;
 };
 
 const developments: Development[] = [
-  { image: groveResidency, title: "Grove Residency" },
-  { image: dolmenMallLahore, title: "Dolmen Mall Lahore" },
-  { image: skyTower, title: "Sky Towers" },
-  { image: corporateOfficeBlock, title: "Corporate Office Block" },
-  { image: dolmenMallClifton, title: "Dolmen Mall Clifton" },
-  { image: dolmenMallHyderi, title: "Dolmen Mall Hyderi" },
-  { image: harbourFront, title: "The Harbour Front" },
-  { image: executiveTower, title: "Executive Tower" },
-  { image: dolmenMallTariqRoad, title: "Dolmen Mall Tariq Road" },
+  { image: groveResidency, title: "Grove Residency", caption: "A PLACE CALLED HOME" },
+  { image: dolmenMallLahore, title: "Dolmen Mall Lahore", caption: "DESTINATION OF CHOICE" },
+  { image: skyTower, title: "Sky Towers", caption: "ELEVATED BUSINESS, REDEFINED" },
+  { image: corporateOfficeBlock, title: "Corporate Office Block", caption: "PRESTIGE IN EVERY DETAIL" },
+  { image: dolmenMallClifton, title: "Dolmen Mall Clifton", caption: "REVOLUTIONIZING SHOPPING EXPERIENCE" },
+  { image: dolmenMallHyderi, title: "Dolmen Mall Hyderi", caption: "YOUR NEIGHBORHOOD MALL" },
+  { image: harbourFront, title: "The Harbour Front", caption: "WHERE BUSINESS MEETS THE SEA" },
+  { image: executiveTower, title: "Executive Tower", caption: "THE ADDRESS OF DISTINCTION" },
+  { image: dolmenMallTariqRoad, title: "Dolmen Mall Tariq Road", caption: "AT THE HEART OF KARACHI" },
   ...(SHOW_DOLMEN_CITY_ISLAMABAD
-    ? [{ image: dolmenCityIslamabad, title: "Dolmen City Islamabad" } satisfies Development]
+    ? [{ image: dolmenCityIslamabad, title: "Dolmen City Islamabad", caption: "RESORT STYLE LIVING" } satisfies Development]
     : []),
 ];
 
@@ -46,14 +47,47 @@ export default function FeaturedDevelopments() {
   const [isDragging, setIsDragging] = useState(false);
   const dragStartX = useRef(0);
   const didDrag = useRef(false);
-  const maxIndex = developments.length - 1;
+  const viewportRef = useRef<HTMLDivElement>(null);
+  // Measured from the real layout: the distance from one card to the next, and how far
+  // the track can move before the last card's right edge meets the viewport's right
+  // edge. The last step is shorter, so the slider stops exactly there (no empty space).
+  const [layout, setLayout] = useState<{ step: number; maxShift: number; view: number } | null>(null);
+  const maxIndex = layout && layout.step > 0 ? Math.ceil(layout.maxShift / layout.step - 0.01) : developments.length - 1;
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const track = viewport?.firstElementChild as HTMLElement | null;
+    if (!viewport || !track) return;
+    const measure = () => {
+      const cards = track.children;
+      if (cards.length < 2) return;
+      const first = cards[0] as HTMLElement;
+      const second = cards[1] as HTMLElement;
+      const last = cards[cards.length - 1] as HTMLElement;
+      // The visible area is the viewport minus its side padding, so the last card stops
+      // as far from the right edge as the first card starts from the left.
+      const style = getComputedStyle(viewport);
+      const view = viewport.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      const step = second.offsetLeft - first.offsetLeft;
+      const maxShift = Math.max(0, last.offsetLeft + last.offsetWidth - first.offsetLeft - view);
+      setLayout({ step, maxShift, view });
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(viewport);
+    observer.observe(track);
+    return () => observer.disconnect();
+  }, []);
+
+  // A resize can lower maxIndex; clamp while rendering instead of correcting state.
+  const index = Math.min(activeIndex, maxIndex);
 
   const move = (direction: number) => {
-    setActiveIndex((currentIndex) => Math.min(maxIndex, Math.max(0, currentIndex + direction)));
+    setActiveIndex(Math.min(maxIndex, Math.max(0, index + direction)));
   };
 
-  const goTo = (index: number) => {
-    setActiveIndex(Math.min(maxIndex, Math.max(0, index)));
+  const goTo = (target: number) => {
+    setActiveIndex(Math.min(maxIndex, Math.max(0, target)));
   };
 
   const onPointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -65,7 +99,6 @@ export default function FeaturedDevelopments() {
     dragStartX.current = event.clientX;
     setIsDragging(true);
     setDragOffset(0);
-    event.currentTarget.setPointerCapture(event.pointerId);
   };
 
   const onPointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -75,12 +108,14 @@ export default function FeaturedDevelopments() {
 
     const delta = event.clientX - dragStartX.current;
 
-    if (Math.abs(delta) > 6) {
+    if (Math.abs(delta) > 6 && !didDrag.current) {
       didDrag.current = true;
+      // Capture only once it is a real drag, so a plain click still reaches the card link.
+      event.currentTarget.setPointerCapture(event.pointerId);
     }
 
     const resistance =
-      (activeIndex === 0 && delta > 0) || (activeIndex === maxIndex && delta < 0) ? 0.35 : 1;
+      (index === 0 && delta > 0) || (index === maxIndex && delta < 0) ? 0.35 : 1;
 
     setDragOffset(delta * resistance);
   };
@@ -114,7 +149,7 @@ export default function FeaturedDevelopments() {
             className="featured-developments-arrow is-previous"
             type="button"
             onClick={() => move(-1)}
-            disabled={activeIndex === 0}
+            disabled={index === 0}
             aria-label="Previous development"
           >
             <Image src={arrowRight} alt="" aria-hidden="true" />
@@ -123,7 +158,7 @@ export default function FeaturedDevelopments() {
             className="featured-developments-arrow"
             type="button"
             onClick={() => move(1)}
-            disabled={activeIndex === maxIndex}
+            disabled={index === maxIndex}
             aria-label="Next development"
           >
             <Image src={arrowRight} alt="" aria-hidden="true" />
@@ -132,6 +167,7 @@ export default function FeaturedDevelopments() {
       </div>
 
       <div
+        ref={viewportRef}
         className={`featured-developments-viewport${isDragging ? " is-dragging" : ""}`}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
@@ -141,8 +177,12 @@ export default function FeaturedDevelopments() {
         <div
           className="featured-developments-track"
           style={{
-            "--development-index": activeIndex,
+            "--development-index": index,
             "--drag-offset": `${dragOffset}px`,
+            // Once measured, move in exact pixels and never past the last card.
+            transform: layout
+              ? `translateX(${-Math.min(index * layout.step, layout.maxShift) + dragOffset}px)`
+              : undefined,
             transition: isDragging ? "none" : undefined,
           } as CSSProperties}
           onClickCapture={(event) => {
@@ -154,7 +194,12 @@ export default function FeaturedDevelopments() {
           }}
         >
           {developments.map((development) => (
-            <article className="development-card" key={development.title}>
+            <Link
+              className="development-card"
+              href={projectHref(development.title)}
+              key={development.title}
+              draggable={false}
+            >
               <div className="development-card-media">
                 <Image
                   className="development-card-image"
@@ -167,12 +212,13 @@ export default function FeaturedDevelopments() {
               </div>
               <div className="development-card-content">
                 <h3>{development.title}</h3>
-                <Link href={projectHref(development.title)}>
+                <span className="development-card-caption">{development.caption}</span>
+                <span className="development-card-explore">
                   Explore
                   <Image src={arrowRight} alt="" aria-hidden="true" />
-                </Link>
+                </span>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
       </div>
@@ -181,17 +227,20 @@ export default function FeaturedDevelopments() {
         <button
           className="featured-developments-progress-track"
           type="button"
-          aria-label={`Slide ${activeIndex + 1} of ${developments.length}`}
+          aria-label={`Slide ${Math.floor(index) + 1} of ${Math.ceil(maxIndex) + 1}`}
           onClick={(event) => {
             const rect = event.currentTarget.getBoundingClientRect();
             const ratio = Math.min(1, Math.max(0, (event.clientX - rect.left) / rect.width));
-            goTo(Math.min(maxIndex, Math.floor(ratio * developments.length)));
+            goTo(Math.round(ratio * maxIndex));
           }}
         >
           <span
             className="featured-developments-progress-fill"
             style={{
-              width: `${((activeIndex + 1) / developments.length) * 100}%`,
+              // Share of the whole row that has been seen so far.
+              width: layout
+                ? `${Math.min(100, ((Math.min(index * layout.step, layout.maxShift) + layout.view) / (layout.maxShift + layout.view)) * 100)}%`
+                : `${((index + 1) / developments.length) * 100}%`,
             }}
           />
         </button>

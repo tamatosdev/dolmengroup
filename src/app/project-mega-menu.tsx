@@ -63,6 +63,13 @@ const communityProjects = [
 
 const categories: ProjectCategory[] = ["COMMUNITY", "MALLS", "OFFICES", "RESIDENCES"];
 
+const categoryLabels: Record<ProjectCategory, string> = {
+  COMMUNITY: "Community",
+  MALLS: "Malls",
+  OFFICES: "Offices",
+  RESIDENCES: "Residence",
+};
+
 export default function ProjectMegaMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
@@ -157,7 +164,7 @@ export default function ProjectMegaMenu() {
                 {activeCategory === category && (
                   <Image className="business-mega-tab-icon" src={menuIcon} alt="" aria-hidden="true" />
                 )}
-                {category}
+                {categoryLabels[category]}
               </button>
             ))}
           </div>
@@ -190,7 +197,6 @@ export default function ProjectMegaMenu() {
                 LINKEDIN
               </a>
             </div>
-            {visibleProjects.length > 1 ? <span>© 2026 DOLMEN GROUP</span> : null}
           </div>
         </div>,
         document.body,

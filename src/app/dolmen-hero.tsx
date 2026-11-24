@@ -1,10 +1,22 @@
 "use client";
 
+import { useLenis } from "lenis/react";
 import { useEffect, useRef, useState, type KeyboardEvent, type MouseEvent } from "react";
 import thumbnail from "../../assets/Dolmanmall-video-thumbnail.jpg";
 
 /** Preview loop length while idle / static. */
 const LOOP_END_SECONDS = 12;
+
+const VIDEO_SRC = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/dolmen-video-3.mp4?v=hero-fast1`;
+
+/** Give the <video> its source (once). It is left out of the HTML so the large file
+    doesn't compete with the page's CSS and JavaScript on slow connections. */
+function ensureVideoSource(video: HTMLVideoElement) {
+  if (video.getAttribute("src")) return;
+  video.preload = "auto";
+  video.src = VIDEO_SRC;
+  video.load();
+}
 
 function PlayIcon() {
   return (
@@ -15,6 +27,7 @@ function PlayIcon() {
 }
 
 export default function DolmenHero() {
+  const lenis = useLenis();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isExpanded, setIsExpanded] = useState(false);
   const isExpandedRef = useRef(false);
@@ -63,6 +76,7 @@ export default function DolmenHero() {
 
   const playFullVideo = async () => {
     const video = videoRef.current;
+    if (video) ensureVideoSource(video);
     if (!video) {
       return;
     }
@@ -158,7 +172,19 @@ export default function DolmenHero() {
       tryStart();
     }
 
+    // Start the video download only once the page itself has loaded (the poster shows
+    // until then); never wait more than 6s.
+    const attachSource = () => ensureVideoSource(video);
+    const attachTimer = window.setTimeout(attachSource, 6000);
+    if (document.readyState === "complete") {
+      attachSource();
+    } else {
+      window.addEventListener("load", attachSource, { once: true });
+    }
+
     return () => {
+      window.clearTimeout(attachTimer);
+      window.removeEventListener("load", attachSource);
       video.removeEventListener("loadeddata", tryStart);
       video.removeEventListener("canplay", tryStart);
       video.removeEventListener("timeupdate", onTimeUpdate);
@@ -215,11 +241,10 @@ export default function DolmenHero() {
         <video
           ref={videoRef}
           className="dolmen-hero-video"
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/dolmen-video-3.mp4?v=hero-fast1`}
           autoPlay
           muted
           playsInline
-          preload="auto"
+          preload="none"
           poster={`${thumbnail.src}?v=5`}
           aria-hidden="true"
           disablePictureInPicture
@@ -249,7 +274,21 @@ export default function DolmenHero() {
         <a
           className="dolmen-hero-scroll"
           href="#about"
-          onClick={(event) => event.stopPropagation()}
+          onClick={(event) => {
+            event.stopPropagation();
+            // Glide to About with the site's smooth scroll; the plain #about link is the fallback.
+            const about = document.getElementById("about");
+            if (lenis && about) {
+              event.preventDefault();
+              // About slides up into place as it reveals (translateY), so measure its layout
+              // position (offsetTop ignores transforms) rather than its current box.
+              let top = 0;
+              for (let node: HTMLElement | null = about; node; node = node.offsetParent as HTMLElement | null) {
+                top += node.offsetTop;
+              }
+              lenis.scrollTo(top, { duration: 1.4 });
+            }
+          }}
         >
           Scroll
         </a>

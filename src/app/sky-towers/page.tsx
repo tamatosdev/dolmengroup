@@ -6,6 +6,7 @@ import gallery1 from "../../../assets/Sky towers page/Dynamic Professional Envir
 import gallery2 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (2).jpg";
 import gallery3 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (3).jpg";
 import gallery4 from "../../../assets/Sky towers page/Dynamic Professional Environment/Sky towers (4).jpg";
+import heroMobileImage from "../../../assets/Sky towers page/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -29,6 +30,7 @@ export default function SkyTowersPage() {
         titleLines={["Sky", "Towers"]}
         description="Sky Towers brings contemporary workplaces and everyday convenience together in a connected business destination within Karachi’s Dolmen City."
         image={heroImage}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         reverse

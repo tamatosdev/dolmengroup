@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import heroImage from "../../../assets/Giordano/hero section Giordano.jpg";
 import experienceImage from "../../../assets/Giordano/The Giordano Experience.jpg";
+import heroMobileImage from "../../../assets/Giordano/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -24,6 +25,7 @@ export default function GiordanoPage() {
         titleLines={["Giordano"]}
         description="Giordano brings international style and everyday comfort together through versatile essentials designed for modern wardrobes and relaxed living."
         image={heroImage}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         titleLines={["Timeless Global", "Fashion"]}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import heroImage from "../../../assets/Executive Tower page/hero section tower.jpg";
-import workspaceImage from "../../../assets/Executive Tower page/Modern Workspace Solutions.jpg";
+import workspaceImage from "../../../assets/Executive Tower page/update image.png";
+import heroMobileImage from "../../../assets/Executive Tower page/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -24,7 +25,7 @@ export default function ExecutiveTowerPage() {
         titleLines={["Executive", "Towers"]}
         description="Executive Tower brings business and ambition together in a distinctive corporate setting overlooking Karachi’s iconic Clifton waterfront."
         image={heroImage}
-        mobileFocus={64}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         titleLines={["Prime Corporate", "Business"]}

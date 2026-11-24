@@ -3,6 +3,7 @@ import heroImage from "../../../assets/Dolmen Mall Tariq Road/hero section tariq
 import tallImage from "../../../assets/Dolmen Mall Tariq Road/Reimagining Traditional Retail Elegance /image 1336 (6).jpg";
 import wideImage from "../../../assets/Dolmen Mall Tariq Road/Reimagining Traditional Retail Elegance /image 1335 (6).jpg";
 import galleryImage from "../../../assets/Dolmen Mall Tariq Road/Karachi Connects Here .jpg";
+import heroMobileImage from "../../../assets/Dolmen Mall Tariq Road/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -26,7 +27,7 @@ export default function DolmenMallTariqRoadPage() {
         titleLines={["Dolmen Mall", "Tariq Road"]}
         description="Dolmen Mall Tariq Road brings shopping, dining and family entertainment together in a familiar destination at Karachi’s heart."
         image={heroImage}
-        mobileFocus={46}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         reverse

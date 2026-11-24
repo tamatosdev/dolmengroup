@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import arrowRight from "../../assets/arrow-right.svg";
 import careerImage1 from "../../assets/career-image-1.png";
@@ -74,10 +75,10 @@ export default function ContactSection() {
           <p>
             Join a team that brings together diverse talent, ideas, and perspectives to create meaningful places, experiences and opportunities that shape the future of our cities.
           </p>
-          <a className="contact-section-button" href="#careers">
+          <Link className="contact-section-button" href="/career/">
             Explore Careers
             <Image src={arrowRight} alt="" aria-hidden="true" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

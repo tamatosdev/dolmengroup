@@ -117,7 +117,7 @@
   }
 
   .development-card-content p,
-  .development-card-content a,
+  .development-card-content .development-card-explore,
   .project-overview-content p {
     font-size: clamp(12.5px, 1.041667vw, 18px);
   }
@@ -293,7 +293,7 @@ label,
 .newsletter-form input,
 .newsletter-form button,
 .development-card-content p,
-.development-card-content a,
+.development-card-content .development-card-explore,
 .dolmen-number p,
 .latest-update-card p,
 .latest-update-card a,
@@ -328,6 +328,20 @@ label,
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
+}
+
+/* Safety net: if the site's JavaScript stalls (slow network, a stale cached page),
+   never leave visitors on the loader. Normally JS hides it within ~3s. */
+.site-loader {
+  animation: site-loader-failsafe 450ms ease 8s forwards;
+}
+
+@keyframes site-loader-failsafe {
+  to {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
 }
 
 .site-loader-logo {
@@ -891,7 +905,6 @@ body.site-loaded .dolmen-hero-stage {
     transform 1100ms cubic-bezier(0.22, 1, 0.36, 1);
   width: fit-content;
   max-width: min(920px, calc(100vw - 120px));
-  will-change: opacity, transform;
   z-index: 2;
 }
 
@@ -904,8 +917,7 @@ body.site-loaded .dolmen-hero-stage {
 .dolmen-hero-watch {
   align-items: center;
   backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  background: #f8f2ea78;
+  background: #f8f2ea4d;
   border: 0;
   border-radius: 999px;
   color: #ffffff;
@@ -923,7 +935,7 @@ body.site-loaded .dolmen-hero-stage {
 
 .dolmen-hero-watch:hover,
 .dolmen-hero-watch:focus-visible {
-  background: #f8f2ea4d;
+  background: #f8f2ea33;
 }
 
 .dolmen-hero-watch:focus-visible {
@@ -980,8 +992,7 @@ body.site-loaded .dolmen-hero-stage {
 
 .dolmen-hero-scroll {
   backdrop-filter: blur(50px);
-  -webkit-backdrop-filter: blur(50px);
-  background: rgb(20 20 20 / 42%);
+  background: #f8f2ea4d;
   border-radius: 5px;
   bottom: 54px;
   color: #ffffff;
@@ -1010,16 +1021,21 @@ body.site-loaded .dolmen-hero-stage {
 
 .dolmen-hero-scroll:hover,
 .dolmen-hero-scroll:focus-visible {
-  background: rgb(20 20 20 / 58%);
+  background: #f8f2ea33;
 }
 
 .about-section {
   background: #f8f2ea;
   color: #111111;
-  opacity: 0;
   padding: 200px 60px 100px;
-  transform: translateY(200px);
   transition: opacity 900ms ease, transform 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hidden only once JavaScript has armed the scroll reveal (SiteLoader), so the
+   section still shows if the script is slow or fails. */
+.about-section.reveal-armed:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(200px);
 }
 
 .about-section.is-visible {
@@ -1349,7 +1365,7 @@ a.about-button {
   margin: 0;
 }
 
-.development-card-content a {
+.development-card-content .development-card-explore {
   align-items: center;
   color: #f8f2ea;
   display: inline-flex;
@@ -1362,7 +1378,7 @@ a.about-button {
   text-transform: uppercase;
 }
 
-.development-card-content a img {
+.development-card-content .development-card-explore img {
   height: 14px;
   width: 14px;
 }
@@ -1403,7 +1419,7 @@ a.about-button {
   }
 }
 
-.featured-developments-track .development-card-content a {
+.featured-developments-track .development-card-content .development-card-explore {
   border-top: 1px solid #e8e8e8;
   color: #11111199;
   display: flex;
@@ -1415,12 +1431,12 @@ a.about-button {
   transition: color 180ms ease;
 }
 
-.featured-developments-track .development-card-content a:hover,
-.featured-developments-track .development-card-content a:focus-visible {
+.featured-developments-track .development-card-content .development-card-explore:hover,
+.featured-developments-track .development-card-content .development-card-explore:focus-visible {
   color: #111111;
 }
 
-.featured-developments-track .development-card-content a img {
+.featured-developments-track .development-card-content .development-card-explore img {
   /* Shared arrow SVG is yellow; tint it grey to match the label. */
   filter: brightness(0) invert(42%);
 }
@@ -1727,7 +1743,8 @@ a.about-button {
 .latest-update-meta {
   align-items: center;
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
+  justify-content: flex-start;
   margin-block: 36px;
 }
 
@@ -2789,7 +2806,7 @@ article.dolmen-number:hover {
   .featured-developments-header h2, .dolmen-numbers > h2, .dolmen-number strong, .future-marquee-contact h2{
     font-size: 60px;
   }
-.development-card-content p, .development-card-content a{
+.development-card-content p, .development-card-content .development-card-explore{
   font-size: 16px;
 }
 .dolmen-number h3, .latest-update-card h3, .footer-link-group h2, .newsletter h2{
@@ -3265,7 +3282,7 @@ header.site-header {
     font-size: 12px;
 }
 
-.development-card-content a {
+.development-card-content .development-card-explore {
     font-size: 14px;
 }
 
@@ -3380,7 +3397,7 @@ span.future-marquee-item {
 .development-card-content h3 {
   font-size: 20px;
 }
-.development-card-content a {
+.development-card-content .development-card-explore {
   font-size: 14px;
 }
 .about-content {
@@ -3459,7 +3476,7 @@ h2#about-title {
     font-size: 12px;
 }
 
-.development-card-content a {
+.development-card-content .development-card-explore {
     font-size: 14px;
 }
 
@@ -3575,7 +3592,7 @@ h2#about-title {
   font-size: 20px;
 }
 
-.development-card-content a {
+.development-card-content .development-card-explore {
   font-size: 14px;
 }
 
@@ -3742,8 +3759,17 @@ h2#about-title {
     padding: 10px 0 0 !important;
   }
 
-  .business-mega-footer > span:last-child {
-    display: none !important;
+  /* Copyright sits on the left under the social links on mobile. */
+  .business-mega-footer > .business-mega-copyright {
+    display: block !important;
+    text-align: left;
+  }
+
+  /* An unconditional desktop rule gives the tabs a 214px basis; in this column
+     layout that turned into 214px of height around the tab row. */
+  .business-mega-tabs,
+  .project-mega-panel .business-mega-tabs {
+    flex: 0 0 auto !important;
   }
 }
 
@@ -4723,7 +4749,7 @@ h2#about-title {
     height: 50svh;
   }
 
-  .featured-developments-track .development-card-content a {
+  .featured-developments-track .development-card-content .development-card-explore {
     font-size: 14px;
   }
 
@@ -4798,7 +4824,7 @@ h2#about-title {
     font-size: max(15px, 1.146vw);
   }
 
-  .featured-developments-track .development-card-content a {
+  .featured-developments-track .development-card-content .development-card-explore {
     font-size: max(15px, 1.04vw);
   }
 
@@ -4843,12 +4869,9 @@ h2#about-title {
 }
 
 /* Portrait screens (phones, upright tablets) show only a narrow slice of the wide
-   banner: aim it at each page's focus point instead of the centre. */
+   contact banner (it has no mobile version): aim it at the Dolmen Mall sign.
+   Project pages swap in a tall mobile banner instead (ProjectHero mobileImage). */
 @media (max-aspect-ratio: 1/1) {
-  .project-hero-image {
-    object-position: var(--hero-focus-x, 50%) 50%;
-  }
-
   .contact-banner-image {
     object-position: 34% 50%;
   }
@@ -4876,7 +4899,6 @@ h2#about-title {
 .project-hero-category {
   align-self: flex-start;
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   background: rgb(248 242 234 / 28%);
   border-radius: 999px;
   color: #ffffff;
@@ -4897,7 +4919,7 @@ h2#about-title {
   color: #f8f2ea;
   flex: 0 0 auto;
   font-family: "NewBlack", sans-serif;
-  font-size: clamp(56px, 7.6vw, 150px);
+  font-size: clamp(52px, 6.6vw, 128px);
   font-weight: 400;
   letter-spacing: -0.03em;
   line-height: 0.95;
@@ -5431,5 +5453,385 @@ h2#about-title {
 @media (prefers-reduced-motion: reduce) {
   .project-intro-button img {
     transition: none;
+  }
+}
+
+/* Project inner pages on phones:
+   - the same 64px between the hero and the intro heading, the stats and the
+     gallery heading, and the gallery (or split image) and the footer;
+   - intro headings keep their lines whole (as in the design), the font shrinking
+     to fit the longest line;
+   - text-only intros (Giordano, Executive Tower) read left-aligned. */
+@media (max-width: 640px) {
+  .project-stats {
+    padding-bottom: 0;
+  }
+
+  .project-gallery {
+    padding-bottom: 64px;
+    padding-top: 64px;
+  }
+
+  .project-split {
+    padding-bottom: 64px;
+  }
+
+  .project-intro-title {
+    font-size: min(36px, calc((100vw - 48px) / (var(--intro-title-chars, 18) * 0.52)));
+  }
+
+  .project-intro-line {
+    white-space: nowrap;
+  }
+
+  .project-intro.is-text-only {
+    text-align: left;
+  }
+
+  .project-intro.is-text-only .project-intro-main {
+    align-items: flex-start;
+  }
+}
+
+/* Projects mega menu (desktop): title-case category list on the left, taller
+   cards on the right. The footer row keeps its existing styles. */
+@media (min-width: 1025px) {
+  /* Space below the cards equals the space above them; the divider line runs
+     from the panel's top edge down to the footer's border. */
+  .business-mega-panel.project-mega-panel {
+    --mega-pad-top: clamp(23.75px, 1.979167vw, 38px);
+    --mega-footer-h: clamp(60px, 5vw, 96px);
+    gap: clamp(18px, 1.5625vw, 30px);
+    min-height: 0;
+    padding-bottom: calc(var(--mega-footer-h) + var(--mega-pad-top));
+    padding-top: var(--mega-pad-top);
+  }
+
+  .project-mega-panel .business-mega-footer {
+    min-height: var(--mega-footer-h);
+  }
+
+  .project-mega-panel .business-mega-tabs {
+    flex: 0 0 clamp(221px, 18.4375vw, 354px);
+    gap: clamp(18px, 1.5vw, 29px);
+    margin-block: calc(var(--mega-pad-top) * -1);
+    padding: calc(var(--mega-pad-top) + 4px) 28px var(--mega-pad-top) 0;
+  }
+
+  .project-mega-panel .business-mega-tab {
+    font-size: clamp(20px, 1.6667vw, 32px);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: none;
+  }
+
+  .project-mega-panel .business-mega-tab-icon {
+    height: clamp(15px, 1.25vw, 24px);
+    margin-right: clamp(8px, 0.7vw, 13px);
+    width: clamp(15px, 1.25vw, 24px);
+  }
+
+  .project-mega-panel .business-mega-cards {
+    gap: clamp(14px, 1.25vw, 24px);
+  }
+
+  .business-mega-panel.project-mega-panel .business-mega-card {
+    /* Four cards fill the space beside the category list at any desktop width. */
+    --mega-card-w: max(150px, min(315px, calc(19vw - 47px)));
+    aspect-ratio: auto !important;
+    flex: 0 0 var(--mega-card-w) !important;
+    height: calc(var(--mega-card-w) * 1.092) !important;
+    max-height: none !important;
+    max-width: none !important;
+    min-height: 0 !important;
+    min-width: 0 !important;
+    width: var(--mega-card-w) !important;
+  }
+
+  .project-mega-panel .business-mega-card-copy {
+    bottom: clamp(12px, 1.05vw, 20px);
+    left: clamp(14px, 1.25vw, 24px);
+    right: clamp(14px, 1.25vw, 24px);
+  }
+
+  .project-mega-panel .business-mega-card-copy strong {
+    font-size: clamp(16px, 1.25vw, 24px);
+    line-height: 1.1;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1025px) {
+  .business-mega-footer > .business-mega-copyright.is-desktop-hidden {
+    display: none;
+  }
+}
+
+/* Mobile: soft dark overlay on the single image before the footer
+   (project gallery with one image, and the split-intro image). */
+@media (max-width: 768px) {
+  .project-gallery-stage.is-single::after,
+  .project-split-image::after {
+    background: linear-gradient(180deg, rgb(0 0 0 / 10%) 0%, rgb(0 0 0 / 38%) 100%);
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+  }
+}
+
+/* One hero heading size site-wide: Home and Contact match the project pages
+   (.project-hero-title-row h1). */
+@media (min-width: 769px) {
+  .dolmen-hero .dolmen-hero-content h1,
+  .contact-banner .contact-banner-content h1 {
+    font-size: clamp(52px, 6.6vw, 128px);
+  }
+}
+
+@media (max-width: 768px) {
+  .dolmen-hero .dolmen-hero-content h1,
+  .contact-banner .contact-banner-content h1 {
+    font-size: clamp(44px, 12vw, 80px);
+  }
+}
+
+/* Latest updates: descriptions stop at two lines with an ellipsis. */
+.latest-update-card p {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+/* Featured developments: the whole card is the link; caption under the title. */
+.featured-developments-track .development-card {
+  color: inherit;
+  display: block;
+  text-decoration: none;
+}
+
+.featured-developments-track .development-card-content .development-card-caption {
+  color: #11111199;
+  display: block;
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-size: clamp(12px, 0.833vw, 16px);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-top: clamp(6px, 0.5vw, 10px);
+  text-transform: uppercase;
+}
+
+.featured-developments-track .development-card:hover .development-card-explore,
+.featured-developments-track .development-card:focus-visible .development-card-explore {
+  color: #111111;
+}
+
+/* ---------- Careers page ---------- */
+.career-apply {
+  align-items: stretch;
+  background: #f8f2ea;
+  color: #111111;
+  display: grid;
+  gap: clamp(24px, 2.6vw, 50px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: clamp(80px, 13vw, 250px) clamp(16px, 3.125vw, 60px) 0;
+}
+
+/* Image column matches the form's height. */
+.career-apply-media {
+  border-radius: 5px;
+  height: 100%;
+  min-height: 420px;
+  overflow: hidden;
+  position: relative;
+}
+
+.career-apply-media img {
+  object-fit: cover;
+}
+
+.career-form {
+  gap: clamp(16px, 1.25vw, 24px);
+}
+
+.career-form .contact-talk-field textarea {
+  min-height: clamp(96px, 6.5vw, 125px);
+}
+
+.career-upload {
+  align-items: center;
+  background: #efe5d6;
+  border: 1px dashed #d6c8b2;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  gap: 14px;
+  padding: clamp(16px, 1.4vw, 26px) 18px;
+  position: relative;
+  transition: border-color 180ms ease, background 180ms ease;
+}
+
+.career-upload:hover,
+.career-upload:focus-within {
+  border-color: #111111;
+}
+
+.career-upload.has-file {
+  border-style: solid;
+}
+
+.career-upload-input {
+  cursor: pointer;
+  inset: 0;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+}
+
+.career-upload-icon {
+  color: #e0a800;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+.contact-talk-field .career-upload-text {
+  display: flex;
+  flex-direction: column;
+  font-size: inherit;
+  gap: 4px;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.career-upload-text strong {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.career-upload-text small {
+  color: #8a8a8a;
+  font-size: 13px;
+  letter-spacing: -0.01em;
+}
+
+.career-cover {
+  position: relative;
+}
+
+.career-cover textarea {
+  padding-bottom: 36px;
+}
+
+.career-cover-count {
+  bottom: 12px;
+  color: #9a958d;
+  font-size: 13px;
+  pointer-events: none;
+  position: absolute;
+  right: 16px;
+}
+
+.career-discover {
+  align-items: start;
+  background: #f8f2ea;
+  color: #111111;
+  display: grid;
+  gap: clamp(32px, 4vw, 80px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: clamp(80px, 12vw, 236px) clamp(16px, 3.125vw, 60px) clamp(80px, 10.4vw, 200px);
+}
+
+.career-discover-intro h2 {
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(36px, 4.45vw, 86px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 clamp(18px, 1.6vw, 30px);
+}
+
+.career-discover-intro p,
+.career-discover-area p {
+  color: #414141;
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-size: clamp(14px, 0.94vw, 18px);
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.career-discover-intro p {
+  max-width: 680px;
+}
+
+.career-discover-areas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding-top: clamp(0px, 0.6vw, 12px);
+}
+
+.career-discover-area {
+  padding: 0 clamp(16px, 2.6vw, 50px);
+}
+
+.career-discover-area + .career-discover-area {
+  border-left: 1px solid #d6d0c8;
+}
+
+.career-discover-icon {
+  color: #fec50d;
+  display: inline-flex;
+  margin-bottom: clamp(18px, 1.6vw, 30px);
+}
+
+.career-discover-icon svg {
+  height: clamp(42px, 3vw, 58px);
+  width: clamp(42px, 3vw, 58px);
+}
+
+.career-discover-area h3 {
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(16px, 1.25vw, 24px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0 0 clamp(12px, 1vw, 18px);
+  text-transform: uppercase;
+}
+
+@media (max-width: 1024px) {
+  .career-apply,
+  .career-discover {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .career-apply-media {
+    aspect-ratio: 16 / 11;
+    height: auto;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .career-discover-areas {
+    gap: 32px;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .career-discover-area {
+    padding: 0;
+  }
+
+  .career-discover-area + .career-discover-area {
+    border-left: 0;
+    border-top: 1px solid #d6d0c8;
+    padding-top: 32px;
   }
 }

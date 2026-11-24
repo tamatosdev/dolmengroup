@@ -5,6 +5,7 @@ import wideImage from "../../../assets/Sindbad/Ultimate Family Entertainment Zon
 import gallery1 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (3).jpg";
 import gallery2 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (4).jpg";
 import gallery3 from "../../../assets/Sindbad/Immersive Adventure Experience/Sindbad (2).jpg";
+import heroMobileImage from "../../../assets/Sindbad/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
@@ -28,6 +29,7 @@ export default function SindbadsWonderlandPage() {
         titleLines={["Sindbad’s", "Wonderland"]}
         description="Sindbad’s Wonderland brings play, discovery and family excitement together in a lively destination made for shared adventures."
         image={heroImage}
+        mobileImage={heroMobileImage}
       />
       <ProjectIntro
         titleLines={["Ultimate Family", ""]}
