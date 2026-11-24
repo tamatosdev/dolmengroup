@@ -1,0 +1,12 @@
+# Copied into the static build (out/) and uploaded with it to the LiteSpeed host.
+#
+# Without a Cache-Control header, browsers cache pages by guesswork, sometimes for
+# days. After a new upload such a stale page still asks for the old /_next/static
+# files, which no longer exist, so the site's JavaScript never starts: the loader
+# hangs and sections that reveal on scroll stay hidden until a manual reload.
+# Pages and their data (.txt) must therefore always be revalidated.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|txt)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>

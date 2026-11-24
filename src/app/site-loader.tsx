@@ -20,12 +20,20 @@ export default function SiteLoader() {
               observer.unobserve(aboutSection);
             }
           },
-          { threshold: 0.15 },
+          // Viewport-based, not a share of the (very tall) section: a 15% threshold of
+          // ~1800px never fits a short screen, leaving About hidden for good.
+          { threshold: 0, rootMargin: "0px 0px -15% 0px" },
         )
       : undefined;
 
     if (aboutSection && aboutObserver) {
-      aboutObserver.observe(aboutSection);
+      // Already scrolled past it (e.g. a restored scroll position): just show it.
+      if (aboutSection.getBoundingClientRect().bottom < 0) {
+        aboutSection.classList.add("is-visible");
+      } else {
+        aboutSection.classList.add("reveal-armed");
+        aboutObserver.observe(aboutSection);
+      }
     }
 
     const finishLoading = () => {
