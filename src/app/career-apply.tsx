@@ -1,10 +1,11 @@
 "use client";
 
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from "react";
 import arrowDown from "../../assets/arrow-down.svg";
 import arrowRight from "../../assets/arrow-right.svg";
-import careerImage from "../../assets/career page/career.png";
+import careerImage from "../../assets/career page/form section image.jpg";
+import careerMobileImage from "../../assets/career page/form section mobile image.jpg";
 import { submitCareer } from "./submit-mail";
 
 const locationOptions = ["Karachi", "Lahore", "Islamabad"];
@@ -231,6 +232,21 @@ function CareerForm() {
   );
 }
 
+/** Below this width the image column becomes a 16:11 strip above the form, with its own crop. */
+const MOBILE_MEDIA = "(max-width: 1024px)";
+
+function CareerApplyPicture() {
+  const alt = "Sky Towers glass facades seen from below";
+  const { props: mobileProps } = getImageProps({ src: careerMobileImage, alt, fill: true, sizes: "100vw" });
+  const { props: desktopProps } = getImageProps({ src: careerImage, alt, fill: true, sizes: "50vw" });
+  return (
+    <picture>
+      <source media={MOBILE_MEDIA} srcSet={mobileProps.srcSet ?? encodeURI(mobileProps.src)} />
+      <img {...desktopProps} alt={alt} />
+    </picture>
+  );
+}
+
 export default function CareerApply() {
   // Mount the form after hydration so password-manager extensions cannot alter SSR HTML.
   const [formReady, setFormReady] = useState(false);
@@ -242,7 +258,7 @@ export default function CareerApply() {
   return (
     <section className="career-apply" id="apply" aria-label="Apply to Dolmen Group">
       <div className="career-apply-media" data-reveal="scale">
-        <Image src={careerImage} alt="Dolmen Mall atrium" fill sizes="(max-width: 1024px) 100vw, 50vw" />
+        <CareerApplyPicture />
       </div>
       {formReady ? <CareerForm /> : <div className="contact-talk-form career-form" aria-hidden="true" />}
     </section>
