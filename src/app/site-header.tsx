@@ -1,7 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { useLenis } from "lenis/react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import domenLogo from "../../assets/domen-logo.png";
 import EntertainmentMegaMenu from "./entertainment-mega-menu";
@@ -9,7 +11,8 @@ import ProjectMegaMenu from "./project-mega-menu";
 import RetailMegaMenu from "./retail-mega-menu";
 
 const leadingLinks = [
-  { label: "OUR GROUP", href: "#about" },
+  // No page of its own: it leads back to the homepage from anywhere.
+  { label: "OUR GROUP", href: "/" },
 ];
 
 const simpleLinks = [
@@ -18,6 +21,8 @@ const simpleLinks = [
 ];
 
 export default function SiteHeader() {
+  const pathname = usePathname();
+  const lenis = useLenis();
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const isMobileNavOpenRef = useRef(false);
   const restoreMobileNavRef = useRef(false);
@@ -122,15 +127,21 @@ export default function SiteHeader() {
         <ul className="navigation-list">
           {leadingLinks.map((item) => (
             <li key={item.label}>
-              <a
+              <Link
                 href={item.href}
-                onClick={() => {
+                onClick={(event) => {
                   restoreMobileNavRef.current = false;
                   setIsMobileNavOpen(false);
+                  // Already on the homepage: glide back to the top instead.
+                  if (pathname === item.href) {
+                    event.preventDefault();
+                    if (lenis) lenis.scrollTo(0);
+                    else window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
                 }}
               >
                 {item.label}
-              </a>
+              </Link>
             </li>
           ))}
           <ProjectMegaMenu />
