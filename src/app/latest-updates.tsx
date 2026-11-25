@@ -60,7 +60,9 @@ export default function LatestUpdates() {
       >
         {updates.map((update) => (
           <article className="latest-update-card" key={update.title}>
-            <Image className="latest-update-image" src={update.image} alt={update.title} />
+            <div className="latest-update-media">
+              <Image className="latest-update-image" src={update.image} alt={update.title} />
+            </div>
             <div className="latest-update-meta">
               <span>{update.category}</span>
               <span>{update.year}</span>

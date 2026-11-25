@@ -29,6 +29,7 @@ export default function BalaBalaPage() {
         description="Balabala brings playful style and everyday comfort together in colourful collections designed for growing personalities and little adventures."
         image={heroImage}
         mobileImage={heroMobileImage}
+        imageFocus="50% 0%"
       />
       <ProjectIntro
         reverse

@@ -13,13 +13,18 @@ type ProjectHeroProps = {
   image: StaticImageData;
   /** Tall banner (1080 × 2400) for portrait screens (phones, upright tablets). */
   mobileImage?: StaticImageData;
+  /**
+   * object-position for the wide banner on landscape screens, e.g. "50% 0%" to keep a
+   * shop sign at the top of the photo in view. Portrait screens are unaffected.
+   */
+  imageFocus?: string;
 };
 
 /** Portrait screens get the tall mobile banner. */
 const MOBILE_MEDIA = "(max-aspect-ratio: 1/1)";
 
 /** Full-screen hero for project inner pages. */
-export default function ProjectHero({ category, titleLines, description, image, mobileImage }: ProjectHeroProps) {
+export default function ProjectHero({ category, titleLines, description, image, mobileImage, imageFocus }: ProjectHeroProps) {
   // Art direction: one <picture>, so each screen downloads only the banner it shows.
   const common = { alt: "", fill: true, sizes: "100vw", loading: "eager", fetchPriority: "high" } as const;
   const { props: desktopProps } = getImageProps({ ...common, src: image });
@@ -82,7 +87,13 @@ export default function ProjectHero({ category, titleLines, description, image, 
           // srcset splits on spaces, and the asset file names contain them: encode the URL.
           <source media={MOBILE_MEDIA} srcSet={mobileProps.srcSet ?? encodeURI(mobileProps.src)} />
         ) : null}
-        <img {...desktopProps} alt="" className="project-hero-image" aria-hidden="true" />
+        <img
+          {...desktopProps}
+          alt=""
+          className="project-hero-image"
+          aria-hidden="true"
+          style={imageFocus ? ({ ...desktopProps.style, "--hero-image-focus": imageFocus } as React.CSSProperties) : desktopProps.style}
+        />
       </picture>
       <div className={`project-hero-content${isVisible ? " is-visible" : ""}`}>
         <span className="project-hero-category">{category}</span>
