@@ -26,6 +26,7 @@ export default function GiordanoPage() {
         description="Giordano brings international style and everyday comfort together through versatile essentials designed for modern wardrobes and relaxed living."
         image={heroImage}
         mobileImage={heroMobileImage}
+        imageFocus="50% 0%"
       />
       <ProjectIntro
         titleLines={["Timeless Global", "Fashion"]}
