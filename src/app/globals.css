@@ -3910,35 +3910,8 @@ h2#about-title {
   line-height: 1.35;
 }
 
-.contact-banner-scroll {
-  background: #f8f2ea;
-  border-radius: 5px;
-  bottom: 54px;
-  color: #111;
-  display: inline-flex;
-  font-size: 14px;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  opacity: 0;
-  padding: 10px 18px;
-  position: absolute;
-  right: 60px;
-  text-decoration: none;
-  transform: translateY(20px);
-  transition: opacity 900ms ease, transform 900ms cubic-bezier(0.22, 1, 0.36, 1), background-color 200ms ease, color 200ms ease;
-  z-index: 2;
-}
 
-.contact-banner-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 
-.contact-banner-scroll:hover,
-.contact-banner-scroll:focus-visible {
-  background: #efe8de;
-  color: #000;
-}
 
 .contact-talk {
   background: #f8f2ea;
@@ -4230,9 +4203,6 @@ h2#about-title {
     font-size: clamp(52px, 4.6vw, 88px);
   }
 
-  .contact-banner-scroll {
-    right: clamp(37.5px, 3.125vw, 60px);
-  }
 
   .contact-talk {
     padding: clamp(100px, 10.416667vw, 200px) clamp(37.5px, 3.125vw, 60px);
@@ -4313,10 +4283,6 @@ h2#about-title {
   text-align: left;
 }
 
-.contact-banner-scroll {
-  bottom: 40px;
-  right: 30px;
-}
 
 .contact-talk {
   gap: 40px;
@@ -4886,6 +4852,36 @@ h2#about-title {
   z-index: 1;
 }
 
+/* ProjectHero tinted: the same gradient over a light, even tint. */
+.project-hero.is-tinted::after {
+  background:
+    linear-gradient(
+      180deg,
+      rgb(0 0 0 / 30%) 0%,
+      rgb(0 0 0 / 0%) 22%,
+      rgb(0 0 0 / 0%) 55%,
+      rgb(0 0 0 / 45%) 100%
+    ),
+    rgb(0 0 0 / 18%);
+}
+
+/* Portrait screens: the tall mobile banners are bright behind the text, so every
+   project hero gets a light tint and a deeper fade at the bottom. */
+@media (max-aspect-ratio: 1/1) {
+  .project-hero::after,
+  .project-hero.is-tinted::after {
+    background:
+      linear-gradient(
+        180deg,
+        rgb(0 0 0 / 30%) 0%,
+        rgb(0 0 0 / 0%) 22%,
+        rgb(0 0 0 / 10%) 50%,
+        rgb(0 0 0 / 60%) 100%
+      ),
+      rgb(0 0 0 / 15%);
+  }
+}
+
 .project-hero-image {
   object-fit: cover;
   z-index: 0;
@@ -5176,6 +5172,11 @@ h2#about-title {
   .project-intro-image-tall {
     aspect-ratio: 0.895;
   }
+
+  /* A little taller than on desktop so the photo reads at phone width. */
+  .project-intro-image-wide {
+    aspect-ratio: 2.1;
+  }
 }
 
 /* Project inner pages: key figures (bordered cells, yellow value, title, short text).
@@ -5259,6 +5260,11 @@ h2#about-title {
   line-height: 1.1;
   margin: 0 0 clamp(28px, 5.3vw, 102px);
   text-align: center;
+}
+
+/* Holds the stage and the thumbnails, which overlay it on desktop. */
+.project-gallery-frame {
+  position: relative;
 }
 
 .project-gallery-stage {
@@ -5351,23 +5357,25 @@ h2#about-title {
     aspect-ratio: 3 / 2;
   }
 
-  /* Thumbnails become a swipeable row along the bottom; the caption sits above it. */
+  /* Thumbnails move out of the photo into a swipeable row below it, so the whole
+     photo stays visible; the caption sits at the photo's bottom. */
   .project-gallery-caption {
-    bottom: calc(24px + 22vw / 1.48);
     max-width: 75%;
   }
 
   .project-gallery-thumbs {
-    bottom: 12px;
     flex-direction: row;
-    left: 12px;
+    margin-top: 12px;
     max-height: none;
     overflow-x: auto;
-    right: 12px;
+    position: static;
     scrollbar-width: none;
-    top: auto;
     transform: none;
     width: auto;
+  }
+
+  .project-gallery-thumb.is-active {
+    border-color: #111111;
   }
 
   .project-gallery-thumbs::-webkit-scrollbar {

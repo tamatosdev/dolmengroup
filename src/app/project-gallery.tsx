@@ -36,26 +36,29 @@ export default function ProjectGallery({ titleLead, highlight, titleTrail, slide
         {titleTrail ? ` ${titleTrail}` : null}
       </h2>
 
-      <div className={`project-gallery-stage${slides.length === 1 ? " is-single" : ""}`} data-reveal="scale">
-        {slides.map((slide, index) => (
-          <Image
-            className={`project-gallery-image${index === activeIndex ? " is-active" : ""}`}
-            src={slide.src}
-            alt={slide.title}
-            fill
-            sizes="100vw"
-            key={slide.title}
-            aria-hidden={index !== activeIndex}
-          />
-        ))}
-        {hideCaption ? null : (
-          <>
-            <span className="project-gallery-shade" aria-hidden="true" />
-            <p className="project-gallery-caption" aria-live="polite">
-              {activeSlide.title}
-            </p>
-          </>
-        )}
+      {/* Frame: on desktop the thumbnails overlay the stage; on phones they sit below it. */}
+      <div className="project-gallery-frame" data-reveal="scale">
+        <div className={`project-gallery-stage${slides.length === 1 ? " is-single" : ""}`}>
+          {slides.map((slide, index) => (
+            <Image
+              className={`project-gallery-image${index === activeIndex ? " is-active" : ""}`}
+              src={slide.src}
+              alt={slide.title}
+              fill
+              sizes="100vw"
+              key={slide.title}
+              aria-hidden={index !== activeIndex}
+            />
+          ))}
+          {hideCaption ? null : (
+            <>
+              <span className="project-gallery-shade" aria-hidden="true" />
+              <p className="project-gallery-caption" aria-live="polite">
+                {activeSlide.title}
+              </p>
+            </>
+          )}
+        </div>
 
         {slides.length > 1 ? (
           <div className="project-gallery-thumbs">

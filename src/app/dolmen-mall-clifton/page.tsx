@@ -7,7 +7,7 @@ import gallery2 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining E
 import gallery3 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Vibrant Dining Experience.jpg";
 import gallery4 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/A Landmark Destination.jpg";
 import gallery5 from "../../../assets/Dolmen Mall Clifton page/Elevated Dining Experience/Iconic Exterior View.jpg";
-import heroMobileImage from "../../../assets/Dolmen Mall Clifton page/mobile hero section image.jpg";
+import heroMobileImage from "../../../assets/Dolmen Mall Clifton page/mobile hero section updated.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";
 import ProjectIntro from "../project-intro";
