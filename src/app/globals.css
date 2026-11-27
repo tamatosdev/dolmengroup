@@ -5897,7 +5897,6 @@ h2#about-title {
   .group-hero {
     aspect-ratio: 3852 / 2170;
     height: auto;
-    margin-top: var(--group-hero-offset, 72px);
     min-height: 0;
   }
 }
@@ -6368,8 +6367,11 @@ h2#about-title {
     flex-basis: 46vw;
   }
 
+  /* The sideways-scrolling year row also clips vertically: leave room so the
+     enlarged active dot isn't cut off. */
   .group-timeline {
     overflow-x: auto;
+    padding: 6px 0 8px;
     scrollbar-width: none;
   }
 
@@ -6382,6 +6384,7 @@ h2#about-title {
   }
 
   .group-milestone-stage {
+    --milestone-text-h: 70px;
     --milestone-w: 84vw;
     --milestone-gap: 12px;
   }
