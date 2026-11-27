@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import heroImage from "../../../assets/Corporate Office Block/hero section.jpg";
 import tallImage from "../../../assets/Corporate Office Block/Elevating Karachi’s Corporate Standard/image 1336 (2).jpg";
 import wideImage from "../../../assets/Corporate Office Block/Elevating Karachi’s Corporate Standard/image 1335 (2).jpg";
-import galleryImage from "../../../assets/Corporate Office Block/updated image Cob.png";
+import galleryImage from "../../../assets/Corporate Office Block/Where Work Meets Lifestyle .jpg";
 import heroMobileImage from "../../../assets/Corporate Office Block/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";

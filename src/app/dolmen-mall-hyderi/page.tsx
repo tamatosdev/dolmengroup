@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import heroImage from "../../../assets/Dolmen Mall Hyderi page/hero section hydery.jpg";
 import tallImage from "../../../assets/Dolmen Mall Hyderi page/Your Everyday Neighborhood Mall /image 1336 (5).jpg";
 import wideImage from "../../../assets/Dolmen Mall Hyderi page/Your Everyday Neighborhood Mall /image 1335 (5).jpg";
-import galleryImage from "../../../assets/Dolmen Mall Hyderi page/updated image 2.png";
+import galleryImage from "../../../assets/Dolmen Mall Hyderi page/Elevated Dining Experience/image 1341.jpg";
 import heroMobileImage from "../../../assets/Dolmen Mall Hyderi page/mobile hero section image.jpg";
 import ProjectGallery from "../project-gallery";
 import ProjectHero from "../project-hero";

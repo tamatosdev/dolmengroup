@@ -923,6 +923,7 @@ body.site-loaded .dolmen-hero-stage {
   color: #ffffff;
   cursor: pointer;
   display: inline-flex;
+  font-family: "NewBlack", sans-serif;
   font-size: 16px;
   font-weight: 400;
   gap: 10px;
@@ -4734,6 +4735,11 @@ h2#about-title {
     bottom: 90px;
   }
 
+  /* Watch Full Video sits close above the heading on phones. */
+  .dolmen-hero-watch {
+    margin-bottom: 8px;
+  }
+
   .project-slide {
     height: 50svh;
   }
@@ -5175,7 +5181,7 @@ h2#about-title {
 
   /* A little taller than on desktop so the photo reads at phone width. */
   .project-intro-image-wide {
-    aspect-ratio: 2.1;
+    aspect-ratio: 1.6;
   }
 }
 
@@ -5603,20 +5609,6 @@ h2#about-title {
 @media (min-width: 1025px) {
   .business-mega-footer > .business-mega-copyright.is-desktop-hidden {
     display: none;
-  }
-}
-
-/* Mobile: soft dark overlay on the single image before the footer
-   (project gallery with one image, and the split-intro image). */
-@media (max-width: 768px) {
-  .project-gallery-stage.is-single::after,
-  .project-split-image::after {
-    background: linear-gradient(180deg, rgb(0 0 0 / 10%) 0%, rgb(0 0 0 / 38%) 100%);
-    content: "";
-    inset: 0;
-    pointer-events: none;
-    position: absolute;
-    z-index: 1;
   }
 }
 
