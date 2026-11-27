@@ -5978,10 +5978,6 @@ h2#about-title {
   width: max-content;
 }
 
-.group-strip:hover .group-strip-track {
-  animation-play-state: paused;
-}
-
 @keyframes group-strip-scroll {
   from {
     transform: translateX(0);
