@@ -923,6 +923,7 @@ body.site-loaded .dolmen-hero-stage {
   color: #ffffff;
   cursor: pointer;
   display: inline-flex;
+  font-family: "NewBlack", sans-serif;
   font-size: 16px;
   font-weight: 400;
   gap: 10px;
@@ -4732,6 +4733,11 @@ h2#about-title {
 
   .dolmen-hero-content {
     bottom: 90px;
+  }
+
+  /* Watch Full Video sits close above the heading on phones. */
+  .dolmen-hero-watch {
+    margin-bottom: 8px;
   }
 
   .project-slide {
