@@ -5866,3 +5866,542 @@ h2#about-title {
     padding-top: 32px;
   }
 }
+
+/* ---------- Our Group page ---------- */
+.group-hero {
+  align-items: center;
+  background: #111111;
+  display: flex;
+  height: 100svh;
+  justify-content: center;
+  min-height: 520px;
+  overflow: hidden;
+  position: relative;
+}
+
+.group-hero-image {
+  object-fit: cover;
+}
+
+.group-hero::after {
+  background: linear-gradient(180deg, rgb(0 0 0 / 18%) 0%, rgb(0 0 0 / 0%) 30%, rgb(0 0 0 / 0%) 42%, rgb(0 0 0 / 78%) 100%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+/* Portrait screens: the photo carries the logo in its centre, so show the whole
+   frame instead of a full-height crop that would cut the logo off. */
+@media (max-aspect-ratio: 1/1) {
+  .group-hero {
+    aspect-ratio: 3852 / 2170;
+    height: auto;
+    margin-top: var(--group-hero-offset, 72px);
+    min-height: 0;
+  }
+}
+
+.group-hero-shade {
+  background: linear-gradient(180deg, rgb(12 20 48 / 45%) 0%, rgb(20 16 40 / 30%) 45%, rgb(0 0 0 / 55%) 100%);
+  inset: 0;
+  position: absolute;
+}
+
+.group-hero-logo {
+  margin: 0;
+  position: relative;
+  width: clamp(220px, 32.5vw, 624px);
+  z-index: 1;
+}
+
+.group-hero-logo img {
+  display: block;
+  height: auto;
+  width: 100%;
+}
+
+.group-statement {
+  background: #f8f2ea;
+  color: #111111;
+  overflow: hidden;
+  /* clip: focus or scrollIntoView can never shift the slides sideways. */
+  overflow: clip;
+  padding: clamp(80px, 10vw, 190px) 0 clamp(70px, 10.4vw, 200px);
+}
+
+.group-statement-title {
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(26px, 3.05vw, 58px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 auto clamp(56px, 10.4vw, 200px);
+  max-width: min(74vw, 1440px, calc(100% - 32px));
+  text-align: center;
+}
+
+/* A row of photos with curved (lens-shaped) top and bottom edges. */
+.group-strip {
+  --strip-sag: 4.4vw;
+  --strip-gap: clamp(10px, 1.25vw, 24px);
+  overflow: hidden;
+  overflow: clip;
+  position: relative;
+}
+
+.group-strip::before,
+.group-strip::after {
+  background: #f8f2ea;
+  border-radius: 50%;
+  content: "";
+  height: calc(var(--strip-sag) * 6.67);
+  left: -20%;
+  position: absolute;
+  width: 140%;
+  z-index: 1;
+}
+
+.group-strip::before {
+  top: calc(var(--strip-sag) * -5.67);
+}
+
+.group-strip::after {
+  bottom: calc(var(--strip-sag) * -5.67);
+}
+
+/* Two identical sets side by side; sliding by exactly one set (-50%) loops seamlessly. */
+.group-strip-track {
+  /* 15 photos per set: ~150px/s on a 1920px screen, as in the prototype. */
+  animation: group-strip-scroll 60s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.group-strip:hover .group-strip-track {
+  animation-play-state: paused;
+}
+
+@keyframes group-strip-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .group-strip-track {
+    animation: none;
+    transform: translateX(-25%);
+  }
+}
+
+.group-strip-item {
+  aspect-ratio: 584 / 752;
+  flex: 0 0 clamp(180px, 30.4vw, 583px);
+  /* Spacing as margin (not gap) so both sets are exactly the same width. */
+  margin-right: var(--strip-gap);
+  overflow: hidden;
+  position: relative;
+}
+
+/* The photo layer is wider/taller than the tile so the parallax drift never
+   shows an edge (GroupStrip moves it with a transform). */
+.group-strip-parallax {
+  inset: -48px -12%;
+  position: absolute;
+  will-change: transform;
+}
+
+.group-strip-parallax img {
+  object-fit: cover;
+}
+
+.group-milestones {
+  background: #ffffff;
+  color: #111111;
+  overflow: hidden;
+  /* clip: focus or scrollIntoView can never shift the slides sideways. */
+  overflow: clip;
+  padding: clamp(80px, 9.1vw, 175px) 0 clamp(80px, 10.4vw, 200px);
+}
+
+.group-milestones-title {
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(34px, 4.45vw, 86px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 clamp(40px, 5.2vw, 100px);
+  padding: 0 16px;
+  text-align: center;
+}
+
+.group-timeline {
+  --timeline-item: clamp(48px, 4.2vw, 80px);
+  --timeline-edge: calc(var(--timeline-item) / 2);
+  margin: 0 clamp(16px, 3.125vw, 60px);
+  position: relative;
+}
+
+.group-timeline-inner {
+  position: relative;
+}
+
+.group-timeline-line {
+  background: #e2e2e2;
+  bottom: 5px;
+  height: 4px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+/* Fill reaches the active year's dot (years sit at the ends and evenly between). */
+.group-timeline-fill {
+  background: #fec50d;
+  display: block;
+  height: 100%;
+  transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  width: calc(var(--timeline-progress) * (100% - 2 * var(--timeline-edge)) + var(--timeline-edge));
+}
+
+.group-timeline-years {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.group-timeline-year {
+  align-items: center;
+  background: none;
+  border: 0;
+  color: #8f8f8f;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(15px, 1.4vw, 27px);
+  gap: clamp(10px, 0.85vw, 16px);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  padding: 0;
+  transition: color 250ms ease;
+  width: var(--timeline-item);
+}
+
+.group-timeline-year.is-reached {
+  color: #111111;
+}
+
+.group-timeline-dot {
+  background: #b5b5b5;
+  border-radius: 50%;
+  height: 14px;
+  transition: background 250ms ease, transform 250ms ease;
+  width: 14px;
+}
+
+.group-timeline-year.is-reached .group-timeline-dot {
+  background: #fec50d;
+}
+
+.group-timeline-year.is-active .group-timeline-dot {
+  transform: scale(1.3);
+}
+
+.group-timeline-year:focus-visible {
+  outline: 2px solid #fec50d;
+  outline-offset: 4px;
+}
+
+.group-milestone-stage {
+  --milestone-w: 53.33vw;
+  --milestone-gap: 3.125vw;
+  /* Room for the title + caption that sit above each photo. */
+  --milestone-text-h: clamp(88px, 6vw, 115px);
+  --milestone-ease: cubic-bezier(0.65, 0, 0.35, 1);
+  margin-top: clamp(40px, 5vw, 96px);
+  position: relative;
+}
+
+.group-milestone-viewport {
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.group-milestone-viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.group-milestone-track {
+  display: flex;
+  gap: var(--milestone-gap);
+  padding-left: calc(50% - var(--milestone-w) / 2);
+  transform: translateX(
+    calc(var(--milestone-index) * -1 * (var(--milestone-w) + var(--milestone-gap)) + var(--drag-offset, 0px))
+  );
+  transition: transform 900ms var(--milestone-ease);
+}
+
+.group-milestone-slide {
+  display: flex;
+  flex: 0 0 var(--milestone-w);
+  flex-direction: column;
+}
+
+.group-milestone-text {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: var(--milestone-text-h);
+  padding: 0 8px;
+  text-align: center;
+}
+
+/* Title and caption fade in-up once their slide becomes active (caption a beat
+   later); the outgoing slide's text fades out straight away. */
+.group-milestone-text h3,
+.group-milestone-text p {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 350ms ease,
+    transform 350ms ease;
+}
+
+.group-milestone-slide.is-active .group-milestone-text h3,
+.group-milestone-slide.is-active .group-milestone-text p {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 700ms ease var(--text-delay, 0ms),
+    transform 800ms cubic-bezier(0.22, 1, 0.36, 1) var(--text-delay, 0ms);
+}
+
+.group-milestone-slide.is-active .group-milestone-text h3 {
+  --text-delay: 300ms;
+}
+
+.group-milestone-slide.is-active .group-milestone-text p {
+  --text-delay: 450ms;
+}
+
+.group-milestone-text h3 {
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(26px, 2.6vw, 50px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 8px;
+}
+
+.group-milestone-text p {
+  color: #666666;
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-size: clamp(12px, 0.94vw, 18px);
+  letter-spacing: 0.02em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.group-milestone-media {
+  aspect-ratio: 1024 / 568;
+  background: #eeeeee;
+  display: block;
+  opacity: 0.45;
+  overflow: hidden;
+  position: relative;
+  transform: scale(0.94);
+  transition: opacity 900ms var(--milestone-ease), transform 900ms var(--milestone-ease);
+}
+
+.group-milestone-slide.is-active .group-milestone-media {
+  opacity: 1;
+  transform: none;
+}
+
+.group-milestone-media img {
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.group-milestone-arrow {
+  align-items: center;
+  backdrop-filter: blur(12px);
+  background: rgb(17 17 17 / 62%);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  height: clamp(42px, 3.6vw, 70px);
+  justify-content: center;
+  left: clamp(12px, 3.75vw, 72px);
+  position: absolute;
+  top: calc(var(--milestone-text-h) + var(--milestone-w) * 568 / 1024 / 2);
+  transform: translateY(-50%);
+  transition: background 200ms ease, opacity 200ms ease;
+  width: clamp(42px, 3.6vw, 70px);
+  z-index: 2;
+}
+
+.group-milestone-arrow:not(.is-previous) {
+  left: auto;
+  right: clamp(12px, 3.75vw, 72px);
+}
+
+.group-milestone-arrow:hover:not(:disabled),
+.group-milestone-arrow:focus-visible {
+  background: rgb(17 17 17 / 85%);
+}
+
+.group-milestone-arrow:disabled {
+  cursor: default;
+  opacity: 0.35;
+}
+
+.group-milestone-arrow img {
+  filter: brightness(0) invert(1);
+  height: 40%;
+  width: 40%;
+}
+
+.group-milestone-arrow.is-previous img {
+  transform: rotate(180deg);
+}
+
+.group-impact {
+  background: #f8f2ea;
+  color: #111111;
+  padding: clamp(80px, 11.5vw, 220px) clamp(16px, 3.125vw, 60px) clamp(80px, 13vw, 250px);
+}
+
+.group-impact-title {
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(34px, 4.45vw, 86px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin: 0 0 clamp(36px, 4.7vw, 90px);
+  text-align: center;
+}
+
+.group-impact-title span {
+  background: linear-gradient(90deg, #111111 0%, #b9b5af 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.group-impact-grid {
+  border: 1px solid #d6d0c8;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.group-impact-card {
+  padding: clamp(28px, 3.1vw, 60px);
+}
+
+.group-impact-card + .group-impact-card {
+  border-left: 1px solid #d6d0c8;
+}
+
+.group-impact-icon {
+  color: #fec50d;
+  display: inline-flex;
+  margin-bottom: clamp(24px, 2.6vw, 50px);
+}
+
+.group-impact-icon svg {
+  height: clamp(56px, 5.6vw, 108px);
+  width: clamp(56px, 5.6vw, 108px);
+}
+
+.group-impact-card h3 {
+  font-family: "NewBlack", sans-serif;
+  font-size: clamp(20px, 1.75vw, 34px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin: 0 0 clamp(12px, 1.25vw, 24px);
+  text-transform: uppercase;
+}
+
+.group-impact-card p {
+  color: #414141;
+  font-family: var(--font-inter), "Inter", sans-serif;
+  font-size: clamp(14px, 0.94vw, 18px);
+  letter-spacing: -0.02em;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 460px;
+}
+
+@media (max-width: 1024px) {
+  .group-impact-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .group-impact-card + .group-impact-card {
+    border-left: 0;
+    border-top: 1px solid #d6d0c8;
+  }
+}
+
+@media (max-width: 768px) {
+  .group-statement-title {
+    max-width: calc(100% - 32px);
+  }
+
+  .group-strip {
+    --strip-sag: 7vw;
+  }
+
+  .group-strip-item {
+    flex-basis: 46vw;
+  }
+
+  .group-timeline {
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .group-timeline::-webkit-scrollbar {
+    display: none;
+  }
+
+  .group-timeline-inner {
+    min-width: 640px;
+  }
+
+  .group-milestone-stage {
+    --milestone-w: 84vw;
+    --milestone-gap: 12px;
+  }
+
+  .group-milestone-arrow {
+    bottom: -64px;
+    top: auto;
+    transform: none;
+  }
+
+  .group-milestone-arrow.is-previous {
+    left: calc(50% - 52px);
+  }
+
+  .group-milestone-arrow:not(.is-previous) {
+    right: calc(50% - 52px);
+  }
+
+  .group-milestones {
+    padding-bottom: 120px;
+  }
+}
