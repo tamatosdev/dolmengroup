@@ -109,7 +109,7 @@ export default function SiteFooter() {
       <nav className="footer-nav" aria-label="Footer">
         <div className="footer-link-group">
           <h2>Company</h2>
-          <Link href="/#about">About</Link>
+          <Link href="/our-group/">About</Link>
           <a href="#reit">REIT</a>
           <Link href="/#updates">Updates</Link>
           <Link href="/career/">Careers</Link>

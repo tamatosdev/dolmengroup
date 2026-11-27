@@ -11,8 +11,7 @@ import ProjectMegaMenu from "./project-mega-menu";
 import RetailMegaMenu from "./retail-mega-menu";
 
 const leadingLinks = [
-  // No page of its own: it leads back to the homepage from anywhere.
-  { label: "OUR GROUP", href: "/" },
+  { label: "OUR GROUP", href: "/our-group/" },
 ];
 
 const simpleLinks = [
@@ -132,8 +131,9 @@ export default function SiteHeader() {
                 onClick={(event) => {
                   restoreMobileNavRef.current = false;
                   setIsMobileNavOpen(false);
-                  // Already on the homepage: glide back to the top instead.
-                  if (pathname === item.href) {
+                  // Already on this page: glide back to the top instead.
+                  const trim = (path: string) => path.replace(/\/+$/, "") || "/";
+                  if (pathname && trim(pathname) === trim(item.href)) {
                     event.preventDefault();
                     if (lenis) lenis.scrollTo(0);
                     else window.scrollTo({ top: 0, behavior: "smooth" });
