@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 import arrowRight from "../../assets/arrow-right.svg";
+import brush from "../../assets/brush.svg";
 import groveResidency from "../../assets/Our group page/web/card-1.jpg";
 import dolmenMallLahore from "../../assets/Our group page/web/card-3.jpg";
 import skyTowers from "../../assets/Our group page/web/card-4.jpg";
@@ -171,7 +172,11 @@ export default function GroupMilestones() {
   return (
     <section className="group-milestones" aria-labelledby="group-milestones-title">
       <h2 className="group-milestones-title" id="group-milestones-title" data-reveal>
-        Milestones that shaped Dolmen
+        Milestones that shaped{" "}
+        <span className="project-intro-highlight">
+          Dolmen
+          <Image className="title-brush" src={brush} alt="" aria-hidden="true" />
+        </span>
       </h2>
 
       <div
