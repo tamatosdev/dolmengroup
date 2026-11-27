@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import brush from "../../../assets/brush.svg";
 import heroImage from "../../../assets/Our group page/web/hero-updated.jpg";
+import heroMobileImage from "../../../assets/Our group page/web/hero-mobile.jpg";
 import rect2 from "../../../assets/Our group page/web/strip/rect-2.jpg";
 import frame406 from "../../../assets/Our group page/web/strip/frame-2147237406.jpg";
 import rect4 from "../../../assets/Our group page/web/strip/rect-4.jpg";
@@ -98,12 +99,21 @@ const impacts = [
 ];
 
 export default function OurGroupPage() {
+  const heroCommon = { alt: "", fill: true, sizes: "100vw", loading: "eager", fetchPriority: "high" } as const;
+  const { props: heroDesktop } = getImageProps({ ...heroCommon, src: heroImage });
+  const { props: heroMobile } = getImageProps({ ...heroCommon, src: heroMobileImage });
+
   return (
     <div className="site-shell" id="top">
       <SiteHeader />
 
       <section className="group-hero" aria-label="Dolmen Group">
-        <Image className="group-hero-image" src={heroImage} alt="" fill priority sizes="100vw" />
+        {/* Art direction: portrait screens get the tall mobile photo; each screen
+            downloads only the one it shows. */}
+        <picture>
+          <source media="(max-aspect-ratio: 1/1)" srcSet={encodeURI(heroMobile.src)} />
+          <img {...heroDesktop} alt="" className="group-hero-image" />
+        </picture>
         {/* The hero photo already carries the Dolmen logo. */}
         <h1 className="sr-only">Dolmen Group — Building a Better Future</h1>
       </section>

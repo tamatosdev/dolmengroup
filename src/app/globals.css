@@ -5891,15 +5891,8 @@ h2#about-title {
   position: absolute;
 }
 
-/* Portrait screens: the photo carries the logo in its centre, so show the whole
-   frame instead of a full-height crop that would cut the logo off. */
-@media (max-aspect-ratio: 1/1) {
-  .group-hero {
-    aspect-ratio: 3852 / 2170;
-    height: auto;
-    min-height: 0;
-  }
-}
+/* Portrait screens show the tall mobile photo (see <picture> in the page) full
+   screen; the logo sits in its centre, so a centred cover crop keeps it. */
 
 .group-hero-shade {
   background: linear-gradient(180deg, rgb(12 20 48 / 45%) 0%, rgb(20 16 40 / 30%) 45%, rgb(0 0 0 / 55%) 100%);
