@@ -5891,16 +5891,8 @@ h2#about-title {
   position: absolute;
 }
 
-/* Portrait screens: the photo carries the logo in its centre, so show the whole
-   frame instead of a full-height crop that would cut the logo off. */
-@media (max-aspect-ratio: 1/1) {
-  .group-hero {
-    aspect-ratio: 3852 / 2170;
-    height: auto;
-    margin-top: var(--group-hero-offset, 72px);
-    min-height: 0;
-  }
-}
+/* Portrait screens show the tall mobile photo (see <picture> in the page) full
+   screen; the logo sits in its centre, so a centred cover crop keeps it. */
 
 .group-hero-shade {
   background: linear-gradient(180deg, rgb(12 20 48 / 45%) 0%, rgb(20 16 40 / 30%) 45%, rgb(0 0 0 / 55%) 100%);
@@ -5962,12 +5954,14 @@ h2#about-title {
   z-index: 1;
 }
 
+/* +3px: at the screen edges the curve meets the strip's edge exactly, which
+   left a hairline of photo showing; overlap a little so it's covered. */
 .group-strip::before {
-  top: calc(var(--strip-sag) * -5.67);
+  top: calc(var(--strip-sag) * -5.67 + 3px);
 }
 
 .group-strip::after {
-  bottom: calc(var(--strip-sag) * -5.67);
+  bottom: calc(var(--strip-sag) * -5.67 + 3px);
 }
 
 /* Two identical sets side by side; sliding by exactly one set (-50%) loops seamlessly. */
@@ -6368,8 +6362,11 @@ h2#about-title {
     flex-basis: 46vw;
   }
 
+  /* The sideways-scrolling year row also clips vertically: leave room so the
+     enlarged active dot isn't cut off. */
   .group-timeline {
     overflow-x: auto;
+    padding: 6px 0 8px;
     scrollbar-width: none;
   }
 
@@ -6382,6 +6379,7 @@ h2#about-title {
   }
 
   .group-milestone-stage {
+    --milestone-text-h: 70px;
     --milestone-w: 84vw;
     --milestone-gap: 12px;
   }
