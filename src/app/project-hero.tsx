@@ -18,13 +18,15 @@ type ProjectHeroProps = {
    * shop sign at the top of the photo in view. Portrait screens are unaffected.
    */
   imageFocus?: string;
+  /** Adds a light, even dark tint over the whole banner, for bright photos. */
+  tinted?: boolean;
 };
 
 /** Portrait screens get the tall mobile banner. */
 const MOBILE_MEDIA = "(max-aspect-ratio: 1/1)";
 
 /** Full-screen hero for project inner pages. */
-export default function ProjectHero({ category, titleLines, description, image, mobileImage, imageFocus }: ProjectHeroProps) {
+export default function ProjectHero({ category, titleLines, description, image, mobileImage, imageFocus, tinted }: ProjectHeroProps) {
   // Art direction: one <picture>, so each screen downloads only the banner it shows.
   const common = { alt: "", fill: true, sizes: "100vw", loading: "eager", fetchPriority: "high" } as const;
   const { props: desktopProps } = getImageProps({ ...common, src: image });
@@ -81,7 +83,7 @@ export default function ProjectHero({ category, titleLines, description, image, 
   }, []);
 
   return (
-    <section className={`project-hero${isVisible ? " is-visible" : ""}`} aria-labelledby="project-hero-title">
+    <section className={`project-hero${tinted ? " is-tinted" : ""}${isVisible ? " is-visible" : ""}`} aria-labelledby="project-hero-title">
       <picture>
         {mobileProps ? (
           // srcset splits on spaces, and the asset file names contain them: encode the URL.

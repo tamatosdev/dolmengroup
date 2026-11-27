@@ -34,9 +34,6 @@ export default function ContactBanner() {
           businesses, and communities together.
         </p>
       </div>
-      <a className={`contact-banner-scroll${isVisible ? " is-visible" : ""}`} href="#talk-to-us">
-        Scroll
-      </a>
     </section>
   );
 }
