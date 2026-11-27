@@ -6088,6 +6088,7 @@ h2#about-title {
   flex-direction: column;
   font-family: "NewBlack", sans-serif;
   font-size: clamp(15px, 1.4vw, 27px);
+  font-weight: 700;
   gap: clamp(10px, 0.85vw, 16px);
   letter-spacing: -0.02em;
   line-height: 1;
@@ -6207,7 +6208,7 @@ h2#about-title {
   color: #666666;
   font-family: var(--font-inter), "Inter", sans-serif;
   font-size: clamp(12px, 0.94vw, 18px);
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   margin: 0;
   text-transform: uppercase;
 }
@@ -6293,8 +6294,10 @@ h2#about-title {
   text-align: center;
 }
 
+/* Figma: dark at the top of the letters, fading to light grey towards the
+   baseline and descenders (top-to-bottom, not left-to-right). */
 .group-impact-title span {
-  background: linear-gradient(90deg, #111111 0%, #b9b5af 100%);
+  background: linear-gradient(180deg, #111111 0%, #111111 22%, #c4c4c4 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
