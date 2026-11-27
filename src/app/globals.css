@@ -5954,12 +5954,14 @@ h2#about-title {
   z-index: 1;
 }
 
+/* +3px: at the screen edges the curve meets the strip's edge exactly, which
+   left a hairline of photo showing; overlap a little so it's covered. */
 .group-strip::before {
-  top: calc(var(--strip-sag) * -5.67);
+  top: calc(var(--strip-sag) * -5.67 + 3px);
 }
 
 .group-strip::after {
-  bottom: calc(var(--strip-sag) * -5.67);
+  bottom: calc(var(--strip-sag) * -5.67 + 3px);
 }
 
 /* Two identical sets side by side; sliding by exactly one set (-50%) loops seamlessly. */
